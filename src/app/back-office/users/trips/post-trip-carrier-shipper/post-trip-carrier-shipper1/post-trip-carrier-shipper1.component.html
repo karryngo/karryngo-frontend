@@ -1,0 +1,71 @@
+<app-nav-bar></app-nav-bar>
+
+<!-- Start your project here-->
+<div class="container container-global cont-margin text-center">
+  <h3 class="jaune text-left mb-2">Trip details</h3>
+  <div class="border  container cont2">
+    <!-- Default form register -->
+    <form class="text-center p-2">
+      <!-- row-item-->
+      <div class="form-row">
+        <div class="col">
+          <!-- First name -->
+          <input type="text" id="defaultRegisterFormFirstName" class="form-control field-form1 field"
+            placeholder="From">
+          <p class="title-form sub-indication text-left">Departure city</p>
+        </div>
+        <div class="col">
+          <!-- Last name -->
+          <input type="text" id="defaultRegisterFormLastName" class="form-control field-form1 field" placeholder="To">
+          <p class="title-form sub-indication text-left">Arrival city</p>
+        </div>
+      </div>
+      <!-- row-item-->
+
+      <!-- row-item-->
+      <div class="form-row m2">
+        <div class="col">
+          <!-- First name -->
+          <input type="text" id="defaultRegisterFormFirstName" class="form-control field-form1 field"
+            placeholder="Date">
+          <p class="title-form sub-indication text-left">Date</p>
+        </div>
+        <div class="col">
+          <!-- Last name -->
+          <div class="row field-form3">
+            <input type="text" id="defaultRegisterFormLastName" class="f1 form-control field-form2 field"
+              placeholder="Trip Duration">
+            <select class="f2 form-control field-form2 field">
+              <option selected>Unit</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <!-- row-item-->
+
+      <!-- row-item-->
+      <div class="form-row m2">
+        <div class="col">
+          <select class="form-control field-form1 field">
+            <option selected>Service Type</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+        <div class="col">
+
+        </div>
+      </div>
+      <!-- row-item-->
+    </form>
+    <!-- Default form register -->
+  </div>
+  <button type="button" class="btn next-button btn-weith" routerLink="/post-trip-carrier-shipper-2">NEXT</button>
+</div>
+<!-- Start your project here-->
+
+<app-footer></app-footer>

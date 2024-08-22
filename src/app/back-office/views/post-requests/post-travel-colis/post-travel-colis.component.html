@@ -1,0 +1,97 @@
+<div class="fadeIn">
+  <div class="row">
+    <div class="col-sm-3 col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="jaune text-left mx-4">{{'post_requests.post_request_colis.post_request_colis2.new_shipment' | translate }}</h4> 
+        </div>
+        <div class="container-fluid cont2">
+
+          <div class="cont">
+            <router-outlet></router-outlet>
+            <!--<div *ngIf="interface1">
+              <app-post-request-colis0></app-post-request-colis0>
+            </div>
+            <div *ngIf="interface2">
+              <app-post-request-colis1></app-post-request-colis1>
+            </div>
+            <div *ngIf="interface3">
+              <app-post-request-colis2></app-post-request-colis2>
+            </div>-->
+          </div>
+          <br><br><br>
+
+          <!--<button *ngIf="!visible" type="button" class="btn next-button b-mag" (click)="myModal.show()">Confirm</button>-->
+
+        </div>
+      </div>
+      <!-- Start your project here-->
+
+    </div>
+
+    <!-- <div class="col-sm-4 col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="jaune text-left mx-4">My request history</h4>
+        </div>
+        <div class="container cont2">
+          <table class="table table-bordered table-striped table-sm">
+            <thead>
+              <tr>
+                <th>Status</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let package of packageList">
+                <td>
+                  <i class="bi-{{showStatutPackage(package)}}" role="img" style="color: green !important;font-weight: bolder; font-size: larger;" aria-hidden="true"></i>
+                                
+                </td>
+                <td>{{package.pkg.from.city}}</td>
+                <td>{{package.pkg.to.city}}</td>
+                <td>{{package.pkg.typeof}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <nav>
+            <ul class="pagination pull-right">
+              <li class="page-item"><a class="page-link">Prev</a></li>
+              <li class="page-item active">
+                <a class="page-link">1</a>
+              </li>
+              <li class="page-item"><a class="page-link">2</a></li>
+              <li class="page-item"><a class="page-link">3</a></li>
+              <li class="page-item"><a class="page-link">Next</a></li>
+            </ul>
+          </nav>
+
+        </div>
+      </div>
+    </div> -->
+  </div>
+</div>
+
+
+
+<div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">{{'post_requests.post_request_colis.post_request_colis2.confirm_request' | translate }}</h4>
+        <button type="button" class="close" (click)="myModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>{{'post_requests.post_request_colis.post_request_colis2.note' | translate }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="myModal.hide()">{{'post_requests.post_request_colis.post_request_colis2.cancel' | translate }}</button>
+        <button type="button" class="btn btn-success" (click)="myModal.hide();showNotification()">{{'post_requests.post_request_colis.post_request_colis2.confirm' | translate }}</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

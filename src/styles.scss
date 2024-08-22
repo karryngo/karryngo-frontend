@@ -1,0 +1,515 @@
+/* You can add global styles to this file, and also import other style files */
+//@import "~bootstrap/dist/css/bootstrap.css";/* You can add global styles to this file, and also import other style files */
+// @import '~bootstrap/dist/css/bootstrap.min.css';
+// @import "https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css";
+// @import "https://fonts.googleapis.com/css?family=Roboto:400,700,300";
+// @tailwind base;
+// @tailwind components;
+// @tailwind utilities;
+
+// @import "tailwindcss/base";
+// @import "tailwindcss/components";
+// @import "tailwindcss/utilities";
+
+
+@import "assets/css/pe-icon-7-stroke.css";
+@import "assets/css/demo.css";
+
+@import "assets/custom_theme/scss/mixins";
+@import "assets/custom_theme/scss/contact_action";
+// @import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css";
+// @import "";
+// @import "";
+// @import "~ng-pick-datetime/assets/style/picker.min.css";
+@import "~@ng-select/ng-select/themes/default.theme.css";
+@import "scss/theriscope.scss";
+
+@import '~@swimlane/ngx-datatable/index.css';
+@import '~@swimlane/ngx-datatable/themes/bootstrap.scss';
+@import '~@swimlane/ngx-datatable/assets/icons.css';
+
+@import "assets/scss/chat";
+@import "assets/scss/phone";
+
+// @import 'tailwindcss/base';
+// @import 'tailwindcss/components';
+// @import 'tailwindcss/utilities';
+
+// html, body { height: 100%; }
+body { margin: 0;
+  // background-color: rgba(247, 247, 241, 0.986) !important;
+      // font-family: Roboto, "Helvetica Neue", sans-saerif !important;
+}
+
+    
+    textarea:focus,
+    select:focus,
+    form input[type=text]:focus,
+    form input[type=date]:focus,
+    form input[type=number]:focus,
+    form input[type=password]:focus{
+      display: block;
+      // border: groove;
+      box-shadow: 6px 6px 0px #e2e1b0c1 !important;
+    	border-color: #fecd0b !important;
+}
+
+form input[type=text]{
+  color: #333;
+}
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+.center-div {
+  margin: 0 auto;
+  width: 100px; 
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: rgb(233, 206, 160);
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  // border: 1px solid #ccc;
+  border-top: none;
+}
+
+
+.responsive-img{
+  display: block;
+  width: 100%;
+}
+    .sidebar .nav-link {
+      display: block;
+      padding: 0.75rem 1rem;
+      color: white !important;
+      text-decoration: none !important;
+      background: transparent;
+    }
+    .sidebar .nav-link:hover {
+      color: white !important;
+      background: #d8ad20 !important;
+    }
+    .sidebar .nav-link:active {
+      color: white !important;
+      background: #94871571 !important;
+    }
+.breadcrumb-item a {
+  color: #b48f30 !important;
+  text-decoration: none;
+  background-color: transparent;
+}
+.btn-group a {
+  color: #b48f30 !important;
+}
+.page-item.active .page-link {
+  z-index: 1;
+  color: #fff;
+  background-color: #fecd0b !important;
+  border-color: black !important;
+}
+.sidebar .nav-link .nav-icon {
+  color: #b48f30 !important;
+}
+.sidebar .nav-link .nav-icon:hover{
+  color: white !important;
+}
+.sidebar .nav-link .nav-icon:active{
+  color: white !important;
+}
+
+.navbar-collapse {
+  background-color: inherit !important;
+}
+
+.nav-item {
+  font-size: 13px;
+}
+.nav-link-mr {
+  margin-right: 7%;
+}
+
+.bottom-footer {
+  background-color: rgb(24, 23, 23);
+}
+
+.card-index {
+  color: rgba(0, 0, 0, 0.5)!important;
+}
+
+.card2 {
+  color: rgba(0, 0, 0, 0.5);
+  width: 85%;
+  margin-left: 8%;
+}
+
+.tree-card {
+  margin-bottom: 1%;
+}
+
+.container-index {
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+
+.page-footer {
+  background-color: rgba(0, 0, 0, 0.54);
+}
+
+.logo {
+  border-radius: 2px;
+  height: 40px;
+}
+
+.next-button {
+  color: black;
+  background-color: #fecd0b;
+}
+
+.mdl-layout-registration {
+  align-items: center;
+  justify-content: center;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  margin-left: 15%;
+  margin-right: 25%;
+  color: #f5f5f5;
+}
+
+.text-padding {
+  margin-left: 5%;
+}
+
+.div-magin {
+  margin-top: 5%;
+}
+
+@media (min-width: 800px) and (max-width: 850px) {
+  // .navbar:not(.top-nav-collapse) {
+  //   // background: #1c2331 !important;
+  // }
+}
+
+.view,
+body,
+html {
+  height: 80%;
+}
+
+.page-footer {
+  background-color: rgba(0, 0, 0, 0.54);
+}
+
+@media only screen and (max-width: 768px) {
+  // .navbar {
+  //   // background-color: #1c2331 !important;
+  // }
+  // .navbar-collapse {
+  //   // background-color: black !important;
+  // }
+}
+
+.htitle {
+  font-size: 50px;
+}
+
+.btn-yellow {
+  color: black;
+}
+
+.title-card {
+  color: black;
+  margin-top: 5%;
+}
+
+.full-title {
+  margin-right: 5%;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 400;
+}
+
+.container1 {
+  background-color: #fee27d;
+}
+
+.container-not-magin {
+  margin-left: 0%;
+  margin-right: 0%;
+  width: 100%;
+}
+
+.container-registration {
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+.form1 {
+  width: 700px;
+}
+
+.title-form {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.field-form {
+  border-bottom-color: rgba(0, 0, 0, 0.32);
+  background-color: #fee27d;
+}
+
+.sub-title {
+  margin-top: 15%;
+}
+
+.submit-button {
+  margin-bottom: 2%;
+  margin-top: 5%;
+  margin-left: 46%;
+  color: #fecd0b;
+  background-color: black;
+}
+
+.image-1 {
+  background-image: url("assets/img/bg_side_4-1.jpg");
+}
+
+.register-button {
+  color: #fecd0b;
+}
+
+.profile {
+  width: 109px;
+  height: 109px;
+}
+
+.text-icon {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.sparator {
+  width: 50%;
+  margin-left: 0%;
+  margin-bottom: 10%;
+}
+
+.contener2 {
+  margin-left: 15%;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+
+.image-back {
+  width: 103%;
+  height: 620px;
+}
+
+.container3 {
+  margin-top: 5%;
+}
+.mask .card {
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  min-width: 0;
+  word-wrap: break-word !important;
+  background-color: rgb(8, 8, 8) !important;
+  background-clip: border-box !important;
+  border: 1px solid rgba(0,0,0,.125) !important;
+  border-radius: .25rem !important;
+}
+
+.container-desk .card {
+  width: 30px !important;
+  height: 370px !important;
+}
+
+.card-back {
+  background: black;
+  opacity: 0.8;
+  width: 70%;
+  height: 420px;
+}
+
+.content-card {
+  margin-left: 7%;
+}
+
+.jaune {
+  color: #fecd0b;
+}
+.bg-jaune {
+  background-color: #fecd0b;
+}
+
+.row .btn{
+  background-color: #fecd0b !important;
+
+}
+
+.error-msg{
+  font-size: 0.8em;
+  color: #df1313;
+}
+
+.footer-card {
+  color: #fecd0b;
+  margin-left: 10%;
+}
+
+.sub-indication {
+  font-size: 11px;
+  margin-left: 5%;
+}
+
+.textarea-marin {
+  margin-top: 10%;
+}
+
+.carousel-text {
+  font-size: 20px;
+}
+
+.description-profil {
+  margin-bottom: 1%;
+}
+
+.signature {
+  width: 90px;
+  height: 60px;
+  margin-top: 16%;
+}
+
+.title-profil {
+  margin-left: 25%;
+  margin-top: 5%;
+  margin-bottom: 3%;
+}
+
+.tab-div {
+  margin-bottom: 2%;
+  border: black;
+}
+
+.link-card:hover {
+  background-color: black;
+  color: white;
+}
+
+.link-h:focus {
+  color: #fecd0b;
+}
+.Commitment {
+  padding: 0%;
+}
+.mask-margin {
+  margin-left: 10%;
+  margin-top: 15%;
+}
+
+.container-global {
+  background-color: rgb(243, 243, 243);
+  margin-top: 10%;
+  margin-bottom: 3%;
+}
+.field {
+  border-color: #757c88;
+  height: 70%;
+  background-color: transparent;
+}
+.cont-login {
+  margin-top: 15%;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-tab-label {
+  border: 1px solid rgb(126, 124, 124);
+  width: 200%;
+}
+.tab-group {
+  border: 1px solid;
+  border-left-color: rgb(126, 124, 124);
+  border-right-color: rgb(126, 124, 124);
+  border-bottom-color: rgb(126, 124, 124);
+  border-top-color: transparent;
+}
+.user-profil {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.mat-tab-label-active {
+  background-color: #fecd0b;
+}
+
+nav .nav-item .nav-link {
+  color: black !important;
+  font-size: large;
+  // transition: 0.35s;
+}
+nav .nav-item .nav-link:hover {
+  color: #fecd0b !important;
+  // transition: 0.35s;
+}
+
+.mat-body {
+  background-color: rgb(212, 209, 209);
+  padding: 2%;
+}
+.div-border2 {
+  border: 1px solid;
+  border-color: rgba(126, 124, 124, 0.892);
+  padding: 2%;
+}
+
+.card-header{
+  background: none !important;
+}
+
+.ng-select.custom-widge .ng-select-container {
+  height: 44px !important;
+  // background: none;
+  border-radius: 0;
+}
+
+.custom-chat{
+  color: #333 !important;
+}

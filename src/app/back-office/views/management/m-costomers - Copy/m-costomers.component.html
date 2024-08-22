@@ -1,0 +1,129 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-sm-6 col-md-12">
+            <div class="card"> <br><br><br>
+                <h3 class="jaune text-center mt-2"> 
+                    {{'management.m_costomers.customers_list' | translate }}
+                </h3>
+                <div class="card-body">
+                    <table class="table table-responsive-sm table-hover table-outline mb-5"
+                        style="margin-left: 2px; margin-right: 2px;">
+                        <thead class="thead-light">
+                            <tr>
+                                <th><i class="fa fa-filter"></i> {{'management.m_costomers.th_user' | translate }}</th>
+                                <th><i class="fa fa-filter"></i> {{'management.m_costomers.th_name' | translate }}</th>
+                                <th><i class="fa fa-filter"></i> {{'management.m_costomers.th_services' | translate }}</th>
+                                <th><i class="fa fa-filter"></i> {{'management.m_costomers.th_country' | translate }}</th>
+                                <th>{{'management.m_costomers.th_details' | translate }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="avatar">
+                                        <img src="../../../../assets/img/user_image.png" class="img-avatar">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>Anselm SIAKAM</div>
+                                    <div class="small text-muted">
+                                        | {{'management.m_costomers.registered_on' | translate }}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div (click)="services.show()">{{'management.m_costomers.trips' | translate }} <i class="fa fa-window-restore fa-lg mt-4"></i>
+                                    </div>
+                                </td>
+                                <td><i class="flag-icon flag-icon-za h1" title="South Africa"></i> {{'management.m_costomers.south_africa' | translate }}
+                                </td>
+                                <td><a (click)="details.show()">{{'management.m_costomers.see_more' | translate }}<i
+                                            class="fa fa-window-restore fa-lg mt-4"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <nav>
+                        <ul class="pagination pull-right">
+                            <li class="page-item"><a class="page-link">{{'management.m_costomers.prev' | translate }}</a></li>
+                            <li class="page-item active">
+                                <a class="page-link">1</a>
+                            </li>
+                            <li class="page-item"><a class="page-link">2</a></li>
+                            <li class="page-item"><a class="page-link">3</a></li>
+                            <li class="page-item"><a class="page-link">{{'management.m_costomers.next' | translate }}</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div bsModal #services="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center">{{'management.m_costomers.services_list' | translate }}</h4>
+                <button type="button" class="close" (click)="services.hide()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-responsive-sm table-hover table-outline mb-5"
+                    style="margin-left: 2px; margin-right: 2px;">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>N <sup>0</sup></th>
+                            <th><i class="fa fa-filter"></i> {{'management.m_costomers.th_name' | translate }}</th>
+                            <th><i class="fa fa-filter"></i> {{'management.m_costomers.status' | translate }}</th>
+                            <th><i class="fa fa-filter"></i> {{'management.m_costomers.date' | translate }}</th>
+                            <th><i class="fa fa-filter"></i> {{'management.m_costomers.price' | translate }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1
+                            </td>
+                            <td>{{'management.m_costomers.service_name' | translate }}
+                            </td>
+                            <td>{{'management.m_costomers.ended' | translate }}
+                            </td>
+                            <td>02 / 02 / 2021
+                            </td>
+                            <td>{{'management.m_costomers.RAN' | translate }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="services.hide()">{{'management.m_costomers.close' | translate }}</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div bsModal #details="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{'management.m_costomers.costomer_details' | translate }}</h4>
+                <button type="button" class="close" (click)="details.hide()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    <br>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="details.hide()">{{'management.m_costomers.close' | translate }}</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

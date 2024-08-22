@@ -1,0 +1,61 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="card text-center">
+                <div class="card-header">
+                    <h4 class="jaune text-left"> 
+                    {{'wallet.withdrawal.current_balance' | translate }}
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <h3 class="balance">{{balence}} 
+                    <span *ngIf="cameroon || gabon">{{'wallet.withdrawal.FCFA' | translate }}</span>
+                    <!-- <span *ngIf="gabon">FCFA</span> -->
+                    <span *ngIf="nigeria">{{'wallet.withdrawal.NAIRA' | translate }}</span>
+                    <span *ngIf="southAfrica">{{'wallet.withdrawal.RAND' | translate }}</span>
+                    </h3> 
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-9">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="jaune text-left">
+                    {{'wallet.withdrawal.withdrawal' | translate }}
+                    </h4>
+                </div>
+                <app-payment (events)='handleEvents($event)'></app-payment>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{'wallet.withdrawal.confirm_transaction' | translate }}</h4>
+                <button type="button" class="close" (click)="myModal.hide()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>{{'wallet.withdrawal.ask_confirm_transaction' | translate }}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="myModal.hide()">{{'wallet.withdrawal.cancel' | translate }}</button>
+                <button type="button" class="btn btn-success" (click)="myModal.hide();showNotification('top','center', 'danger', 'pe-7s-close-circle', '\<b>Cancel \</b>\<br>Sorry')">{{'wallet.withdrawal.tray_later' | translate }}</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+
+
+
+

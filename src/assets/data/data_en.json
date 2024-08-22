@@ -1,0 +1,550 @@
+﻿[
+{
+	"id":"albums-outline",
+	"color":"tertiary",
+	"name":"Lounge",
+	"items": [
+		{
+			"name": "3 Seater Couch",
+			"quantity": ""
+		},
+		{
+			"name": "2 Seater Couch",
+			"quantity": ""
+		},
+		{
+			"name": "1 Seater Couch/Wingback Chair",
+			"quantity": ""
+		},
+		{
+			"name": "L-Shape/Corner Couch",
+			"quantity": ""
+		},
+		{
+			"name": "Ottoman Beanbag",
+			"quantity": ""
+		},
+		{
+			"name": "Coffee Table (Wood)",
+			"quantity": ""
+		},
+		{
+			"name": "Coffee Table (Glass)",
+			"quantity": ""
+		},
+		{
+			"name": "Side Table",
+			"quantity": ""
+		},
+		{
+			"name": "Half-Moon Table",
+			"quantity": ""
+		},
+		{
+			"name": "Hat/Coat Stand",
+			"quantity": ""
+		},
+		{
+			"name": "Carpet",
+			"quantity": ""
+		},
+		{
+			"name": "Sound System",
+			"quantity": ""
+		},
+		{
+			"name": "\"Flat Screen TV (Up to 40\"\")\"",
+			"quantity": ""
+		},
+		{
+			"name": "\"Flat Screen TV (40\"\" to 50\"\")\"",
+			"quantity": ""
+		},
+		{
+			"name": "\"Flat Screen TV (55\"\" to 70\"\")\"",
+			"quantity": ""
+		},
+		{
+			"name": "Curved TV/OLED/QLED",
+			"quantity": ""
+		},
+		{
+			"name": "TV Cabinet/Wall Unit (Medium)",
+			"quantity": ""
+		},
+		{
+			"name": "TV Cabinet/Wall Unit (Large)",
+			"quantity": ""
+		},
+		{
+			"name": "Display Cabinet/Showcase",
+			"quantity": ""
+		},
+		{
+			"name": "Bar Counter",
+			"quantity": ""
+		},
+		{
+			"name": "Bar Chairs",
+			"quantity": ""
+		},
+		{
+			"name": "Pool/Billard Table",
+			"quantity": ""
+		},
+		{
+			"name": "Sculpture/Statue",
+			"quantity": ""
+		},
+		{
+			"name": "Picture/Mirror",
+			"quantity": ""
+		}
+	]
+},
+{
+	"id":"restaurant-outline",
+	"color":"danger",
+	"name":"Dining Room",
+	"items": [
+		{
+			"name": "Dining Room Table (Wood)",
+			"quantity": ""
+		},
+		{
+			"name": "Dining Room Table (Glass)",
+			"quantity": ""
+		},
+		{
+			"name": "Dining Room Chairs",
+			"quantity": ""
+		},
+		{
+			"name": "Dining Room Bench",
+			"quantity": ""
+		},
+		{
+			"name": "Sideboard/Buffet (Medium)",
+			"quantity": ""
+		},
+		{
+			"name": "Sideboard/Buffet (Large)",
+			"quantity": ""
+		},
+		{
+			"name": "Piano (Upright)",
+			"quantity": ""
+		},
+		{
+			"name": "Piano (Grand)",
+			"quantity": ""
+		},
+		{
+			"name": "Tea Trolley",
+			"quantity": ""
+		},
+		{
+			"name": "Wine Cabinet/Wine Rack",
+			"quantity": ""
+		},
+		{
+			"name": "Bar Chairs",
+			"quantity": ""
+		},
+		{
+			"name": "Picture/Mirror",
+			"quantity": ""
+		}
+	]
+},
+{
+	"id":"storefront-outline",
+	"color":"orange",
+	"name":"Kitchen",
+	"items": [
+		{
+			"name": "Fridge/Freezer (Side by Side)",
+			"quantity": ""
+		},
+		{
+			"name": "Fridge/Freezer (Single)",
+			"quantity": ""
+		},
+		{
+			"name": "Bar Fridge",
+			"quantity": ""
+		},
+		{
+			"name": "Microwave",
+			"quantity": ""
+		},
+		{
+			"name": "Dishwasher",
+			"quantity": ""
+		},
+		{
+			"name": "Washing Machine",
+			"quantity": ""
+		},
+		{
+			"name": "Tumble Dryer",
+			"quantity": ""
+		},
+		{
+			"name": "Oven/Stove",
+			"quantity": ""
+		},
+		{
+			"name": "Vacuum Cleaner",
+			"quantity": ""
+		},
+		{
+			"name": "Kitchen Table (Wood)",
+			"quantity": ""
+		},
+		{
+			"name": "Kitchen Table (Glass)",
+			"quantity": ""
+		},
+		{
+			"name": "Kitchen Chairs",
+			"quantity": ""
+		},
+		{
+			"name": "Dustbin",
+			"quantity": ""
+		},
+		{
+			"name": "Washing/ Laundry Basket",
+			"quantity": ""
+		},
+		{
+			"name": "Ironing Board",
+			"quantity": ""
+		},
+		{
+			"name": "Clothes Horse",
+			"quantity": ""
+		},
+		{
+			"name": "Broom/Mop/Bucket",
+			"quantity": ""
+		},
+		{
+			"name": "Cooler Box",
+			"quantity": ""
+		},
+		{
+			"name": "Picture/Mirror",
+			"quantity": ""
+		}
+	]
+},
+{
+	"id":"school-outline",
+	"color":"vert",
+	"name":"Study",
+	"items":[
+		{
+			"name": "Desk (Medium - Wood)",
+			"quantity": ""
+		},
+		{
+			"name": "Desk (Medium - Glass)",
+			"quantity": ""
+		},
+		{
+			"name": "Desk (Large - Wood)",
+			"quantity": ""
+		},
+		{
+			"name": "Desk (Large - Glass)",
+			"quantity": ""
+		},
+		{
+			"name": "Credenza",
+			"quantity": ""
+		},
+		{
+			"name": "Office Chairs",
+			"quantity": ""
+		},
+		{
+			"name": "Filing Cbinet",
+			"quantity": ""
+		},
+		{
+			"name": "Stationery Cabinet",
+			"quantity": ""
+		},
+		{
+			"name": "Bookcase (Medium)",
+			"quantity": ""
+		},
+		{
+			"name": "Bookcase (Large)",
+			"quantity": ""
+		},
+		{
+			"name": "Computer Stand",
+			"quantity": ""
+		},
+		{
+			"name": "Computer Monitor/Screen",
+			"quantity": ""
+		},
+		{
+			"name": "Printer",
+			"quantity": ""
+		},
+		{
+			"name": "Safe (Non-Scheduled)",
+			"quantity": ""
+		},
+		{
+			"name": "Picture/Mirror",
+			"quantity": ""
+		}
+	]
+},
+{
+	"id":"bed-outline",
+	"color":"violet",
+	"name":"Bedrooms",
+	"items": [
+		{
+			"name": "Bed (King)",
+			"quantity": ""
+		},
+		{
+			"name": "Kist",
+			"quantity": ""
+		},
+		{
+			"name": "Suitcase",
+			"quantity": ""
+		},
+		{
+			"name": "Sewing Cabinet",
+			"quantity": ""
+		},
+		{
+			"name": "Couch/Sleeper Couch",
+			"quantity": ""
+		},
+		{
+			"name": "Cot",
+			"quantity": ""
+		},
+		{
+			"name": "Compactum",
+			"quantity": ""
+		},
+		{
+			"name": "Exercise Bicycle",
+			"quantity": ""
+		},
+		{
+			"name": "Wardrobe",
+			"quantity": ""
+		},
+		{
+			"name": "Bed (Queen)",
+			"quantity": ""
+		},
+		{
+			"name": "Bed (Double)",
+			"quantity": ""
+		},
+		{
+			"name": "Bed (3/4 or Single)",
+			"quantity": ""
+		},
+		{
+			"name": "Seigh/ 4 Post Bed Mattress",
+			"quantity": ""
+		},
+		{
+			"name": "Headboard",
+			"quantity": ""
+		},
+		{
+			"name": "Bedside Cabinet",
+			"quantity": ""
+		},
+		{
+			"name": "Dressing Table and Chair",
+			"quantity": ""
+		},
+		{
+			"name": "Chest of Drawers",
+			"quantity": ""
+		},
+		{
+			"name": "Treadmill/Gym",
+			"quantity": ""
+		},
+		{
+			"name": "\"Flat Screen TV (Up to 40\"\")\"",
+			"quantity": ""
+		},
+		{
+			"name": "\"Flat Screen TV (40\"\" to 55\"\")\"",
+			"quantity": ""
+		},
+		{
+			"name": "\"Flat Screen TV (55\"\" to 70\"\")\"",
+			"quantity": ""
+		},
+		{
+			"name": "Curved TV/OLED/QLED",
+			"quantity": ""
+		},
+		{
+			"name": "Picture/Mirror",
+			"quantity": ""
+		}
+	]
+},
+{
+	"id":"build-outline",
+	"color":"dark-marron",
+	"name":"Garage and Outdoor",
+	"items": [
+		{
+			"name": "",
+			"quantity": ""
+		},
+		{
+			"name": "GARAGE & OUTDOOR",
+			"quantity": "quantity"
+		},
+		{
+			"name": "3 Seater ",
+			"quantity": ""
+		},
+		{
+			"name": "2 Seater ",
+			"quantity": ""
+		},
+		{
+			"name": "1 Seater ",
+			"quantity": ""
+		},
+		{
+			"name": "Coffee Table (Wood) ",
+			"quantity": ""
+		},
+		{
+			"name": "Coffee Table (Glass) ",
+			"quantity": ""
+		},
+		{
+			"name": "Garden Table (Medium - Wood) ",
+			"quantity": ""
+		},
+		{
+			"name": "Garden Table (Medium - Glass) ",
+			"quantity": ""
+		},
+		{
+			"name": "Garden Table (Large - Wood) ",
+			"quantity": ""
+		},
+		{
+			"name": "Garden Table (Large - Glass) ",
+			"quantity": ""
+		},
+		{
+			"name": "Garden Chairs ",
+			"quantity": ""
+		},
+		{
+			"name": "Garden Chairs (Stackable) ",
+			"quantity": ""
+		},
+		{
+			"name": "Garden Bench ",
+			"quantity": ""
+		},
+		{
+			"name": "Braai",
+			"quantity": ""
+		},
+		{
+			"name": "Heater/Fan",
+			"quantity": ""
+		},
+		{
+			"name": "Pot Plant (Medium) ",
+			"quantity": ""
+		},
+		{
+			"name": "Pot Plant (Large) ",
+			"quantity": ""
+		},
+		{
+			"name": "Kennel ",
+			"quantity": ""
+		},
+		{
+			"name": "Swing/Jungle Gym",
+			"quantity": ""
+		},
+		{
+			"name": "Trampoline (Small) ",
+			"quantity": ""
+		},
+		{
+			"name": "Trampoline (Large) ",
+			"quantity": ""
+		},
+		{
+			"name": "Bicycle",
+			"quantity": ""
+		},
+		{
+			"name": "Motorbike (cc)",
+			"quantity": ""
+		},
+		{
+			"name": "Lawnmower",
+			"quantity": ""
+		},
+		{
+			"name": "Garden Tools",
+			"quantity": ""
+		},
+		{
+			"name": "Wheelbarrow",
+			"quantity": ""
+		},
+		{
+			"name": "Step Ladder",
+			"quantity": ""
+		},
+		{
+			"name": "Ladder",
+			"quantity": ""
+		},
+		{
+			"name": "Cabinet (Steel/Wood)",
+			"quantity": ""
+		},
+		{
+			"name": "Workbench",
+			"quantity": ""
+		},
+		{
+			"name": "Toolbox",
+			"quantity": ""
+		},
+		{
+			"name": "Crate/Trunk",
+			"quantity": ""
+		}
+	]
+}
+    
+    
+]

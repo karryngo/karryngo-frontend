@@ -1,0 +1,18 @@
+/* Add this to your component's CSS file */
+
+.mat-chip {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.delete-icon {
+    margin-left: auto;
+    color: #ff5252; /* Example color for the delete icon */
+    transition: color 0.3s ease;
+    border: #ff5252;
+}
+
+.delete-icon:hover {
+    color: #ff1744; /* Darker shade for hover effect */
+}

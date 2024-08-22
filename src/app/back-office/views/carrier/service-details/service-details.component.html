@@ -1,0 +1,407 @@
+<section id="main-container" class="main-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12 col-lg-8">
+                <div class="col-md-12 card text-center py-5" *ngIf="!service">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div> 
+                    </div>
+                </div>
+                <div class="content-inner-page" *ngIf="service">
+                    <div class="row my-2" style="text-align: center;">
+                        <div class="col-md-12 mb-5">
+                            <h2><a href="javascript:void(0)">{{ service.title }}</a></h2>
+                        </div>
+                    </div>
+                    <div class="row my-5" *ngIf="service.type == 'TransportColisService'">
+                        <div class="col-md-12" >
+                            
+                        </div>
+                        <div class="col-md-4" style="text-align: center;">
+                            <h5>{{'service_details.service_details_not_weak' | translate }} {{'service_details.service_details_departure' | translate }}</h5>
+                            <img style="margin-left: auto; margin-right: auto; width: 80%" src="assets/data/service_icons/home.png" alt=""><br>
+                            {{ service.address.from.name }}, {{ service.address.from.city }} {{ service.address.from.country }}
+                            
+                        </div>
+                        <div class="col-md-4" style="text-align: center;">
+                            <img style="margin-left: auto; margin-right: auto; width: 80%" src="assets/data/service_icons/right-arrow.png" alt=""><br>
+                            <p>
+                                <span class="badge badge-primary mx-2"> {{ service.type }} </span>
+                            </p>
+                            <p>
+                                <span class="badge badge-primary mx-2">{{'service_details.service_details_on' | translate }} {{ service.publicationDate | date }} </span>
+                            </p>
+                            <p>
+                                <span *ngIf="service.is_urgent" class="badge badge-danger mx-2">{{'service_details.service_details_urgent' | translate }}</span>
+                                <span *ngIf="!service.is_urgent" class="badge badge-success mx-2">{{'service_details.service_details_not_urgent' | translate }}</span>
+                                <span *ngIf="service.is_weak" class="badge badge-danger mx-2">{{'service_details.service_details_weak' | translate }}</span>
+                                <span *ngIf="!service.is_weak" class="badge badge-success mx-2">{{'service_details.service_details_not_weak' | translate }}</span>
+                                <!-- <span class="badge badge-info"> {{ service.size_heigth }}</span> -->
+                            </p>
+                        </div>
+                        <div class="col-md-4" style="text-align: center;">
+                            <h5>{{'service_details.service_details_arrival' | translate }}</h5>
+                            <img style="margin-left: auto; margin-right: auto; width: 80%;" src="assets/data/service_icons/house.png"  alt=""><br>
+                            {{ service.address.from.name }}, {{ service.address.from.city }} {{ service.address.from.country }}
+                        </div>
+                    </div>
+
+                    <div class="gap-40"></div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h3 class="column-title-small">{{'service_details.service_details_title' | translate }}</h3>
+                            <p style="text-align: justify;">
+                                {{ service.description }}
+                            </p>
+                            <time datetime="2020-05-25 12:00:00"> 
+                                <small><i class="fas fa-calendar-alt mr-2"></i> {{ 'my_services.my_services_date' | translate }} {{ service.publicationDate | date }}, {{  'my_services.my_services_time' | translate }} {{ service.publicationDate | date: 'shortTime' }}</small>
+                            </time>
+                            <ul class="list-arrow">
+                                <li>{{'service_details.service_details_state' | translate }}: <span *ngIf="service.state=='service_init_STATE'" class="badge badge-success" >OPEN</span> .</li>
+                                <li>{{ 'my_services.my_services_price' | translate }} : <span class="badge badge-info"> {{ service.suggestedPrice }} {{ service.country_docs[0].currency.cc }} </span> .</li>
+                                <li>{{'service_details.service_details_address' | translate }}: 
+                                    <span class="badge badge-info"> 
+                                        {{service.collection_address}}, {{ service.address.from?.name+" "+service.address.from?.city+" "+service.address.from?.country }}.
+                                    </span>
+                                </li>
+                                <span *ngIf="service.type == 'TransportColisService'">
+                                    <li>{{'service_details.service_details_size' | translate }}: <span class="badge badge-info"> {{ service.options.size.heigth }} cm</span> .</li>
+                                    <li>{{'service_details.service_details_width' | translate }}: <span class="badge badge-info"> {{ service.options.size.width }} cm</span> .</li>
+                                    <li>{{'service_details.service_details_depth' | translate }}: <span class="badge badge-info"> {{ service.options.size.depth }} cm</span> .</li>
+                                </span>
+                                
+                                <!-- <li>Opporutnity to work with amet elit a.</li>
+                                <li>Saving Time to Deal with commodo iaculis.</li>
+                                <li>Leadership skills to manage erat volutpat.</li>
+                                <li>Cut cost without sacrificing dolore magna.</li>
+                                <li>Automate your business elis tristique.</li> -->
+                                <span *ngIf="service.type == 'RentalService'">
+                                    <li>
+                                        <time datetime="2020-05-25 12:00:00"> 
+                                            <i class="fas fa-calendar-alt mr-2"></i> 
+                                            {{ 'my_services.need_car' | translate }} <span class="badge badge-info" > {{ service.publicationDate | date }} {{ service.date_rent | date: 'shortTime' }}</span>, {{  'my_services.my_services_time' | translate }} <span class="badge badge-info"> {{ service.date_rent | date: 'shortTime' }}</span>
+                                        </time>
+                                    </li>
+                                </span>
+                            </ul>
+                            <button *ngIf="service.state==service_state.SERVICE_PAIEMENT_DONE_AND_WAITING_START" (click)="ask_start_service()" type="button" class="btn btn-info">{{'service_details.service_details_start' | translate }}</button>
+                            <button *ngIf="service.state==service_state.SERVICE_RUNNING" (click)="ask_complete_service()" type="button" class="btn btn-info">{{'service_details.service_details_finnish' | translate }}?</button>
+                            
+                            <!-- <li class="tag__item" *ngIf="service.state==service_state.SERVICE_PAIEMENT_DONE_AND_WAITING_START" (click)="updatePrice(service)"><i class="fas fa-edit"></i>Start</li> -->
+                        </div>
+
+                        <div class="col-md-6 mt-5 mt-md-0" *ngIf="conversation">
+                            <!-- <h3 class="column-title-small">You Should Know</h3> -->
+                            <h3 class="column-title-small"></h3>
+                            <div class="page-content page-container" id="page-content">
+                                <div class="padding">
+                                    <div class="row container d-flex justify-content-center">
+                                        <div class="col-md-12">
+                                            <div class="card card-bordered">
+                                                <div class="card-header">
+                                                    <h4 class="card-title"><strong>{{'service_details.service_details_chat' | translate }}</strong></h4>
+                                                </div>
+                                                <div class="ps-container ps-theme-default ps-active-y" id="chat-content" style="overflow-y: scroll !important; height:400px !important;">
+                                                    <div *ngFor="let message of messages">
+                                                        <div class="media media-chat" *ngIf="message.user_id!=current_user._id">
+                                                            <img class="avatar" [src]="requester.picture ? fileUrl+requester.picture.name: defaultImg" alt="Requester's picture">
+                                                            <div class="media-body">
+                                                                <p>{{ message.message }}</p>
+                                                                <p class="meta"><time datetime="2018">{{ message.created_at | date: 'dd/MM/yy HH:mm' }}</time></p>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="media media-chat media-chat-reverse" *ngIf="message.user_id==current_user._id">
+                                                            <div class="media-body">
+                                                                <p>{{ message.message }}</p><br>
+                                                                <p class="meta" style="color: gray;"><time datetime="2018"><small>{{ message.created_at | date: 'dd/MM/yy HH:mm' }}</small></time></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;"><div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div></div>
+                                                    <div class="ps-scrollbar-y-rail" style="top: 0px; height: 0px; right: 2px;"><div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 2px;"></div></div>
+                                                </div>
+                                                <div class="publisher bt-1 border-light" *ngIf="service.state!=service_state.SERVICE_END">
+                                                    <img class="avatar avatar-xs" [src]="current_user.picture ? fileUrl+current_user.picture.name: defaultImg" alt="User(s Picture)">
+                                                    <input class="publisher-input" type="text" placeholder="Write something" [(ngModel)]="newMessage">
+                                                    <span class="publisher-btn file-group">
+                                                        <i class="fa fa-paperclip file-browser"></i>
+                                                        <input type="file">
+                                                    </span>
+                                                    <a class="publisher-btn" data-abc="true"><i class="fa fa-smile"></i></a>
+                                                    <a class="publisher-btn text-info" data-abc="true"><i class="fa fa-paper-plane" (click)="sendMessage()"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 mt-3" *ngIf="service && service.state==service_state.SERVICE_END">
+                            <h3 class="column-title-small"></h3>
+                            <section style="background-color: #d94125;" style="background-color: #d94125; padding: 0px !important; padding-top: 30px !important;" >
+                                <div class="container text-dark" *ngIf="!findCommentByUserId(service.idRequester)">
+                                    <div class="row d-flex justify-content-center">
+                                        <div class="col-md-12 col-lg-12 col-xl-12">
+                                            <div class="card">
+                                                <div class="card-body p-4">
+                                                    <div class="d-flex align-items-center w-100">
+                                                        <img class="rounded-circle shadow-1-strong me-3" [src]="current_user.picture ? fileUrl+current_user.picture.name: defaultImg" alt="avatar" width="65" height="65" />
+                                                        <div class="w-100">
+                                                            <h5><strong>{{'service_details.service_details_add_comment' | translate }}</strong></h5>
+                                                            <ul class="rating mb-3" data-mdb-toggle="rating">
+                                                                <li *ngFor="let star of [1, 2, 3, 4, 5]" (click)="onRatingChange(star)" style="display: inline;">
+                                                                    <i [class]="star <= comment.rating ? 'fas fa-star fa-sm text-danger' : 'far fa-star fa-sm text-danger'"
+                                                                        [title]="getStarTitle(star)"></i>
+                                                                </li>
+                                                            </ul>
+                                                            <div class="form-outline">
+                                                                <textarea class="form-control" id="textAreaExample" rows="4" [(ngModel)]="comment.text"></textarea>
+                                                                <label class="form-label" for="textAreaExample">{{'service_details.service_details_comment' | translate }}</label>
+                                                            </div>
+                                                            <div class="d-flex justify-content-between mt-3">
+                                                                <!-- <button type="button" class="btn btn-success">Danger</button> -->
+                                                                <!-- <div class="d-flex justify-content-center align-items-center" style="background-color: red;"> -->
+                                                                    <!-- <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+                                                                        <span class="sr-only">Loading...</span>
+                                                                    </div>  -->
+                                                                <!-- </div> -->
+                                                                <div class="spinner-border m-5" role="status" *ngIf="processing">
+                                                                    <span class="visually-hidden"></span>
+                                                                </div>
+                                                                <button type="button" class="btn btn-danger" (click)="onSend()" [disabled]="validComment()" *ngIf="!processing">
+                                                                    {{'service_details.service_details_send_comment' | translate }} <i class="fas fa-long-arrow-alt-right ms-1"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container text-dark" *ngIf="findCommentByUserId(service.idRequester)">
+                                    <div class="row d-flex justify-content-center">
+                                        <div class="col-md-12 col-lg-12 col-xl-12">
+                                            <div class="card">
+                                                <div class="card-body p-4">
+                                                    <div class="d-flex align-items-center w-100">
+                                                        <img class="rounded-circle shadow-1-strong me-3" [src]="current_user.picture ? fileUrl+current_user.picture.name: defaultImg" alt="avatar" width="65" height="65" />
+                                                        <div class="w-100">
+                                                            <h5><strong>{{'service_details.service_details_my_comment' | translate }}</strong></h5>
+                                                            <ul class="rating mb-3" data-mdb-toggle="rating">
+                                                                <li *ngFor="let star of [1, 2, 3, 4, 5]" style="display: inline;">
+                                                                    <i [class]="star <= findCommentByUserId(service.idRequester).rating ? 'fas fa-star fa-sm text-danger' : 'far fa-star fa-sm text-danger'"
+                                                                        [title]="getStarTitle(star)"></i>
+                                                                </li>
+                                                            </ul>
+                                                            <div class="form-outline">
+                                                                <p>
+                                                                    {{ findCommentByUserId(service.idRequester).text }}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container text-dark" *ngIf="findCommentByUserId(service.idSelectedProvider)">
+                                    <div class="row d-flex justify-content-center">
+                                        <div class="col-md-12 col-lg-12 col-xl-12">
+                                            <div class="card">
+                                                <div class="card-body p-4">
+                                                    <div class="d-flex align-items-center w-100">
+                                                        <img class="rounded-circle shadow-1-strong me-3" [src]="requester.picture ? fileUrl+requester.picture.name: defaultImg" alt="avatar" width="65" height="65" />
+                                                        <div class="w-100">
+                                                            <h5><strong>{{'service_details.service_details_requester_comment' | translate }}</strong></h5>
+                                                            <ul class="rating mb-3" data-mdb-toggle="rating">
+                                                                <li *ngFor="let star of [1, 2, 3, 4, 5]" style="display: inline;">
+                                                                    <i [class]="star <= findCommentByUserId(service.idSelectedProvider).rating ? 'fas fa-star fa-sm text-danger' : 'far fa-star fa-sm text-danger'"
+                                                                        [title]="getStarTitle(star)"></i>
+                                                                </li>
+                                                            </ul>
+                                                            <div class="form-outline">
+                                                                <p>
+                                                                    {{ findCommentByUserId(service.idSelectedProvider).text }}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" *ngIf="service.images && service.images?.length!=0">
+                                <ol class="carousel-indicators">
+                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="6"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="7"></li>
+                                </ol>
+                                <div class="carousel-inner">
+                                <div class="carousel-item active" >
+                                    <img class="d-block w-100" [src]="service.images[0]" alt="First slide">
+                                </div>
+                                <div class="carousel-item" *ngIf="service.images.length>1">
+                                    <img class="d-block w-100" [src]="service.images[1]" alt="Second slide">
+                                </div>
+                                <div class="carousel-item" *ngIf="service.images.length>2">
+                                    <img class="d-block w-100" [src]="service.images[2]" alt="Third slide">
+                                </div>
+                                <div class="carousel-item" *ngIf="service.images.length>3">
+                                    <img class="d-block w-100" [src]="service.images[3]" alt="Third slide">
+                                </div>
+                                <div class="carousel-item" *ngIf="service.images.length>4">
+                                    <img class="d-block w-100" [src]="service.images[4]" alt="Third slide">
+                                </div>
+                                </div>
+                                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gap-40"></div>
+                    <div class="call-to-action classic">
+                        <div class="row align-items-center">
+                            <div class="col-md-8 text-center text-md-left">
+                            <div class="call-to-action-text">
+                                <h3 class="action-title">{{'service_details.service_details_interested' | translate }}</h3>
+                            </div>
+                            </div>
+                            <div class="col-md-4 text-center text-md-right mt-3 mt-md-0">
+                            <div class="call-to-action-btn">
+                                <a href="javascript:void(0)" *ngIf="transaction_init()" style="color: white;">{{'service_details.service_details_booked' | translate }}</a> 
+                                <!-- <a class="btn btn-primary" href="javascript:void(0)" data-toggle="modal" data-target="#exampleModalCenter"><small><b>Let the client know</b></small></a> -->
+                                <a class="btn btn-primary" *ngIf="!transaction_init()" href="javascript:void(0)" data-toggle="modal" data-target="#exampleModalCenter"><small><b>{{'service_details.service_details_book' | translate }}</b></small></a>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">{{'service_details.service_details_confirm' | translate }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" #mismiss>
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body">
+            <p>
+                {{'service_details.service_details_confirm_question' | translate }}
+            </p>
+        </div>
+        <div class="modal-footer" *ngIf="!submited">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{'service_details.my_service_close' | translate }}</button>
+            <button type="button" class="btn btn-primary" (click)="confirm_request()">{{'service_details.my_service_yes' | translate }}</button>
+        </div>
+        <div class="modal-footer" *ngIf="submited">
+            <div class="spinner-grow text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <div class="spinner-grow text-secondary" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <div class="spinner-grow text-success" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+
+
+<ng-template #startService let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title"> {{'service_details.service_details_start' | translate }} </h4> 
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <!-- Modal body -->
+    <div class="modal-body">
+        <p>{{'service_details.service_details_start_now' | translate }}</p>
+    </div>
+    <div class="modal-footer" *ngIf="!submited">
+        <button type="button" class="btn btn-success" (click)="start_service()">{{'chat.chat.confirm' | translate }}</button>
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close(false)">{{'chat.chat.cancel' | translate }}</button>
+    </div>
+    <div class="modal-footer" *ngIf="submited">
+        <div class="spinner-grow text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-secondary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-success" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #serviceCompleted let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title"> {{'service_details.service_details_complete' | translate }}  </h4> 
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <!-- Modal body -->
+    <div class="modal-body">
+        <p>{{'service_details.service_details_completed' | translate }}</p>
+        <div class="form-group">
+            <label for="inputPrice">Code </label>
+            <input type="text" class="form-control" id="inputPrice" aria-describedby="pricelHelp" [(ngModel)]="code" />
+            <!-- <small id="complete" class="form-text text-muted">{{'chat.chat.price_mentionned' | translate }} </small> -->
+        </div>
+    </div>
+    <div class="modal-footer" *ngIf="!submited">
+        <button type="button" class="btn btn-success" (click)="service_completed()">{{'chat.chat.confirm' | translate }}</button>
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close(false)">{{'chat.chat.cancel' | translate }}</button>
+    </div>
+    <div class="modal-footer" *ngIf="submited">
+        <div class="spinner-grow text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-secondary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-success" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+</ng-template>

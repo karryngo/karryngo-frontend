@@ -1,0 +1,155 @@
+<!-- <div style="display: block;">
+    <canvas baseChart
+        [datasets]="barChartData"
+        [labels]="barChartLabels"
+        [options]="barChartOptions"
+        [legend]="barChartLegend"
+        [chartType]="barChartType">
+    </canvas>
+</div> -->
+
+<!-- <div class="md-form md-outline input-with-post-icon datepicker" id="formatsSection">
+    <input placeholder="Select date" type="text" id="formats-example" class="form-control">
+    <label for="formats-example">Try me...</label>
+    <i class="fas fa-calendar input-prefix" tabindex=0></i>
+</div>
+
+<input type="date" id="field_delayDate" formControlName="field_delayDate" class="form-control"> -->
+
+<!-- <form [formGroup]="searchForm">
+    <label for="fromDate">From Date:</label>
+    <input type="date" id="fromDate" formControlName="fromDate" class="form-control">
+  
+    <label for="toDate">To Date:</label>
+    <input type="date" id="toDate" formControlName="toDate" class="form-control">
+  
+    <button type="button" (click)="onSearch()">Search</button>
+</form> -->
+
+<form [formGroup]="searchForm">
+    <div class="form-group row">
+        <div class="col-md-6">
+            <label for="fromDate">From Date:</label>
+            <input type="date" id="fromDate" formControlName="fromDate" class="form-control">
+        </div>
+        <div class="col-md-6">
+            <label for="toDate">To Date:</label>
+            <input type="date" id="toDate" formControlName="toDate" class="form-control">
+        </div>
+        <div class="col-md-6">
+            <label for="sort">Sort:</label>
+            <select id="sort" formControlName="sort" class="form-control">
+                <option value="1">Ascending</option>
+                <option value="-1">Descending</option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label for="displayMode">Display Mode:</label>
+            <select id="displayMode" formControlName="displayMode" class="form-control">
+                <option [value]="0">All</option>
+                <option [value]="1">Daily</option>
+                <option [value]="2">Weekly</option>
+                <option [value]="3">Monthly</option>
+                <option [value]="4">Yearly</option>
+            </select>
+        </div>
+        <div class="col-md-12">
+            <div class="row my-3">
+                <label for="displayMode">Type of services:</label>
+                <!-- <div class="col-md-6">
+                    <mat-form-field appearance="fill" style="width: 100%;">
+                        <mat-label>{{'business_profile.type_service' | translate}}</mat-label>
+                        <mat-select [formControl]="cat" [(value)]="selectedCat">
+                            <mat-option *ngFor="let category of categories" [value]="category">{{services[category][0]}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div> -->
+
+                <div class="col-md-12">
+                    <p>
+                        <span *ngFor="let item of selectedToppings" class="badge badge-info mr-2 p-2" style="cursor: pointer;" (click)="remove_service(service)">{{item}}</span>
+                    </p>
+                    <!-- <p>
+                        <button *ngIf="selectedToppings.length != 0" type="button" class="btn btn-secondary" (click)="add_service_skills()">{{'business_profile.save_skill' | translate}}</button>
+                    </p> -->
+                </div>
+                
+                
+                <div class="col-md-12 mt-4">
+                    <mat-form-field style="width: 100%;" *ngIf="(servs$ | async) as services">
+                        <mat-select placeholder="{{'business_profile.value' | translate}}" formControlName="type" [(value)]="selectedToppings" multiple (selectionChange)="onSelectionChange($event)">
+                            <mat-option *ngFor="let service of services" [value]="service.value">{{service.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <!-- <div class="col-md-6">
+                    <select class="form-control" style="font-weight: bold;" formControlName="field_typeof" (change)="handleType($event.target.value)" [ngClass]="{ 'is-invalid': submitted && f.field_typeof.errors }">
+                        <ng-container *ngIf="(servs$ | async) as services">
+                            <option style="font-weight: bold;" *ngFor="let service of services" [value]="service.value"> 
+                                {{  service.name  }}
+                            </option>
+                        </ng-container>
+                        
+                    </select>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <div class="footer-registration text-center">
+        <button type="submit" class="btn next-button" (click)="onSearch()">
+        Search
+        </button>
+    </div>
+</form>
+  
+<div class="row">
+    <div class="col-md-12">
+        <section class="intro">
+            <div class="bg-image h-100" style="background-color: #f5f7fa;">
+                <div class="mask d-flex align-items-center h-100">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-12">
+                                <div class="card shadow-2-strong">
+                                    <div class="card-body p-0">
+                                        <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true" style="position: relative; height: 700px">
+                                            <table class="table table-dark mb-0">
+                                                <thead style="background-color: #393939;">
+                                                    <tr class="text-uppercase text-success">
+                                                    <th scope="col">TimeStamp</th>
+                                                    <th scope="col">Display Mode</th>
+                                                    <th scope="col">Average Price</th>
+                                                    <th scope="col">Total Price</th>
+                                                    <th scope="col">Nb Services</th>
+                                                    <th scope="col">Total Revenue</th>
+                                                    <!-- <th scope="col">Spots</th> -->
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let d of data">
+                                                        <td> {{d._id?.year}}-{{d._id?.month}}-{{d._id?.day}} </td>
+                                                        <td> {{ mode[searchForm.value.displayMode] }} </td>
+                                                        <td> {{d.averageSuggestedPrice}} </td>
+                                                        <td> {{d.totalSuggestedPrice}} </td>
+                                                        <td> {{d.count}} </td>
+                                                        <td> {{ d.totalRevenue + " "+ d.currency?.symbol }} </td>
+                                                        <!-- <td>10</td> -->
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>          
+    </div>
+    <div class="col-md-12">
+        <div class="chart-container">
+            <canvas  id="MyChart" >{{ chart }}</canvas>
+        </div>
+    </div>
+</div>

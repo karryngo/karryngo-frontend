@@ -1,0 +1,56 @@
+<table class="table align-middle mb-0 bg-white" *ngIf="services">
+    <thead class="bg-light">
+    <tr>
+        <th>Type</th>
+        <th>Title</th>
+        <th>Status</th>
+        <th>Date</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let service of services">
+        <td>
+            <div class="d-flex align-items-center">
+                <!-- <img
+                    src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                    alt=""
+                    style="width: 45px; height: 45px"
+                    class="rounded-circle"
+                    /> -->
+                    <i class="fa fa-wrench" aria-hidden="true"></i>
+                <div class="ms-3">
+                <p class="fw-bold mb-1">  {{service.type}} </p>
+                <!-- <p class="text-muted mb-0">john.doe@gmail.com</p> -->
+                </div>
+            </div>
+        </td>
+        <td>
+            <p class="fw-normal mb-1">{{service.title}}</p>
+            <!-- <p class="text-muted mb-0">IT department</p> -->
+        </td>
+        <td>
+            <span class="badge badge-success rounded-pill d-inline">{{service.state}}</span>
+        </td>
+        <td> {{ service.publicationDate | date:'short' }} </td>
+        <td>
+            <button type="button" class="btn btn-link btn-sm btn-rounded">
+                Details
+            </button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<mat-paginator 
+            [length]="dataLength"
+            [pageSize]="criteria.limit"
+            [pageSizeOptions]="[5, 10, 25, 100]"
+            (page)="onPageChange($event)"
+            aria-label="Select page">
+</mat-paginator>
+<!-- <mat-paginator 
+            [length]="100"
+            [pageSize]="10"
+            [pageSizeOptions]="[5, 10, 25, 100]"
+            aria-label="Select page">
+</mat-paginator> -->

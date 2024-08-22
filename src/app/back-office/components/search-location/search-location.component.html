@@ -1,0 +1,40 @@
+<!-- <mat-form-field class="example-chip-list">
+    <mat-label>{{label}}</mat-label>
+    <mat-chip-list #chipList aria-label="Location selection">
+    <mat-chip
+        *ngFor="let location of selectedLocation"
+        [selectable]="selectable"
+        [removable]="removable"
+        (removed)="remove(location)">
+        {{location.getStringZone()}}
+        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+    </mat-chip>
+    <input 
+        [placeholder]="placeholder"
+        #locationInput
+        [formControl]="locationCtrl"
+        [matAutocomplete]="auto"
+        [matChipInputFor]="chipList"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        (matChipInputTokenEnd)="add($event)">
+    </mat-chip-list>
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+    <mat-option *ngFor="let location of filteredLocation" [value]="location.getStringZone()">
+        {{location.getStringZone()}}
+    </mat-option>
+    </mat-autocomplete>
+</mat-form-field> -->
+
+<div>
+    <label><small>{{label}}</small></label>
+    <ng-select class="custom-widge" 
+        (change)="selectedObject($event)"
+        [minTermLength]="2"
+        (search)="onSearch($event)"
+        [loading]="peopleLoading"
+        typeToSearchText="Please enter 2 or more characters"
+        >
+        <ng-option value="" disabled selected hidden>{{label}}</ng-option>
+        <ng-option *ngFor="let obj of filteredLocation" [value]="obj">{{obj.getStringZone()}}</ng-option>
+    </ng-select>
+</div>

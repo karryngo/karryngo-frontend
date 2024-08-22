@@ -1,0 +1,60 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="imag">
+    <div class="container" style="margin-top: 70px; margin-bottom: 0px;">
+        <div class="row">
+            <div class="col-md-5 bg-white my-5 card" style="margin-right: auto; margin-left: auto; border-radius: 15px;
+            background-color: rgba(10, 10, 10, 0.82) !important;">
+                <div class="p-4" style="margin-bottom: 15px; margin-top: 15px; text-align: center; border-bottom: 1px solid gray;">
+                    <h3 style="color: white; font-size:20px;">{{'login.title' | translate}}</h3>
+                </div>
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" style="color: white;" class="card-body ">
+                    <div class="form-group">
+                        <label for="field_email"><b>{{'login.login_email' | translate}}</b></label>
+                        <input type="text" id="field_email" formControlName="field_email" placeholder="{{'login.login_email_placeholder' | translate}}" style="color: black !important; background-color: white;"
+                            class="form-control"  [ngClass]="{ 'is-invalid': submitted && f.field_email.errors }">
+
+                        <div *ngIf="submitted && f.field_email.errors" class="invalid-feedback text-danger">
+                            <div *ngIf="f.field_email.errors.required">{{'login.login_required' | translate}}</div>
+                        </div>
+                    </div><br>
+                    <div class="form-group">
+                        <label for="field_password"><b>{{'login.login_password' | translate}}</b></label>
+                        <input id="field_password" type="password" formControlName="field_password" style="color: black !important; background-color: white;"
+                            placeholder="{{'login.login_password_placeholder' | translate}}" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f.field_password.errors }" />
+
+                        <div *ngIf="submitted && f.field_password.errors" class="invalid-feedback text-danger">
+                            <div *ngIf="f.field_password.errors.required">{{'login.login_password_required' | translate}}</div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="login-help">
+                        <span class="pull-left" style="margin-top: -15px;">
+                            <label for="checkbox-1" class="checkbox-custom-label"> {{'login.remember_me' | translate}}</label><br>
+                            <label class="switch switch-label switch-pill switch-outline-warning-alt">
+                              <input type="checkbox" class="switch-input" id="checkbox-1" name="checkbox-1" checked>
+                              <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
+                            </label>
+                        </span>
+                    </div><br>
+                    <app-progress-indeterminate *ngIf="waitingRegistration"></app-progress-indeterminate>
+                    <span class="pull-right">
+                        <button type="submit" class="login btn"
+                            value="Login" *ngIf="!waitingRegistration">{{'login.login_button' | translate}}</button>
+                    </span>
+                </form>
+                <div class="d-flex justify-content-end social_icon">
+                    <!-- <span><i class="fab fa-google-plus-square"></i></span>
+                    <span><i class="fab fa-facebook-square"></i></span>
+                    <span><i class="fab fa-twitter-square"></i></span> -->
+                </div>
+                <p style="color: white; font-size:15px;"><a href="javascript:void(0)" routerLink="/register">{{'login.no_account' | translate}}</a> {{'login.or' | translate}} <a href="javascript:void(0)" (click)="navigateToForgot()">{{'login.forgot_password' | translate}}</a></p>
+                <!-- <p style="color: white; font-size:15px;"><a href="javascript:void(0)" routerLink="/activate/link/new_link">{{'login.no_link' | translate}}</a> </p> -->
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-front-footer></app-front-footer>

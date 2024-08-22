@@ -1,0 +1,6 @@
+<span class="text-left chip-mag">
+    <input  type="file"  [accept]="accept" [multiple]="multiple" (change)="fileUpload($event)" [formControl]="inputFile">
+    <div *ngIf="fileTooLarge" class="text-danger">
+        {{'carrier.be_provider_form.form_picture_large' | translate }}
+    </div>
+</span>

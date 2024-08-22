@@ -1,0 +1,95 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container">
+<div class="wraper bootstrap snippets bootdeys bootdey">
+    <div class="page-title"> 
+        <h3 class="title">Payment transactions</h3> 
+    </div>
+      
+    <div class="row">
+        <div class="col-md-12 text-center text-muted" *ngIf="dataLoaded && paymentTransactions?.length==0">
+            <h1 class="text-muted">No Data Found</h1>
+        </div>
+        <div class="col-md-12 text-center text-muted" *ngIf="!dataLoaded">
+            <div class="spinner-grow" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="panel panel-default m-t-20">
+                <div class="panel-body">
+                    
+                    
+                    <hr>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="main-box clearfix">
+                                    <div class="table-responsive">
+                                        <table class="table role-list">
+                                            <thead>
+                                                <tr>
+                                                    <th><span>#</span></th>
+                                                    <th><span>Payer</span></th>
+                                                    <th><span>Amount</span></th>
+                                                    <th><span>Currency</span></th>
+                                                    <th><span>Method</span></th>
+                                                    <th><span>Status</span></th>
+                                                    <th><span>Date</span></th>
+                                                    <th><span><i class="bi bi-trash"></i></span></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let item of paymentTransactions; let i = index" (click)="navigateToDetails(item)">
+                                                    <td>
+                                                        {{ i+1 }}
+                                                    </td>
+                                                    <td>
+                                                        {{ item.user ? ((item.user.firstname+" "+item.user.lastname) > 15 ? ((item.user.firstname+" "+item.user.lastname) | slice:0:15) + '...' : (item.user.firstname+" "+item.user.lastname)) : '' }}
+                                                    </td>
+                                                    <td>
+                                                        {{ item.amount }}
+                                                    </td>
+                                                    <td>
+                                                        {{ item.moneyCode }}
+                                                    </td>
+                                                    <td>
+                                                        {{ item.paymentMethod }}
+                                                    </td>
+                                                    <td>
+                                                        {{ item.status }}
+                                                    </td>
+                                                    <td >
+                                                        <small>{{item.createdAt | date}}</small>
+                                                    </td>
+                                                    <td  class="d-flex justify-content-center trash">
+                                                        <i class="bi bi-trash text-danger trash-icon" (click)="deleteContact(item._id||'', $event)"></i>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- <div class="row">
+                        <div class="col-xs-7">
+                            Showing 1 - 20 of 289
+                        </div>
+                        <div class="col-xs-5">
+                            <div class="btn-group pull-right">
+                              <button type="button" class="btn btn-default"><i class="fa fa-chevron-left"></i></button>
+                              <button type="button" class="btn btn-default"><i class="fa fa-chevron-right"></i></button>
+                            </div>
+                        </div>
+                    </div> -->
+                </div> <!-- panel body -->
+            </div> <!-- panel -->
+        </div> <!-- end Col-9 -->
+    
+    </div><!-- End row -->
+
+
+</div>
+</div>

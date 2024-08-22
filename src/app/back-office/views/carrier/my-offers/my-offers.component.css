@@ -1,0 +1,12 @@
+.item:hover {
+    background-color: gray;
+}
+
+.item {
+    font-weight: bold;
+}
+
+
+.element {
+    margin-bottom: 30px;
+}

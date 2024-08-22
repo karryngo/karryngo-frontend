@@ -1,0 +1,81 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-sm-12 col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="jaune text-left mb-4">{{'carrier.settings.provider_profile' | translate }}</h4>
+        </div>
+        <div class="card-body">
+          <div class="col-sm-12 col-md-12">
+              
+              <div class="container cont2">
+
+                <table class="table table-bordered table-striped table-sm">
+                  <!-- <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Profile</th>
+                      <th>Country</th>
+                      <th>City</th>
+                    </tr>
+                  </thead> -->
+                  <tbody *ngIf="!currentProvider">
+                    <tr>
+                      <td colspan="2">{{'carrier.settings.wait' | translate }}</td>
+                    </tr>
+                  </tbody>
+                  <tbody *ngIf="currentProvider">
+                    <tr>
+                      <td>{{'carrier.settings.label' | translate }}</td>
+                      <td>{{currentProvider?.name}}</td>
+                    </tr>
+                    <tr>
+                      <td>{{'carrier.settings.type_service' | translate }}</td>
+                      <td>{{currentProvider?.title}}</td>
+                    </tr>
+                    <tr>
+                      <td>{{'carrier.settings.description_service' | translate }}</td>
+                      <td>{{currentProvider?.description}}</td>
+                    </tr>
+                    <tr>
+                      <td>{{'carrier.settings.covered_regions' | translate }}</td>
+                      <td>
+                        <ul>
+                          <li *ngFor="let obj of currentProvider.zones">
+                            {{obj.city}}, {{obj.country}}
+                          </li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>{{'carrier.settings.documents' | translate }}</td>
+                      <td *ngIf="currentProvider?.documents.length == 0">{{'carrier.settings.no_doc_uploaded' | translate}} </td>
+                      <td *ngIf="currentProvider?.documents.length != 0">{{currentProvider?.documents.length}} {{'carrier.settings.doc_uploaded' | translate}}</td>
+                    </tr>
+                    <tr>
+                      <td>{{'carrier.settings.vehicles' | translate }}</td>
+                      <td *ngIf="currentProvider?.vehicles.length == 0"> {{'carrier.settings.no_vehicle_registered' | translate}} </td>
+                      <td *ngIf="currentProvider?.vehicles.length != 0">{{currentProvider?.vehicles.length}} {{'carrier.settings.vehicle_registered' | translate}} </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- <nav>
+                  <ul class="pagination pull-right">
+                    <li class="page-item"><a class="page-link">Prev</a></li>
+                    <li class="page-item active">
+                      <a class="page-link">1</a>
+                    </li>
+                    <li class="page-item"><a class="page-link">2</a></li>
+                    <li class="page-item"><a class="page-link">3</a></li>
+                    <li class="page-item"><a class="page-link">Next</a></li>
+                  </ul>
+                </nav> -->
+      
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

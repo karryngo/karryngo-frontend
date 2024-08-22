@@ -1,0 +1,91 @@
+<!-- phone-update.component.html -->
+<form [formGroup]="phoneForm" (ngSubmit)="onSubmit()" *ngIf="!codeSent">
+    
+    <div class="form-group row mx-2">
+        <div class="mb-4 col-md-12">
+            <label for="phoneNumber">{{'profil.new_phone_number' | translate }}:</label>
+            <ngx-intl-tel-input
+                [cssClass]="'form-control'"
+                [preferredCountries]="preferredCountries"
+                [enableAutoCountrySelect]="true"
+                [enablePlaceholder]="true"
+                [searchCountryFlag]="true"
+                [searchCountryField]="['name', 'dialCode', 'iso2']"
+                [selectFirstCountry]="false"
+                [selectedCountryISO]="CountryISO.Cameroon"
+                [phoneValidation]="true"
+                [separateDialCode]="false"
+                name="phoneNumber"
+                formControlName="phoneNumber"
+            ></ngx-intl-tel-input>
+            <div *ngIf="phoneForm.get('phoneNumber').invalid && (phoneForm.get('phoneNumber').dirty || phoneForm.get('phoneNumber').touched)">
+                <div *ngIf="submitted&&phoneForm.get('phoneNumber').errors.required">{{'profil.form_required_field' | translate }}</div>
+            </div>
+        </div>
+        <div class="mb-4 col-md-12">
+            <label for="password">{{'profil.enter_password' | translate }}:</label>
+            <input type="password" id="password" formControlName="password" placeholder="{{'profil.enter_password_placeholder' | translate }}"  class="form-control">
+            <div *ngIf="submitted&&codeForm.get('password').invalid && (codeForm.get('password').dirty || codeForm.get('password').touched)">
+                <div *ngIf="codeForm.get('password').errors.required">{{'profil.form_required_field' | translate }}</div>
+            </div>
+        </div>
+    </div>
+    <p *ngIf="incorrectPassword" class="text-danger">{{'profil.incorrect_password' | translate }}</p>
+    <button *ngIf="!submitting" type="submit" class="btn btn-success" [disabled]="phoneForm.invalid">{{'profil.send' | translate }}</button>
+    <div *ngIf="submitting" class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</form>
+
+<div *ngIf="codeSent" class="row">
+    <div class="col-md-12">
+        <form [formGroup]="codeForm" (ngSubmit)="onSubmitCode()">
+            
+            <div class="form-group row mx-2">
+                <div class="mb-4 col-md-12">
+                    <input type="text" [value]="phoneForm.value.phoneNumber.e164Number" [disabled]="true">
+                </div>
+            </div>
+            <div class="form-group row mx-2">
+                <div class="mb-4 col-md-12">
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        {{'profil.confirm_code' | translate }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row mx-2">
+                <div class="mb-4 col-md-12">
+                    <label for="code">{{'profil.enter_code' | translate }}:</label>
+                    <input type="text"
+                        id="code"
+                        formControlName="code"
+                        placeholder="Code"
+                        class="form-control">
+                    <div *ngIf="submitted&&codeForm.get('code').invalid && (codeForm.get('code').dirty || codeForm.get('code').touched)">
+                        <div *ngIf="codeForm.get('code').errors.required">{{'profil.form_required_field' | translate }}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row mx-2">
+                <div class="mb-4 col-md-12">
+                    <button *ngIf="!submitting" type="submit" class="btn btn-info" [disabled]="codeForm.invalid">{{'profil.update' | translate }}</button>
+                    <div *ngIf="submitting" class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </div>
+            
+            
+        </form>
+    </div>
+    <!-- <div class="col-md-12">
+        <input type="text" [value]="phoneForm.value.phoneNumber.e164Number">
+    </div>
+    <div class="col-md-12">
+        <button type="button" class="btn btn-info"> </button>
+    </div> -->
+</div>
+  

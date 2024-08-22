@@ -1,0 +1,25 @@
+.site-section {
+    padding: 3.5em 0; 
+    .box-title{
+        margin-top: 2em;
+    }
+}
+
+@media (min-width: 768px) {
+    .site-section {
+        padding: 5em 0; 
+    }
+}
+
+.bloc-serv .col-md-12{
+    // border: 1px solid rgb(231, 230, 230);
+    padding-top: 2px;
+    padding-bottom: 2px;
+    div img{
+        height: 150px;
+        width: 150px;
+        object-fit: cover;
+        border-radius: 100%;
+        border: 2px solid #ffbb33;
+    }
+}

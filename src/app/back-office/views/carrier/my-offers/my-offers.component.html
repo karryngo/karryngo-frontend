@@ -1,0 +1,50 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <div class="card" *ngIf="!currentProvider; else continue">
+                <div>
+                    <td colspan="2">{{'carrier.settings.wait' | translate }}</td>
+                </div>
+            </div>
+            <ng-template #continue>
+                <div class="card item" *ngFor="let offer of offers" style="cursor:pointer" (click)="go_to_details(offer)">
+                    <div class="card-header">
+                        <h4 class="jaune text-left mb-4">{{offer?.type}}</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 element" >{{offer?.name}}</div>
+                            <div class="col-md-6 element" >{{offer?.name}}</div>
+                            <div class="col-md-6 element" >Dep. Place: <br> {{offer?.departure_place}}</div>
+                            <div class="col-md-6 element" >Arr. Plave: <br> {{offer?.arrival_place}}</div>
+                            <div class="col-md-6 element" >Dep. Dape: <br> {{offer?.departure_date}}</div>
+                            <div class="col-md-6 element" >Dep. Time: <br> {{offer?.departure_time}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid  mt-100" *ngIf="!offers">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>No service found</h5>
+                                </div>
+                                <div class="card-body cart">
+                                    <div class="col-sm-12 empty-cart-cls text-center">
+                                        <!-- <i class="fa fa-american-sign-language-interpreting fa-5x" aria-hidden="true"> </i> -->
+                                        <!-- <img src="https://i.imgur.com/dCdflKN.png" width="130" height="130" class="img-fluid mb-4 mr-3"> -->
+                                        <span style="height: 130px; width: 130px;"><i class="fa fa-truck fa-5x" aria-hidden="true"></i></span>
+                                        <h3><strong>Your Offer list is Empty</strong></h3>
+                                        <h4>Click bellow to add some.</h4>
+                                        <a href="javascript:void(0)" [routerLink]="['/carrier/create-new-service']" class="btn btn-primary cart-btn-transform m-3" data-abc="true">Add a new service</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+            
+        </div>
+    </div>
+</div>

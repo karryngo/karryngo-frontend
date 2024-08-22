@@ -1,0 +1,146 @@
+<form [formGroup]="rentForm" (ngSubmit)="submit()" class="text-center p-1 form-horizontal">
+
+    <div *ngIf="!submitted">
+        <!-- Package Details--> 
+        <h3 *ngIf="slug!==undefined && slug=='person'" class="mx-4 text-left title-form jaune">{{'post_requests.post_request_rental.post_request_rental0.request_transport' | translate }}</h3>
+        <h3 *ngIf="slug!==undefined && slug=='rent'" class="mx-4 text-left title-form jaune">{{'post_requests.post_request_rental.post_request_rental0.rent_vehicle' | translate }}</h3>
+        <h3 *ngIf="slug!==undefined && slug=='hire'" class="mx-4 text-left title-form jaune">{{'post_requests.post_request_rental.post_request_rental0.hire_vehicle' | translate }}</h3>
+        <p class="mx-4 text-left">{{'post_requests.post_request_rental.post_request_rental0.fill_form' | translate }} </p>
+        <!-- <p *ngIf="slug!==undefined && slug!='person'" class="mx-4 text-left title-form">Please, fill the form below to perform your request</p> -->
+
+        <!-- row-item-->
+        <div class="card-body">
+            <div class="form-group row">
+                <div class="col-md-6">
+                    <label for=""> {{'post_requests.post_request_rental.post_request_rental0.vehicle_type' | translate }}</label>
+                    <select class="form-control" style="font-weight: bold;" formControlName="field_typeof" (change)="handleType($event.target.value)" [ngClass]="{ 'is-invalid': submitted && f.field_typeof.errors }">
+                        <option value="" selected disabled>{{ service_rent["VEHICLE RENTALS"][0] }}</option>
+                        <option style="font-weight: bold;" *ngFor="let service of service_rent['VEHICLE RENTALS'] | slice:1" [value]="service">{{ service }}</option>
+                    </select>
+                    <div *ngIf="submitted && f.field_typeof.errors" class="invalid-feedback text-danger">
+                        <div *ngIf="f.field_typeof.errors.required">{{'post_requests.post_request_rental.post_request_rental0.form_required_field' | translate }}</div>
+                    </div>
+                </div>
+                <div class="col-md-6" *ngIf="countries.length!=0"> 
+                    <label for=""> {{'post_requests.post_request_rental.post_request_rental0.form_country' | translate }}</label>
+                    <select placeholder="Country" class="form-control" formControlName="field_country" (change)="get_cities($event.target.value)" [ngClass]="{ 'is-invalid': submitted && f.field_country.errors }">
+                        <option value="" selected disabled>{{ countries[0].name }}</option>
+                        <option style="font-weight: bold;" *ngFor="let country of countries" [ngValue]="country">{{ country.name }}</option>
+                    </select>
+                    <div *ngIf="submitted && f.field_country.errors" class="invalid-feedback text-danger"> 
+                        <div *ngIf="f.field_country.errors.required">{{'post_requests.post_request_colis.post_request_colis0.form_required_field' | translate }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row mb-2 py-3" *ngIf="country_code">
+                <div class="col">
+                <app-search-location [country_code]="country_code" label="{{'post_requests.post_request_rental.post_request_rental0.form_depart' | translate }}" placeholder="" #fromZone></app-search-location>
+                </div>
+            </div>
+            <div class="form-row mb-2 py-3">
+                <div class="col-md-6">
+                    <input type="text" formControlName="field_place" class="form-control mb-3" placeholder="{{'post_requests.post_request_rental.post_request_rental0.form_departure_place' | translate }}">
+                <!-- <app-search-location label="{{'post_requests.post_request_colis.post_request_colis0.form_arrival' | translate }}" placeholder="" #toZone></app-search-location> -->
+                </div>
+                <div class="col-md-6">
+                    <!-- <p class="title-form sub-indication text-left">Transport costs</p> -->
+                    <!-- <label for="field_price"></label> -->
+                    <input type="number" min="0" id="field_price" formControlName="field_price" class="form-control" placeholder="{{'post_requests.post_request_rental.post_request_rental0.form_transport_cost' | translate }}"
+                    [ngClass]="{ 'is-invalid': is_form && f.field_price.errors }">
+                    <small *ngIf="currency" style="font-weight: bold;">( {{ currency }} )</small>
+                    <div class="error-msg" *ngIf="rentForm.get('field_price').hasError('required') && (rentForm.get('field_price').dirty || rentForm.get('field_price').touched)">
+                    {{'post_requests.post_request_rental.post_request_rental0.form_proposal_price_required' | translate }}
+                    </div>
+                    <div class="error-msg" *ngIf="rentForm.get('field_price').hasError('pattern') && (rentForm.get('field_price').dirty || rentForm.get('field_price').touched)">
+                    {{'post_requests.post_request_rental.post_request_rental0.form_positive_value' | translate }}
+                    </div> 
+                </div>
+            </div>
+            <!-- row-item-->
+            <div class="form-group row">
+                <div class="col-md-4">
+                    <p class="sub-indication text-left"> {{'post_requests.post_request_rental.post_request_rental0.form_seats' | translate }}</p>
+                    <input type="number" min="0" id="field_numberPlace" formControlName="field_numberPlace" class="form-control" [ngClass]="{ 'is-invalid': is_form && f.field_numberPlace.errors }">
+                    <div class="error-msg" *ngIf="rentForm.get('field_numberPlace').hasError('required') && (rentForm.get('field_numberPlace').dirty || rentForm.get('field_numberPlace').touched)">
+                        {{'post_requests.post_request_rental.post_request_rental0.form_required_field' | translate }}
+                    </div>
+                    <div class="error-msg" *ngIf="rentForm.get('field_numberPlace').hasError('pattern') && (rentForm.get('field_numberPlace').dirty || rentForm.get('field_numberPlace').touched)">
+                        {{'post_requests.post_request_rental.post_request_rental0.form_positive_field' | translate }}
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <p class="sub-indication text-left">{{'post_requests.post_request_rental.post_request_rental0.form_departure_date' | translate }}</p>
+                    <input type="date" id="field_departureDate"  min="{{current_date}}" formControlName="field_departureDate" class="form-control"
+                        [ngClass]="{ 'is-invalid': is_form && f.field_departureDate.errors }">
+                    <div *ngIf="is_form && f.field_departureDate.errors" class="invalid-feedback text-danger">
+                        <div *ngIf="f.field_departureDate.errors.required">{{'post_requests.post_request_rental.post_request_rental0.form_required_field' | translate }}</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <p class="sub-indication text-left">{{'post_requests.post_request_rental.post_request_rental0.form_departure_time' | translate }}</p>
+                    <input type="time" id="field_departureTime" formControlName="field_departureTime" class="form-control"
+                        [ngClass]="{ 'is-invalid': is_form && f.field_departureTime.errors }" >
+                    <div *ngIf="is_form && f.field_departureTime.errors" class="invalid-feedback text-danger">
+                        <div *ngIf="f.field_departureTime.errors.required">{{'post_requests.post_request_rental.post_request_rental0.form_required_field' | translate }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row py-4">
+                <div class="col-md-6">
+                    <label class="sub-indication text-left">{{'post_requests.post_request_rental.post_request_rental0.form_return_date' | translate }}</label>
+                    <input type="date" id="returnDate"  min="{{current_date}}" formControlName="returnDate" class="form-control"
+                        [ngClass]="{ 'is-invalid': is_form && f.returnDate.errors }">
+                    <div *ngIf="is_form && f.returnDate.errors" class="invalid-feedback text-danger">
+                        <div *ngIf="f.returnDate.errors.required">{{'post_requests.post_request_rental.post_request_rental0.form_required_field' | translate }}</div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label class="sub-indication text-left">{{'post_requests.post_request_rental.post_request_rental0.form_return_time' | translate }}</label>
+                    <input type="time" id="returnTime" formControlName="returnTime" class="form-control"
+                        [ngClass]="{ 'is-invalid': is_form && f.returnTime.errors }" >
+                    <div *ngIf="is_form && f.returnTime.errors" class="invalid-feedback text-danger">
+                        <div *ngIf="f.returnTime.errors.required">{{'post_requests.post_request_rental.post_request_rental0.form_required_field' | translate }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row py-4">
+                <div class="col-md-12">
+                    <label for="">{{'post_requests.post_request_rental.post_request_rental0.form_place' | translate }}</label>
+                    <app-map (get_coord)="get_coord($event)" ></app-map>
+                </div>
+            </div>
+                <!-- row-item-->
+            <div class="form-row mb-4 form-group shadow-textarea py-3">
+                <label for="tripDescription"> {{'post_requests.post_request_rental.post_request_rental0.form_description' | translate }}</label>
+                <textarea class="form-control field-form2 z-depth-1" id="field_tripDescription"
+                formControlName="field_tripDescription" rows="3"
+                placeholder="{{'post_requests.post_request_rental.post_request_rental0.form_about_trip' | translate }}"></textarea>
+            </div>
+            
+            <!-- <div class="alert alert-warning">
+                {{'post_requests.post_request_rental.post_request_rental0.form_note' | translate }}
+            </div> -->
+            <div class="form-group row">
+                <div class="col-md-12">
+                    <input type="text" id="field_code" formControlName="field_code" class="form-control"
+                        placeholder="{{'post_requests.post_request_rental.post_request_rental0.form_code' | translate }}" [ngClass]="{ 'is-invalid': submitted && f.field_code.errors }">
+                    <div *ngIf="submitted && f.field_code.errors" class="invalid-feedback text-danger">
+                        <div *ngIf="f.field_code.errors.required">{{'post_requests.post_request_colis.post_request_colis0.form_required_field' | translate }}</div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="row">
+                <div class="col-md-12">
+                    <select id="distance" class="form-control" formControlName="radius" [ngClass]="{ 'is-invalid': submitted && f.radius.errors }">
+                        <option *ngFor="let item of distance" value="{{item.value}}">{{item.dist}}</option>
+                    </select>
+                </div>
+            </div> -->
+        </div>
+    </div>
+
+    <button *ngIf="!submitted" class="btn btn-primary" type="submit">{{'post_requests.post_request_rental.post_request_rental0.form_confirm' | translate }}
+    </button>
+    <app-progress-indeterminate *ngIf="submitted"></app-progress-indeterminate>
+</form>

@@ -1,0 +1,55 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="imag">
+    <div class="container-fluid content">
+        <div class="container">
+            <h2>{{ 'activation.activate_your_account' | translate }}</h2>
+            <p>
+                {{ 'activation.enter_activation_code' | translate }}
+            </p>
+            <form [formGroup]="activationForm" (ngSubmit)="onSubmit()">
+                <input type="text" formControlName="activationCode" placeholder="{{ 'activation.enter_activation_code_placeholder' | translate }}">
+                <button type="submit" [disabled]="!activationForm.valid || isLoading">{{ 'activation.activate_button' | translate }}</button>
+            </form>
+            <a href="javascript:void(0)" class="text-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">{{'activation.activation_click_here' | translate}}</a> {{'activation.activation_new_link' | translate}}
+        </div>
+    </div>
+</div>
+
+<app-front-footer></app-front-footer> 
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">{{'activation.activation_email_t' | translate}}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                {{'activation.activation_email_c1' | translate}} <strong>{{'activation.activation_btn_send' | translate}}</strong> {{'activation.activation_email_c2' | translate}}
+                <form [formGroup]="codeForm" (ngSubmit)="activation_email()">
+                    <div class="modal-body">
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label" >{{'activation.activation_email_field' | translate}}:</label>
+                                <input type="email" class="form-control" formControlName="email" id="recipient-name" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                                <div *ngIf="submitted && f.email.errors" class="invalid-feedback text-danger">
+                                    <div *ngIf="f.email.errors.required">{{'activation.activation_enter' | translate}}</div>
+                                </div>
+                                
+                            </div>
+                            <div *ngIf="not_found!=''" class=" text-danger">
+                                <div>{{not_found}} </div>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary dis" data-dismiss="modal" [disabled]="isLoading">{{'activation.activation_btn_cancel' | translate}}</button>
+                        <button type="submit" class="btn btn-primary" [disabled]="isLoading">{{'activation.activation_btn_send' | translate}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

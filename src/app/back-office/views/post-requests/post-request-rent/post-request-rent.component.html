@@ -1,0 +1,31 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-sm-12 col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="jaune text-left mx-4">{{titleInterface}}</h3>
+        </div>
+        <div class="container cont2">
+
+          <div class="cont">
+            <router-outlet></router-outlet>
+          </div>
+          <br><br><br>
+
+          <div class="footer-registration text-right">
+            <button *ngIf="visiblePrev" type="button" class="btn next-button btn-w" (click)="prev()">{{'post_requests.post_request_trip.post_request_trips.back' | translate }}</button>
+            <button *ngIf="visible && !interface1" type="button" class="btn next-button btn-w"
+              (click)="next()">
+              {{'post_requests.post_request_trip.post_request_trips.next' | translate }}
+            </button>
+          </div>
+          <button *ngIf="!visible" type="button" class="btn next-button b-mag">{{'post_requests.post_request_trip.post_request_trips.confirm' | translate }}</button>
+
+        </div>
+      </div>
+      <!-- Start your project here-->
+
+    </div>
+
+  </div>
+</div>

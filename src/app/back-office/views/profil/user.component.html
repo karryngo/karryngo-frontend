@@ -1,0 +1,355 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-sm-9 order-xl-1">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="jaune text-center mx-4 mb-4">{{'profil.my_profile' | translate }}</h4>
+            </div>
+            <div class="card-body">
+            <form [formGroup]="updateProfilForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                    <label>{{'profil.form_company' | translate }}</label>
+                    <input *ngIf="!user.isCompany" type="text" class="form-control" disabled placeholder="{{'profil.form_company_placeholder' | translate }}" value="No Company">
+                    <input *ngIf="user.isCompany" type="text" class="form-control" disabled placeholder="{{'profil.form_company_placeholder' | translate }}" [value]="user.companyName">
+                </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                    <label>{{'profil.form_username' | translate }}</label> 
+                    <input type="text"
+                        formControlName="userName" 
+                        class="form-control" 
+                        placeholder="{{'profil.null' | translate }}" 
+                        [ngClass]="{ 'is-invalid': submitted && f.userName.errors }">
+                        <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
+                            <div *ngIf="f.userName.errors.required">{{'profil.form_required_field' | translate }}</div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                    <label>{{'profil.form_first_name' | translate }}</label>
+                    <input type="text" 
+                        formControlName="firstName" 
+                        class="form-control" 
+                        placeholder="{{'profil.form_first_name' | translate }}" 
+                        [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }">
+                        <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                            <div *ngIf="f.firstName.errors.required">{{'profil.form_required_field' | translate }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                    <label>{{'profil.form_last_name' | translate }}</label>
+                    <input type="text" 
+                        formControlName="lastName" 
+                        class="form-control" 
+                        placeholder="{{'profil.form_last_name' | translate }}"
+                        [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }">
+                        <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                            <div *ngIf="f.firstName.errors.required">{{'profil.form_required_field' | translate }}</div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>{{'profil.form_phone' | translate }}</label>
+                        <div class="input-group">
+                            <input type="text" 
+                                formControlName="userPhone" 
+                                class="form-control" 
+                                placeholder="{{'profil.form_phone_number' | translate }}" 
+                                [readonly]="true"
+                                [ngClass]="{ 'is-invalid': submitted && f.userPhone.errors }">
+                            <div class="input-group-append bg-primary" style="cursor: pointer;" (click)="editPhone()">
+                                <span class="input-group-text">
+                                    <i class="bi bi-pencil"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <!-- <input type="text" 
+                            formControlName="userPhone" 
+                            class="form-control" 
+                            placeholder="{{'profil.form_phone_number' | translate }}" 
+                            [readonly]="true"
+                            [ngClass]="{ 'is-invalid': submitted && f.userPhone.errors }"> -->
+                        <div *ngIf="submitted && f.userPhone.errors" class="invalid-feedback">
+                            <div *ngIf="f.userPhone.errors.required">{{'profil.form_required_field' | translate }}</div>
+                        </div>
+                    </div>
+                    <!-- <i class="bi bi-pencil"></i> -->
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>{{'profil.form_email_address' | translate }}</label>
+                        <div class="input-group">
+                            <input type="text"
+                                formControlName="userEmail" 
+                                class="form-control" 
+                                placeholder="{{'profil.form_email_address' | translate }}" 
+                                [readonly]="true"
+                                [ngClass]="{ 'is-invalid': submitted && f.userEmail.errors }">
+                            <div class="input-group-append bg-primary" style="cursor: pointer;" (click)="editEmail()">
+                                <span class="input-group-text">
+                                    <i class="bi bi-pencil"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div *ngIf="submitted && f.userEmail.errors" class="invalid-feedback">
+                            <div *ngIf="f.userEmail.errors.required">{{'profil.form_required_field' | translate }}</div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                    <label>{{'profil.form_address' | translate }}</label>
+                    <input type="text"
+                        formControlName="userAddress" 
+                        class="form-control" 
+                        placeholder="{{'profil.form_home_address_placeholder' | translate }}"
+                        [ngClass]="{ 'is-invalid': submitted && f.userAddress.errors }">
+                        <div *ngIf="submitted && f.userAddress.errors" class="invalid-feedback">
+                            <div *ngIf="f.userAddress.errors.required">{{'profil.form_required_field' | translate }}</div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+
+                <!-- <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                    <label>{{'profil.form_country' | translate }}</label>
+                    <input type="text"
+                        formControlName="userCountry" 
+                        class="form-control" 
+                        placeholder="{{'profil.form_country' | translate }}" 
+                        value="{{userCountry}}"
+                        [(ngModel)]="userCountry"
+                        [ngClass]="{ 'is-invalid': submitted && f.userCountry.errors }">
+                        <div *ngIf="submitted && f.userCountry.errors" class="invalid-feedback">
+                            <div *ngIf="f.userCountry.errors.required">{{'profil.form_required_field' | translate }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                    <label>{{'profil.form_city' | translate }}</label>
+                    <input type="text"
+                        formControlName="userCity" 
+                        class="form-control" 
+                        placeholder="{{'profil.form_city' | translate }}" 
+                        value="{{userCity}}"
+                        [(ngModel)]="userCity"
+                        [ngClass]="{ 'is-invalid': submitted && f.userCity.errors }">
+                        <div *ngIf="submitted && f.userCity.errors" class="invalid-feedback">
+                            <div *ngIf="f.userCity.errors.required">{{'profil.form_required_field' | translate }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                    <label>{{'profil.form_postal_code' | translate }}</label>
+                    <input type="number"
+                        formControlName="userZip"
+                        class="form-control" 
+                        placeholder="{{'profil.form_ZIP_code' | translate }}" 
+                        value="{{userZip}}"
+                        [(ngModel)]="userZip"
+                        [ngClass]="{ 'is-invalid': submitted && f.userZip.errors }">
+                        <div *ngIf="submitted && f.userZip.errors" class="invalid-feedback">
+                            <div *ngIf="f.userZip.errors.required">{{'profil.form_required_field' | translate }}</div>
+                        </div>
+                    </div>
+                </div>
+                </div> -->
+
+                <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                    <label>{{'profil.form_about_me' | translate }}</label>
+                    <textarea rows="5" 
+                        formControlName="aboutUser" 
+                        class="form-control" 
+                        placeholder="{{'profil.form_about_me_placeholder' | translate }}"
+                        [ngClass]="{ 'is-invalid': submitted && f.aboutUser.errors }">{{aboutUser}}</textarea>
+                        <div *ngIf="submitted && f.aboutUser.errors" class="invalid-feedback">
+                            <div *ngIf="f.aboutUser.errors.required">{{'profil.form_required_field' | translate }}</div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <button *ngIf="!sendingForm" type="submit" class="btn btn-info btn-fill pull-right">{{'profil.form_update_profile_btn' | translate }}</button>
+                <div *ngIf="sendingForm" class="spinner-border pull-right" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                <div class="clearfix"></div>
+            </form>
+            </div>
+        </div>
+        </div>
+
+
+        <div class="col-sm-3 order-xl-2 mb-3 mb-xl-0">
+            <div class="card card-profile shadow">
+                <div class="row">
+                <div class="card-body">
+                <!-- <carousel [interval]="false"> -->
+                    <!-- <slide> -->
+                    <img *ngIf="!user.picture" class="rounded-circle responsive-img" src="{{userProfileImg}}" alt="Profil img"/>
+                    <!-- <img *ngIf="user.picture" class="rounded-circle responsive-img"[src]="user.picture" alt="profile" alt="Profil img"> -->
+                    <img *ngIf="user.picture" class="rounded-circle responsive-img" [src]="user.picture ? fileUrl+user.picture.name: defaultImg" alt="profile" alt="Profil img">
+                    
+                    <!-- </slide> -->
+                    <!-- </carousel> -->
+                </div>
+                </div>
+                <div class="card-body pt-0 pt-md-4">
+                <div class="text-center">
+                    <div>
+                        <!-- <span>
+                            <span class="badge material-icons-profil black-text black">1.0</span>
+                            <i class="fas fa-star jaune"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </span> -->
+                        <div class="form-group">
+                            <label for="file" type="button" class="p-2 bg-info" > Update picture
+                                <!-- <img *ngIf="userData[0].picture" [src]="userData[0].picture" alt="profile"> -->
+                                <!-- <img [src]="userData[0].picture ? userData[0].picture : 'assets/profile-user.png'" height="100" width="100" alt="profile"> -->
+                            </label>
+                            <input type="file"
+                                    accept="image/*"
+                                    hidden
+                                    id="file"
+                                    (change)="handleFileInput($event.target.files)">
+                        </div>                                  
+                        <p><img *ngIf="fileToUpload" [src]="fileToUpload" height="150" width="150" alt="aa"></p>
+                        <input *ngIf="fileToUpload" type="button" class="btn btn-primary p-1 mr-2" style="font-size: 11px;" value="Save" (click)="uploadFileToActivity()">
+                        <input *ngIf="fileToUpload" type="button" class="btn btn-secondary p-1" style="font-size: 11px;" value="cancel" (click)="cancelPic()"/>
+                    </div>
+                    <h3> 
+                        {{firstName}} <br>{{lastName}}
+                    </h3>
+                    <div class="h5 font-weight-300">
+                        <i class="ni location_pin mr-2"></i><strong>@{{userName}}</strong>
+                    </div>
+                    <div class="h5 mt-4">
+                        {{userPhone}}
+                    </div>
+                    <div>
+                        {{userCountry}}
+                        <br>
+                        <!-- <button type="button" class="btn btn-fill pull-center" data-toggle="modal" (click)="myModal.show()">
+                            Add payment method</button> -->
+                    </div>
+                    <br>
+                    <hr class="my-4">
+                    <p>{{userLabel}}</p>
+                    <!-- <div class="text-center">
+                    <button href="#" class="btn btn-simple"><i class="fa fa-facebook-square"></i></button>
+                    <button href="#" class="btn btn-simple"><i class="fa fa-twitter"></i></button>
+                    <button href="#" class="btn btn-simple"><i class="fa fa-google-plus-square"></i></button>
+                    </div> -->
+                </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- <div *ngIf="isProvider" class="col-sm-12 order-xl-3">
+        <div class="card">
+            <div class="card-header">
+            <h3 class="jaune text-center mx-4 mb-4">
+                Carrier informations
+            </h3>
+            </div>
+            <div class="card-body">
+            <div class="container-fluid">
+                <div class="row">
+                <div class="col-12">
+                    <input type="text" id="service_title" class="form-control field-form1 field"
+                    placeholder="{{carrierDatas}}" [value]="userService.title" disabled>
+                    <p class="title-form sub-indication text-left"><strong>Service title</strong></p>
+                </div>
+                </div>
+                <div class="row">
+                <div class="col-12">
+                    <input type="text" id="passportNum" class="form-control field-form1 field"
+                    placeholder="{{carrierDatas}}" [value]="user.passportNumber" disabled>
+                    <p class="title-form sub-indication text-left"><strong>Passport Number</strong></p>
+                </div>
+                </div>
+                <p class="text-left"><strong>Adress for verification</strong></p>
+                <div class="row">
+                <div class="col-md-6">
+                    <input type="text" id="adPersonal1" class="form-control field-form1 field"
+                    placeholder="{{carrierDatas}}" disabled>
+                    <p class="title-form sub-indication text-left"><strong>Personal Adress 1</strong></p>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" id="adPersonal2" class="form-control field-form1 field"
+                    placeholder="{{carrierDatas}}" disabled>
+                    <p class="title-form sub-indication text-left"><strong>Personal Adress 2</strong></p>
+                </div>
+                </div>
+                <div class="row">
+                <div class="col-6">
+                    <input type="text" id="adPersonal3" class="form-control field-form1 field"
+                    placeholder="{{carrierDatas}}" disabled>
+                    <p class="title-form sub-indication text-left"><strong>Personal Adress 3</strong></p>
+                </div>
+                <div class="col-6">
+                    <input type="text" id="adPersonal4" class="form-control field-form1 field"
+                    placeholder="{{carrierDatas}}" disabled>
+                    <p class="title-form sub-indication text-left"><strong>Personal Adress 4</strong></p>
+                </div>
+                </div>
+                <div class="col-12">
+                <p class="text-left"><strong>Description</strong></p>
+                <textarea rows="5" class="form-control field-form1 field" placeholder="{{carrierDatas}}" disabled
+                    value=""></textarea>
+                </div><br>
+            </div>
+            </div>
+        </div>
+
+        </div> -->
+        
+    </div>
+</div>
+
+
+<div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">{{'profil.form_add_payment' | translate }}</h4>
+            <button type="button" class="close" (click)="myModal.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <app-payment></app-payment>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" (click)="myModal.hide()">{{'profil.cancel' | translate }}</button>
+            <button type="button" class="btn btn-success"
+            (click)="myModal.hide();showMessage()">{{'profil.confirm' | translate }}</button>
+        </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

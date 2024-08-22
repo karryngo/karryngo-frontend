@@ -1,0 +1,418 @@
+<!-- <div class="animated fadeIn">
+    <div class="row">
+    <div class="col-sm-6 col-md-12">
+        <div class="card"> <br><br><br>
+        <h3 class="jaune text-center"> 
+            {{'sidemenu.my_requests' | translate}}
+        </h3>
+        <div class="card-body">
+            <app-list-services [services]="services"></app-list-services>
+        </div>
+        </div>
+    </div>
+    </div>
+</div> -->
+
+
+<div class="row">
+    <div class="col-md-12 pb-5">
+        <!-- <label for="sel1" class="form-label" style="width: 100%;">Select the state:</label>
+        <select class="form-select" id="sel1" name="sellist1" style="width: 100%; height: 40px;" (change)="onChange($event.target.value)">
+            <option [value]="TransactionServiceState.service_init_STATE"> {{ TransactionServiceLabel.service_init_STATE }} </option>
+            <option [value]="TransactionServiceState.SERVICE_ACCEPTED_AND_WAITING_PAIEMENT"> {{ TransactionServiceLabel.service_accepted_and_waiting_paiement }} </option>
+            <option [value]="TransactionServiceState.SERVICE_PAIEMENT_DONE_AND_WAITING_START"> {{ TransactionServiceLabel.service_paiement_done_and_waiting_start }} </option>
+            <option [value]="TransactionServiceState.SERVICE_RUNNING"> {{ TransactionServiceLabel.service_running }} </option>
+            <option [value]="TransactionServiceState.SERVICE_DONE_AND_WAIT_PROVIDER_PAIEMENT"> {{ TransactionServiceLabel.service_done_and_wait_provider_paiement }} </option>
+            <option [value]="TransactionServiceState.SERVICE_PROVIDER_PAIEMENT_DONE"> {{ TransactionServiceLabel.service_provider_paiement_done }} </option>
+            <option [value]="TransactionServiceState.SERVICE_END"> {{ TransactionServiceLabel.service_end }} </option>
+        </select> -->
+
+        <!-- <h4>Basic mat-select</h4> -->
+        <mat-form-field appearance="fill" style="width: 100%;">
+            <!-- <h1> {{selectedCat}} </h1> -->
+            <mat-label>{{ 'my_services.my_services_search' | translate }}</mat-label>
+            <mat-select [formControl]="cat" [(value)]="selectedCat" (selectionChange)="selectionChange($event.value)" style="width: 100%;">
+                <mat-option [value]="TransactionServiceState.service_init_STATE"> {{ TransactionServiceLabel.service_init_STATE | translate }} </mat-option>
+                <mat-option [value]="TransactionServiceState.SERVICE_ACCEPTED_AND_WAITING_PAIEMENT"> {{ TransactionServiceLabel.service_accepted_and_waiting_paiement | translate }} </mat-option>
+                <mat-option [value]="TransactionServiceState.SERVICE_PAIEMENT_DONE_AND_WAITING_START"> {{ TransactionServiceLabel.service_paiement_done_and_waiting_start | translate }} </mat-option>
+                <mat-option [value]="TransactionServiceState.SERVICE_RUNNING"> {{ TransactionServiceLabel.service_running | translate }} </mat-option>
+                <mat-option [value]="TransactionServiceState.SERVICE_DONE_AND_WAIT_PROVIDER_PAIEMENT"> {{ TransactionServiceLabel.service_done_and_wait_provider_paiement | translate }} </mat-option>
+                <mat-option [value]="TransactionServiceState.SERVICE_PROVIDER_PAIEMENT_DONE"> {{ TransactionServiceLabel.service_provider_paiement_done | translate }} </mat-option>
+                <mat-option [value]="TransactionServiceState.SERVICE_END"> {{ TransactionServiceLabel.service_end | translate }} </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="col-md-12">
+        <span><i><b>{{ status | translate }}</b></i></span>
+    </div>
+    <div class="col-md-12 card text-center" *ngIf="services.length==0">
+        <!-- <div class="card-header">
+            Featured
+        </div> -->
+        <div class="col-md-12 card text-center py-5" *ngIf="!servicesLoaded">
+            <div class="d-flex justify-content-center align-items-center">
+                <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </div>
+        <div class="card-body" *ngIf="servicesLoaded && services.length==0">
+            <h5 class="card-title">.</h5>
+            <p class="card-text" style="font-size: 30px;">{{ 'my_services.my_services_no_service' | translate }}</p>
+            <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+        </div>
+        
+    </div>
+    <!-- <div id="container" class="col-md-6"  *ngFor="let service of services; let i=index">
+        <div class="col-md-12" *ngIf="ispackage_service(service)">
+            <div class="ts-service-box" id="target{{i+1}}" >
+                <div class="product-details" >
+                    <h4>{{ service.title }}</h4>
+                    <time datetime="2020-05-25 12:00:00"> 
+                        <small><i class="fas fa-calendar-alt mr-2"></i> {{ 'my_services.my_services_date' | translate }} {{ service.publicationDate | date }}, {{  'my_services.my_services_time' | translate }} {{ service.publicationDate | date: 'shortTime' }}</small>
+                    </time>
+                    <p class="information py-4" style="text-align: left;">{{ service.description }}</p>
+                    <small *ngIf="service.type =='TransportColisService'" class="tag__item">Service date: <i class="fas fa-clock mr-2"></i>{{ service.deadline.arrival }}</small>
+                    
+                    <span >
+                        <a href="javascript:void(0)" *ngIf="service.idSelectedProvider==''"><i class="fas fa-clock mr-2"></i>{{ 'my_services.my_services_pendind' | translate }}</a>
+                        <span *ngIf="service.state=='service_accepted_and_waiting_paiement'" class="badge badge-success mr-2" >{{ 'my_services.my_services_accepted' | translate }}</span>
+                        <span class="badge badge-success mr-2" >Code: {{ service.code }} </span>
+                        </span>
+                    <span class="badge badge-success my-3" > {{ 'my_services.my_services_price' | translate }}: {{ service.suggestedPrice }} {{ service.country_docs[0].currency.cc }} </span>
+                    <span class="badge badge-success my-3" > {{ TransactionServiceLabel[service.state] | translate }} </span> <br>
+                     <br>
+                    <div class="my-2">
+                        <a href="javascript:void(0)" class="ml-3" *ngIf="payment_init(service) && waitting_payment(service) && id_service!=service._id" (click)="check_payment(service)"> <br>Or <i class="fa fa-check-circle" style="color:red"></i><b>{{ 'my_services.check_older' | translate }}</b></a> 
+                        <div *ngIf="id_service==service._id" class="spinner-border" role="status">
+                            <b>{{ 'my_services.checking' | translate }}</b><span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    <small *ngIf="service.provider[0]" class="tag__item">{{ 'my_services.provider' | translate }}: <strong>
+                        <i *ngIf="!service.provider[0]?.picture" class="fas fa-user mr-2"></i>
+                        <img *ngIf="service.provider[0]?.picture" [src]="service.provider[0]?.picture" style="height: 20px; width: 20px;" alt="">{{ service.provider[0]?.firstname + " " + service.provider[0]?.lastname }}</strong>
+                    </small>
+                    <button type="button" class="btn btn-warning p-3 text-dark" (click)="getDetails(service._id)"><b>More Details</b></button>
+                </div>
+                <div class="product-image">
+                    <img class="postcard__img" *ngIf="service.images && service.images.length!=0" [src]="service.images[0]" alt="Image Title" />
+                    <img class="postcard__img" *ngIf="service.images && service.images.length==0" src="https://internt.slu.se/globalassets/mw/stod-serv/campus-och-hus/services.jpg?width=480&height=480&mode=crop" alt="Image Title" />
+                    <img class="postcard__img" *ngIf="!service.images" src="https://internt.slu.se/globalassets/mw/stod-serv/campus-och-hus/services.jpg?width=480&height=480&mode=crop" alt="Image Title" />
+                    <div class="info" style="font-size: 12px; overflow-y: scroll; overflow-x: hidden;">
+                        <h2> Details</h2>
+                        <ul *ngIf="service.options?.receiver">
+                            <li style="list-style: none;"><strong> RECEIVER </strong></li> 
+                            <li><strong>Name : </strong> {{ service.options.receiver.name }} </li>
+                            <li><strong>Address : </strong><small>{{ service.options.receiver.address }}</small></li>
+                            <li><strong>Email : </strong>{{ service.options.receiver.email }}</li>
+                            <li><strong>Contact : </strong>{{ service.options.receiver.contact }}</li>
+                        </ul>
+                        <ul *ngIf="service.options?.size" >
+                            <li style="list-style: none;"><strong> PACKAGE </strong></li>
+                            <li><strong>Depth : </strong> {{ service.options.size.depth }}cm </li>
+                            <li><strong>Heigth : </strong><small>{{ service.options.size.heigth }}cm</small></li>
+                            <li><strong>Width : </strong>{{ service.options.size.width }}cm</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12" *ngIf="!ispackage_service(service)">
+            <div class="ts-service-box" id="target{{i+1}}" >
+                <div class="product-details" >
+                    <h4>{{ service.title }}</h4>
+                    <time datetime="2020-05-25 12:00:00"> 
+                        <small><i class="fas fa-calendar-alt mr-2"></i> {{ 'my_services.my_services_date' | translate }} {{ service.publicationDate | date }}, {{  'my_services.my_services_time' | translate }} {{ service.publicationDate | date: 'shortTime' }}</small>
+                    </time>
+                    <p class="information py-4" style="text-align: left;">{{ service.description }}</p>
+                    <small *ngIf="service.type =='TransportColisService'" class="tag__item">Service date: <i class="fas fa-clock mr-2"></i>{{ service.deadline.arrival }}</small>
+                    
+                    <span >
+                        <a href="javascript:void(0)" *ngIf="service.idSelectedProvider==''"><i class="fas fa-clock mr-2"></i>{{ 'my_services.my_services_pendind' | translate }}</a>
+                        <span *ngIf="service.state=='service_accepted_and_waiting_paiement'" class="badge badge-success mr-2" >{{ 'my_services.my_services_accepted' | translate }}</span>
+                        <span class="badge badge-success mr-2" >Code: {{ service.code }} </span>
+                    </span>
+                    <span class="badge badge-success my-3" > {{ 'my_services.my_services_price' | translate }}: {{ service.suggestedPrice }} {{ service.country_docs[0]?.currency.cc }} </span>
+                    <span class="badge badge-success my-3" > {{ TransactionServiceLabel[service.state] | translate }} </span> <br>
+                    <br>
+                    <div class="my-2">
+                        <a href="javascript:void(0)" class="ml-3" *ngIf="payment_init(service) && waitting_payment(service) && id_service!=service._id" (click)="check_payment(service)"> <br>Or <i class="fa fa-check-circle" style="color:red"></i><b>{{ 'my_services.check_older' | translate }}</b></a> 
+                        <div *ngIf="id_service==service._id" class="spinner-border" role="status">
+                            <b>{{ 'my_services.checking' | translate }}</b><span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    <small *ngIf="service.provider[0]" class="tag__item">Provider: <strong><i class="fas fa-user mr-2"></i>{{ service.provider[0]?.firstname + " " + service.provider[0]?.lastname }}</strong></small>
+                </div>
+                <div class="product-image">
+                    <img class="postcard__img" *ngIf="service.images && service.images.length!=0" [src]="service.images[0]" alt="Image Title" />
+                    <img class="postcard__img" *ngIf="service.images && service.images.length==0" src="https://internt.slu.se/globalassets/mw/stod-serv/campus-och-hus/services.jpg?width=480&height=480&mode=crop" alt="Image Title" />
+                    <img class="postcard__img" *ngIf="!service.images" src="https://internt.slu.se/globalassets/mw/stod-serv/campus-och-hus/services.jpg?width=480&height=480&mode=crop" alt="Image Title" />
+                    <div class="info" style="font-size: 12px; overflow-y: scroll; overflow-x: hidden;">
+                        <h2> Details</h2>
+                        <ul *ngIf="service.options?.receiver">
+                            <li style="list-style: none;"><strong> RECEIVER </strong></li>
+                            <li><strong>Name : </strong> {{ service.options.receiver.name }} </li>
+                            <li><strong>Address : </strong><small>{{ service.options.receiver.address }}</small></li>
+                            <li><strong>Email : </strong>{{ service.options.receiver.email }}</li>
+                            <li><strong>Contact : </strong>{{ service.options.receiver.contact }}</li>
+                        </ul>
+                        <ul *ngIf="service.options?.size" >
+                            <li style="list-style: none;"><strong> PACKAGE </strong></li>
+                            <li><strong>Depth : </strong> {{ service.options.size.depth }}cm </li>
+                            <li><strong>Heigth : </strong><small>{{ service.options.size.heigth }}cm</small></li>
+                            <li><strong>Width : </strong>{{ service.options.size.width }}cm</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <div class="row">
+        <div class="about wow fadeInUp col-md-6 mt-2 pb-2" data-wow-delay="0.1s"  *ngFor="let service of services; let i=index" id="target{{i+1}}" style="border-bottom: 1px solid gray;">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-5 col-md-6">
+                        <div class="about-img">
+                            <img src="assets/img/service.jpg" style="width: 100%;" alt="Image">
+                        </div>
+                    </div>
+                    <div class="col-lg-7 col-md-6">
+                        <div class="section-header text-left">
+                            <p>Welcome to Builderz</p>
+                            <h2> {{ service.title }} </h2>
+                        </div>
+                        <div class="about-text">
+                            <time datetime="2020-05-25 12:00:00"> 
+                                <small><i class="fas fa-calendar-alt mr-2"></i> {{ 'my_services.my_services_date' | translate }} {{ service.publicationDate | date }}, {{  'my_services.my_services_time' | translate }} {{ service.publicationDate | date: 'shortTime' }}</small>
+                            </time>
+                            <p>
+                                {{ service.description }}
+                            </p>
+                            <small *ngIf="service.type =='TransportColisService'" class="tag__item">Service date: <i class="fas fa-clock mr-2"></i>{{ service.deadline.arrival }}</small>
+                            <button type="button" class="btn btn-warning p-3 text-dark" (click)="getDetails(service._id)"><b>More Details</b></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- <div class="wrapper">
+    <div class="about wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5 col-md-6">
+                    <div class="about-img">
+                        <img src="assets/about.jpg" style="width: 100%;" alt="Image">
+                    </div>
+                </div>
+                <div class="col-lg-7 col-md-6">
+                    <div class="section-header text-left">
+                        <p>Welcome to Builderz</p>
+                        <h2>25 Years Experience</h2>
+                    </div>
+                    <div class="about-text">
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit non vulputate. Aliquam metus tortor, auctor id gravida condimentum, viverra quis sem.
+                        </p>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit non vulputate. Aliquam metus tortor, auctor id gravida condimentum, viverra quis sem. Curabitur non nisl nec nisi scelerisque maximus. Aenean consectetur convallis porttitor. Aliquam interdum at lacus non blandit.
+                        </p>
+                        <a class="btn p-3 text-dark" href=""> <b>Learn More</b> </a>
+                        <button type="button" class="btn btn-warning">Warning</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+    
+
+
+
+
+
+
+
+
+<!-- 
+<section class="light">
+    <div class="container-fluid">
+        <div class="h1 text-center text-dark" id="pageHeaderTitle">My Requests</div>
+
+            <article class="postcard light yellow animated fadeIn" *ngFor="let service of services">
+                <a class="postcard__img_link" href="javascript:void(0)">
+                    <img class="postcard__img" *ngIf="service.images && service.images.length!=0" [src]="service.images[0]" alt="Image Title" />
+                    <img class="postcard__img" *ngIf="service.images && service.images.length==0" src="https://internt.slu.se/globalassets/mw/stod-serv/campus-och-hus/services.jpg?width=480&height=480&mode=crop" alt="Image Title" />
+                    <img class="postcard__img" *ngIf="!service.images" src="https://internt.slu.se/globalassets/mw/stod-serv/campus-och-hus/services.jpg?width=480&height=480&mode=crop" alt="Image Title" />
+                </a>
+                <div class="postcard__text t-dark">
+                    <h1 class="postcard__title yellow"><a href="javascript:void(0)">{{ service.title }}</a></h1>
+                    <div class="postcard__subtitle small">
+                        <time datetime="2020-05-25 12:00:00"> 
+                            <i class="fas fa-calendar-alt mr-2"></i> {{ service.publicationDate | date }}
+                        </time>
+                    </div>
+                    <div class="postcard__bar"></div>
+                    <div class="postcard__preview-txt">{{ service.description }}</div>
+                    <ul class="postcard__tagbox">
+                        <li class="tag__item"><i class="fas fa-tag mr-2"></i>{{ service.type }}</li>
+                        <li *ngIf="service.type =='TransportColisService'" class="tag__item"><i class="fas fa-clock mr-2"></i>{{ service.deadline.arrival }}</li>
+                        <li class="tag__item play yellow">
+                            <a href="javascript:void(0)" *ngIf="service.idSelectedProvider==''"><i class="fas fa-clock mr-2"></i>Request Pending</a>
+                            <span *ngIf="service.state=='service_accepted_and_waiting_paiement'" class="badge badge-success mr-2" >ACCEPTED</span>
+                            <span class="badge badge-success mr-2" >Code: {{ service.code }} </span>
+                            <a href="javascript:void(0)" *ngIf="waitting_payment(service)" (click)="handlePayment(service)"><i class="fa fa-credit-card mr-2"></i>Pay Now</a>
+                            <a href="javascript:void(0)" class="ml-2" *ngIf="payment_init(service) && waitting_payment(service) && id_service!=service._id" (click)="check_payment(service)"><i class="fa fa-check-circle" style="color:red"></i>check an older initiated payment</a>
+                            <div *ngIf="id_service==service._id" class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="postcard__tagbox">
+                        <li class="tag__item play yellow">
+                            <span class="badge badge-success" > Price: {{ service.suggestedPrice }} </span>
+                        </li>
+                        <li class="tag__item play yellow">
+                            <span class="badge badge-success" > {{ TransactionServiceLabel[service.state] }} </span>
+                        </li>
+                        <li class="tag__item" *ngIf="service.state=='service_init_STATE'" (click)="updatePrice(service)"><i class="fas fa-edit"></i>Update Price</li>
+                    </ul>
+                </div>
+            </article>
+    </div>
+</section>
+ -->
+
+<ng-template #contentMethod let-modal>
+    
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{'chat.chat.start_payment' | translate }}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    
+    <!-- Modal body -->
+    <div class="modal-body">
+        <p>{{'chat.chat.select_payment_method' | translate }}</p>
+        <a *ngFor="let item of paymentMethods; let i = index"
+            class="list-group-item list-group-item-action"
+            (click)="handleMethodPayment(item, i)"
+            [ngClass]="{'selected-item': i === selectedIndex}">
+            {{item.name}}
+        </a>
+        <div class="row my-3">
+            <div class="col-md-12">
+            Amount : <strong> {{ selected_service.suggestedPrice + ' ' + country_service.currency.cc}} </strong>
+            </div>
+        </div>
+        <div *ngIf="selectedPaymentMethod">
+            <hr>
+            <div *ngIf="selectedPaymentMethod=='orange' || selectedPaymentMethod=='mtn'" class="mobile-money">
+                <div class="row my-3" *ngIf="service_cost">
+                    <div class="col-md-12">
+                    Amount : <strong> {{ service_cost + ' ' + moneyCode }} </strong>
+                    </div>
+                </div>
+                <p class="mt-2">{{'chat.chat.mobile_money_number' | translate }} ({{selectedPaymentMethod}}) </p>
+                <ngx-intl-tel-input [cssClass]="'custom-chat'" [preferredCountries]="preferredCountries"
+                    [enableAutoCountrySelect]="true" [enablePlaceholder]="true" [searchCountryFlag]="true"
+                    [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]" [selectFirstCountry]="false"
+                    [selectedCountryISO]="CountryISO.Cameroon" [maxLength]="15"
+                    [phoneValidation]="true" [separateDialCode]="separateDialCode"
+                    [numberFormat]="PhoneNumberFormat.National" 
+                    name="cell_phone_number" 
+                    [(ngModel)]="mm_phone">
+                </ngx-intl-tel-input> 
+
+                <button type="button" [disabled]="!this.mm_phone" (click)="startPayment()" class="btn btn-success p-2">{{'chat.chat.make_payment' | translate }}</button>
+            </div>
+            <p class="mt-2">{{'chat.chat.paygate_payment' | translate }} ({{selectedPaymentMethod}}) </p>
+            <div *ngIf="selectedPaymentMethod=='paygate'" class="mobile-money">
+                <!-- <button type="button" (click)="startPayment()" class="btn btn-success">{{'chat.chat.initiate_payment' | translate }}</button> -->
+                <button type="button" class="btn btn-success p-2" (click)="startPayment()">{{'chat.chat.initiate_payment' | translate }}</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close(false)">{{'chat.chat.cancel' | translate }}</button>
+    </div>
+        
+</ng-template>
+
+
+<!-- The Modal for display loading -->
+<ng-template #contentLoader let-modal>
+    <!-- Modal body -->
+    <div class="modal-body">
+        <div class="p-4 text-center">
+            <div class="spinner-grow text-primary" role="status">
+            <span class="sr-only"></span>
+            </div>
+            <div class="spinner-grow text-secondary" role="status">
+            <span class="sr-only"></span>
+            </div>
+            <div class="spinner-grow text-success" role="status">
+            <span class="sr-only"></span>
+            </div>
+            <div class="spinner-grow text-danger" role="status">
+            <span class="sr-only"></span>
+            </div>
+        </div> 
+        <div *ngIf="selectedPaymentMethod==methodPaymentState.paygate; else elseBlock">
+            <p>{{'chat.chat.message_confirm_payment_paygate' | translate }}</p>
+        </div>
+        
+        <ng-template #elseBlock>
+            <p>{{'chat.chat.message_confirm_payment_mobile_money' | translate }}</p>
+        </ng-template>
+        <!-- <p *ngIf="selectedPaymentMethod==MethodPaymentState.paygate">{{'chat.chat.message_confirm_payment' | translate }}</p> -->
+        
+        <div class="text-center p-4" *ngIf="!payment_done">
+            <!-- <button type="button" (click)="checkTransaction()" class="btn">{{'chat.chat.payment_done' | translate }}</button> -->
+            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> {{'chat.chat.payment_done' | translate }} ...
+        </div>
+        <div class="text-center p-4" *ngIf="payment_done">
+            <button *ngIf="!checking_payment" type="button" (click)="checkTransaction()" class="btn">{{'chat.chat.check_payment' | translate }}</button>
+            <div *ngIf="checking_payment" class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="modal-footer text-center">
+        <button type="button" class="btn btn-dark" [disabled]="obj_spinner" (click)="cancelTransaction()">{{'chat.chat.cancel_transaction' | translate }}</button>
+    </div> -->
+</ng-template>
+
+<!-- The Modal for price changed form to display -->
+<ng-template #contentPrice let-modal>
+    
+    <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">{{ 'my_services.my_services_update_price.title' | translate }} </h4> 
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    
+    <!-- Modal body -->
+    <div class="modal-body">
+    <p>{{ 'my_services.my_services_update_price.description' | translate }}</p>
+    <div class="form-group">
+        <label for="inputPrice">{{ 'my_services.my_services_update_price.from_new_price' | translate }} </label>
+        <input type="number" class="form-control" id="inputPrice" aria-describedby="pricelHelp" [(ngModel)]="new_price" />
+        <!-- <small id="priceHelp" class="form-text text-muted">{{'chat.chat.price_mentionned' | translate }} </small> -->
+    </div>
+    </div>
+    <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="confirmedPrice()">{{ 'my_services.my_services_update_price.confirm' | translate }}</button>
+    <button type="button" class="btn btn-outline-dark" (click)="cancelTransaction()">{{ 'my_services.my_services_update_price.cancel' | translate }}</button>
+    </div>
+        
+</ng-template>
+
+
+

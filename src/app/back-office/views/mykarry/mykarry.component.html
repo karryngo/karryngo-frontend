@@ -1,0 +1,327 @@
+<div *ngIf="waiting_provider" class="row mb-5" data-aos="fade-up">
+    <div class="col-md-12">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{'dashboard.msg_provider' | translate}}
+        
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <!-- <div class="card bg-danger px-2 py-2 pt-2 pb-2">
+        Your request to be a transporter still processing 
+        </div> -->
+    </div>
+</div>
+<div class="site-section bg-light" id="section-services">
+    <div class="container-fluid px-5">
+        <div class="row justify-content-center mb-5" data-aos="fade-up">
+            <div class="col-md-7 text-center border-primary">
+            <h2 class="mb-0 mt-2 text-primary">{{'dashboard.welcome' | translate}} {{userName}}</h2>
+            <p class="color-black-opacity-5">{{'dashboard.welcome_message' | translate}}</p>
+            </div>
+        </div>
+        <!-- <div class="row align-items-stretch mb-5" style="text-align: justify;">
+            <div class="col-md-12">
+                <section class="py-3 draggable bg-gray-400" style="">
+                    <div class="container-fluid">
+                    <div class="row justify-content-center text-center">
+                        <div class="col-md-3">
+                        <h1 class="text-gradient text-primary">323</h1>
+                        <h5 class="mt-3">Projects</h5>
+                        <p>Of “high-performing” level are led by a certified project manager</p>
+                        </div>
+                        <div class="col-md-3">
+                        <h1 class="text-gradient text-primary">500+</h1>
+                        <h5 class="mt-3">Hours</h5>
+                        <p>That meets quality standards required by our users</p>
+                        </div>
+                        <div class="col-md-3">
+                        <h1 class="text-gradient text-primary">24/7</h1>
+                        <h5 class="mt-3">Support</h5>
+                        <p>Actively engage team members that finishes on time</p>
+                        </div>
+                    </div>
+                    </div>
+                </section>
+            </div>
+        </div> -->
+        <div class="row align-items-stretch" style="text-align: justify;">
+            <div class="col-md-6 col-lg-3 mb-4 mb-lg-4" data-aos="fade-up" style="height: 300px;">
+                <div class="unit-4 d-flex">
+                    <div class="unit-4-icon mr-4"><span class="text-primary flaticon-plane"></span></div>
+                    <div>
+                    <h3>{{'dashboard.dashboard_shipping' | translate}}</h3>
+                    <p>{{'dashboard.dashboard_shipping_content' | translate}}</p>
+                    <p><a class="btn btn-primary shadow-none" (click)="goToPage('post-requests/packages')">{{'dashboard.dashboard_shipping_button' | translate}}</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="unit-4 d-flex">
+                    <div class="unit-4-icon mr-4"><span class="text-primary flaticon-boat-ship"></span></div>
+                    <div>
+                    <h3>{{'dashboard.dashboard_transport' | translate}}</h3>
+                    <p>{{'dashboard.dashboard_transport_content' | translate}}</p>
+                    <p><a class="btn btn-primary shadow-none" (click)="goToPage('post-requests/trips/add/person')">{{'dashboard.dashboard_transport_button' | translate}}</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="unit-4 d-flex">
+                    <div class="unit-4-icon mr-4"><span class="text-primary flaticon-boat-ship"></span></div>
+                    <div>
+                    <h3>{{'dashboard.dashboard_rental' | translate}}</h3>
+                    <p>{{'dashboard.dashboard_rental_content' | translate}}</p>
+                    <p><a class="btn btn-primary shadow-none" (click)="goToPage('post-requests/rents/add/cars')">{{'dashboard.dashboard_rental_button' | translate}}</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="unit-4 d-flex">
+                    <div class="unit-4-icon mr-4"><span class="text-primary flaticon-boat-ship"></span></div>
+                    <div>
+                        <h3>{{'dashboard.dashboard_traveller' | translate}}</h3>
+                        <p>{{'dashboard.dashboard_traveller_content' | translate}}</p><br>
+                        <p>
+                            <a class="btn btn-primary shadow-none" (click)="goToPage('post-requests/travellers/add/colis')">{{'dashboard.dashboard_traveller_button' | translate}}</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="unit-4 d-flex">
+                    <div class="unit-4-icon mr-4"><span class="text-primary flaticon-truck"></span></div>
+                    <div>
+                    <h3>Tracking</h3>
+                    <p>MyKarryngo offers tracking services, find here how you can track your courier</p>
+                    <p><a class="btn btn-primary shadow-none" (click)="goToPage('map')">Track my courrier</a></p>
+                    </div>
+                </div>
+            </div> -->
+            <!-- <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="unit-4 d-flex">
+                <div class="unit-4-icon mr-4"><span class="text-primary flaticon-truck"></span></div>
+                <div>
+                <h3>Tracking</h3>
+                <p>MyKarryngo offers tracking services, find here how you can track your courier</p>
+                <p><a class="btn btn-primary shadow-none" (click)="goToPage('map')">Track my courrier</a></p>
+                </div>
+            </div>
+            </div> -->
+        </div>
+    </div>
+</div>
+<div class="site-section bg-light" id="section-services">
+    <div class="container-fluid px-5">
+        <div class="row justify-content-center mb-5" data-aos="fade-up">
+            <div class="col-md-7 text-center border-primary">
+                <h2 class="mb-0 mt-2 text-primary">{{ 'dashboard.recent_services_heading' | translate }}</h2>
+                <p class="color-black-opacity-5">{{ 'dashboard.recent_services_description' | translate }}</p>
+            </div>
+        </div>
+        <table class="table align-middle mb-0 bg-white">
+            <thead class="bg-light">
+                <tr>
+                    <th>{{ 'dashboard.place' | translate }}</th>
+                <th>{{ 'dashboard.title' | translate }}</th>
+                <th>{{ 'dashboard.status' | translate }}</th>
+                <th>{{ 'dashboard.price' | translate }}</th>
+                <th>{{ 'dashboard.actions' | translate }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let service of services">
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <!-- <img
+                                src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                                    alt=""
+                                    style="width: 45px; height: 45px"
+                                    class="rounded-circle"
+                                /> -->
+                                <div class="ms-3">
+                                <p class="fw-bold mb-1"> {{ service.address?.from?.city +", "+ service.address?.from?.country }} </p>
+                                <p class="text-muted mb-0"> <small>{{ 'dashboard.posted_on' | translate }}: <b>{{ service.publicationDate | date:'short' }}</b></small> </p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1"> {{ service.title }} </p>
+                        <!-- <p class="text-muted mb-0">IT department</p> -->
+                    </td>
+                    <td>
+                        <span class="badge badge-success rounded-pill d-inline" *ngIf="service?.state=='service_end'"> {{ service.state }} </span>
+                        <span class="badge badge-primary rounded-pill d-inline" *ngIf="service?.state=='service_init_STATE'"> {{ service.state }} </span >
+                        <span class="badge badge-warning rounded-pill d-inline" *ngIf="(service?.state!='service_init_STATE')&&(service?.state!='service_end')"> {{ service.state }} </span>
+
+                    </td>
+                    <td> {{ service.suggestedPrice }} </td>
+                    <td>
+                        <button type="button" class="btn btn-link btn-sm btn-rounded" (click)="getDetails(service._id)">
+                            {{ 'dashboard.details' | translate }}
+                        </button>
+                    </td>
+                </tr>
+              <!-- <tr>
+                <td>
+                  <div class="d-flex align-items-center">
+                    <img
+                        src="https://mdbootstrap.com/img/new/avatars/6.jpg"
+                        class="rounded-circle"
+                        alt=""
+                        style="width: 45px; height: 45px"
+                        />
+                    <div class="ms-3">
+                      <p class="fw-bold mb-1">Alex Ray</p>
+                      <p class="text-muted mb-0">alex.ray@gmail.com</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <p class="fw-normal mb-1">Consultant</p>
+                  <p class="text-muted mb-0">Finance</p>
+                </td>
+                <td>
+                  <span class="badge badge-primary rounded-pill d-inline"
+                        >Onboarding</span
+                    >
+                </td>
+                <td>Junior</td>
+                <td>
+                  <button
+                          type="button"
+                          class="btn btn-link btn-rounded btn-sm fw-bold"
+                          data-mdb-ripple-color="dark"
+                          >
+                    Edit
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="d-flex align-items-center">
+                    <img
+                        src="https://mdbootstrap.com/img/new/avatars/7.jpg"
+                        class="rounded-circle"
+                        alt=""
+                        style="width: 45px; height: 45px"
+                        />
+                    <div class="ms-3">
+                      <p class="fw-bold mb-1">Kate Hunington</p>
+                      <p class="text-muted mb-0">kate.hunington@gmail.com</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <p class="fw-normal mb-1">Designer</p>
+                  <p class="text-muted mb-0">UI/UX</p>
+                </td>
+                <td>
+                  <span class="badge badge-warning rounded-pill d-inline">Awaiting</span>
+                </td>
+                <td>Senior</td>
+                <td>
+                  <button
+                          type="button"
+                          class="btn btn-link btn-rounded btn-sm fw-bold"
+                          data-mdb-ripple-color="dark"
+                          >
+                    Edit
+                  </button>
+                </td>
+              </tr> -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Suivre -->
+<div class=" bg-dark p-5 mb-5">
+    <h4 class="text-warning text-center">{{'tracking.tracking_title' | translate}}</h4>
+    <div class="c-voc-tracking-bar">
+        <form method="GET" class="form-inline justify-content-center">
+        <div class="form-group row custom-form">
+            <div class="form-group mx-sm-6 mb-2">
+            <label for="inputTracking" class="sr-only">{{'tracking.tracking_order' | translate}}</label>
+            <input type="text" class="form-control" id="inputTracking" placeholder="{{'tracking.tracking_placeholder' | translate}}">
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">{{'tracking.tracking_button' | translate}}</button>
+        </div>
+        <!-- <div class="c-voc-tracking-bar--input-outer-group">
+            <div class="c-voc-tracking-bar--input-inner-group">
+            <input class="c-voc-tracking-bar--input js--tracking-bar--input" id="c-voc-tracking-bar--input" name="tracking-id" type="text" placeholder="Saisissez votre/vos numéro(s) de suivi" data-error-message="Veuillez saisir votre/vos numéro(s) de suivi" required="" data-di-id="#c-voc-tracking-bar--input">
+            <button class="c-voc-tracking-bar--button js--tracking-bar--button base-button " title="Veuillez renseigner ce champ." type="submit" data-tracking="{&quot;component&quot;:&quot;dhl/components/containers/marketing-stage-tracking&quot;,&quot;name&quot;:&quot;Track&quot;,&quot;topic&quot;:&quot;track your shipment&quot;}">
+                
+                Suivre 
+            </button>
+            </div>
+        </div> -->
+        </form>
+    </div>
+</div>
+<!-- end suivre-->
+
+
+<!-- Become a Provider-->
+<div class="site-section bg-dark section-providers mt-5 pt-4">
+    <div class="container">
+    <div class="row justify-content-center mb-5" data-aos="fade-up">
+        <div class="col-md-7 text-center border-primary">
+        <h2 class="mb-0 text-primary">{{'dashboard.become_partner' | translate}}</h2>
+        <p class="color-black-opacity-5">{{'dashboard.become_partner_sub' | translate}}</p>
+        </div>
+    </div>
+    <div class="row align-items-stretch">
+        <div class="col-md-6 col-lg-6 mb-4 mb-lg-4" data-aos="fade-up">
+        <div class="unit-4 d-flex">
+            <div class="unit-4-icon mr-4"><span class="text-primary flaticon-plane"></span></div>
+            <div>
+            <h3>{{'dashboard.pro_carrier_title' | translate}}</h3>
+            <p>{{'dashboard.pro_carrier_content' | translate}}</p>
+            <p><a class="text-warning" (click)="goToPage('carrier/be-carrier')">{{'buttons.register' | translate}}</a></p>
+            </div>
+        </div>
+        </div>
+        <!-- <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="100"></div> -->
+        <div class="col-md-6 col-lg-6 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="unit-4 d-flex">
+            <div class="unit-4-icon mr-4"><span class="text-primary flaticon-boat-ship"></span></div>
+            <div class="text-right">
+            <h3>{{'dashboard.pro_trans_title' | translate}}</h3>
+            <p>{{'dashboard.pro_trans_content' | translate}}</p>
+            <p><a class="text-warning" (click)="goToPage('carrier/be-carrier')">{{'buttons.register' | translate}}</a></p>
+            </div>
+        </div>
+        </div>
+
+    </div>
+
+    <div class="row align-items-stretch">
+        <div class="col-md-6 col-lg-6 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="unit-4 d-flex">
+            <div class="unit-4-icon mr-4"><span class="text-primary flaticon-boat-ship"></span></div>
+            <div>
+            <h3>{{'dashboard.pro_travel_title' | translate}}</h3>
+            <p>{{'dashboard.pro_travel_content' | translate}}</p>
+            <p><a class="text-warning" (click)="goToPage('carrier/be-carrier')">{{'buttons.register' | translate}}</a></p>
+            </div>
+        </div>
+        </div>
+
+        <!-- <div class="col-md-4 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="100"></div> -->
+
+        <div class="col-md-6 col-lg-6 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="unit-4 d-flex">
+            <div class="unit-4-icon mr-4"><span class="text-primary flaticon-boat-ship"></span></div>
+            <div class="text-right">
+            <h3>{{'dashboard.pro_rent_title' | translate}}</h3>
+            <p>{{'dashboard.pro_rent_content' | translate}}</p>
+            <p><a class="text-warning" (click)="goToPage('carrier/be-carrier')">{{'buttons.register' | translate}}</a></p>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+    

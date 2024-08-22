@@ -1,0 +1,66 @@
+<div class="animated fadeIn">
+    <div class="row">  
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="jaune text-left mx-4 mb-4"> 
+              {{'wallet.payment_method.list_payment_methods' | translate }}
+            </h4>
+          </div>
+          <div class="card-body">
+            <div class="custom-list p-3">
+                <div class="item-check ">
+                    
+                    <h4>{{'wallet.payment_method.orange_money' | translate }}</h4>
+                  </div>
+                  <div class="item-check">
+                    
+                    <h4>{{'wallet.payment_method.mtn_money' | translate }}</h4>
+                  </div>
+                  <div class="item-check">
+                    <h4>{{'wallet.payment_method.paypal' | translate }}</h4>
+                  </div>
+                  <div>
+                    <button type="button" class="btn btn-secondary" data-toggle="modal" (click)="myModal.show()">
+                      {{'wallet.payment_method.add_payment_method_action' | translate }}
+                    </button>
+                  </div>
+            </div>  
+          </div>
+        </div>
+      </div>
+  
+  
+    </div>
+  </div>
+  
+ 
+  <div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title"> {{'wallet.payment_method.add_payment_method_title' | translate }}</h4>
+          <button type="button" class="close" (click)="myModal.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div>
+            <div class="form-group">
+                <label>{{'wallet.payment_method.payment_method_label' | translate }}</label>
+                <input type="text"
+                  class="form-control"                   
+                  [(ngModel)]="payment_method"
+                >
+                 
+              </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="myModal.hide()">{{'wallet.payment_method.cancel' | translate }}</button>
+          <button type="button" class="btn btn-success" (click)="myModal.hide();showNotification('top','center', 'danger', 'pe-7s-close-circle', '\<b>Sorry\</b>\<br>This service was not available now. Try later.')">{{'wallet.payment_method.confirm' | translate }}</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+  

@@ -1,0 +1,18 @@
+.circle {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: #00a1c9; /* Red background color */
+    cursor: pointer;
+}
+.circle i {
+    /* color: #00a1c9; */
+    font-size: 1.5rem;
+}
+
+.circle:hover {
+    font-size: 2.5rem;
+}

@@ -1,0 +1,17 @@
+<!-- Package Details-->
+<h4 class="mb-2 text-center title-form"><b> <u>Confirm Payment</u></b></h4>
+<!-- row-item-->
+<br>
+<div *ngIf="!isAnsware">
+  <font size=3>Dear user, the sum of <font size=3> <b><u>{{amount}}</u> {{currency}} </b></font>will be debited from your account for this transport.
+ Please confirm to allow the transporter to start the service.</font>
+ <font size=4> This module requires payment. validation is just a payment simulation </font>
+</div>
+
+ <app-progress-indeterminate *ngIf="isAnsware"></app-progress-indeterminate>
+<div class="modal-footer" *ngIf="!isAnsware">
+  <button type="button" class="btn btn-danger" (click)="myModal.hide()"
+    style="background-color: red !important;">Cancel</button>
+  <button type="button" class="btn btn-success" style="background-color: green !important;"
+    (click)="confirm()">Confirm</button>
+</div>

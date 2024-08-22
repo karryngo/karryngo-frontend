@@ -1,0 +1,140 @@
+<ng-template #detailscontent let-modal>
+    <div class="modal-content">
+        
+        <div class="modal-header">
+            <h3 class="modal-title" id="modal-basic-title">{{objHouse?.title}}</h3>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="bloc-resume">
+                <div class="card border-0">
+                    <div class="card-body">
+                        <h4>{{objHouse?.type}}</h4>
+                        <table class="table custom-table">
+                            <thead>
+                                <tr *ngIf="objHouse">
+                                    <td>
+                                        <span class="badge badge-primary">{{getStatus(objHouse?.state)}} </span>
+                                    </td>
+                                    <td *ngIf="objHouse.options.is_urgent">
+                                        <span class="badge badge-primary">Urgent</span>
+                                    </td>
+                                    <td *ngIf="objHouse.options.is_weak">
+                                        <span class="badge badge-warning">Weak</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Provider:</td>
+                                    <td>{{provider?.firstname}} {{provider?.lastname}}<br> {{provider?.companyName}} </td>
+                                </tr>
+                                <tr>
+                                    <td>Customer:</td>
+                                    <td>{{customer?.firstname}} {{provider?.lastname}}</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Title</td>
+                                    <td>{{objHouse?.title}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Departure</td>
+                                    <td>{{objHouse?.address.from.city}}, {{objHouse?.address.from.country}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Arrival</td>
+                                    <td>{{objHouse?.address.to.city}}, {{objHouse?.address.to.country}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Delivery date</td>
+                                    <td>{{objHouse?.deadline.arrival | date:'mediumDate'}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Type of package to send</td>
+                                    <td>{{objHouse?.typeof}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Receiver</td>
+                                    <td *ngIf="objHouse.options && objHouse.options.receiver">
+                                        {{objHouse.options?.receiver.name}}<br>
+                                        {{objHouse.options?.receiver.contact}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Customer price</td>
+                                    <td>
+                                        {{objHouse?.suggestedPrice | currency:'ZAR'}}<br>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- <p>Status : {{objHouse?.state}}</p> -->
+                        
+                    </div>
+                </div>
+            </div>        
+        </div>
+        <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-outline-danger" (click)="modal.close('delete')">Delete</button> -->
+            <button type="button" *ngIf="objHouse.idSelectedProvider==''" (click)="got_todetails(objHouse)" class="btn btn-dark">More Details</button>
+            <button type="button" class="btn btn-dark" (click)="modal.close('close')">Close</button>
+        </div>
+    </div>
+</ng-template>
+
+
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="card shadow mb-30">
+            <!-- <div class="card-header border-0">
+                <div class="row text-right">
+                    <div class="col-md-4 col-sm-12">
+                        <select  class="form-control" >
+                            <option value="" selected disabled>{{'buttons.filter_status' | translate}}</option>
+                            <option [value]="'all'">{{'buttons.all' | translate}}</option>
+                            <option *ngFor="let obj of statuts" [value]="obj.state">{{obj.name}}</option>
+                        </select>  
+                    </div>
+                    <div class="col-md-4 col-sm-12">
+                        <select class="form-control" >
+                            <option value="" selected disabled>{{'buttons.filter_year' | translate}}</option>
+                            <option [value]="'all'">{{'buttons.all' | translate}}</option>
+                            <option *ngFor="let obj of periods" [value]="obj">{{obj}}</option>
+                        </select>  
+                    </div>
+
+                </div>
+            </div> -->
+            <div class="dataTables_wrapper py-4">
+                <ngx-datatable 
+                class="bootstrap"
+                [messages]="customMessage"
+                [columnMode]="'force'"
+                [headerHeight]="50"
+                [footerHeight]="50"
+                [rowHeight]="'auto'"
+                [limit]="entries != -1 ? entries:undefined"
+                [rows]="services" 
+                [columns]="columns"
+                > 
+                <ngx-datatable-column *ngFor="let column of columns; let i = index;" name="{{column.name}}" prop="{{column.prop}}">
+                </ngx-datatable-column>
+
+                <ngx-datatable-column 
+                    [resizeable]="false"
+                    [sortable]="true"
+                    [draggable]="false"
+                    [canAutoResize]="false"
+                    name="Action">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <button class="btn btn-sm btn-outline-secondary" (click)="showDetails(detailscontent, row)">Details</button>
+                        <!-- <button class="btn btn-sm btn-outline-warning" (click)="showEdit(content, row)">Edit</button> -->
+                    </ng-template>
+                </ngx-datatable-column>
+              </ngx-datatable>
+            </div>
+        </div>
+    </div>
+</div>    

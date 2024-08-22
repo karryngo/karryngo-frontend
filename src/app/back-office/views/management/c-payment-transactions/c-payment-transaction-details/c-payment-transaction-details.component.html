@@ -1,0 +1,128 @@
+<div class="container">
+    <div class="wraper bootstrap snippets bootdeys bootdey">
+        <div class="page-title"> 
+            <h3 class="title">Payment transaction details</h3> 
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12 text-center text-muted" *ngIf="dataLoaded && !paymentTransaction">
+                <h1 class="text-muted">No Data Found</h1>
+            </div>
+            <div class="col-md-12 text-center text-muted" *ngIf="!dataLoaded">
+                <div class="spinner-grow" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="panel panel-default m-t-20">
+                    <div class="panel-body">
+                        
+                        
+                        <hr>
+                    
+                        <div class="transaction-details" *ngIf="paymentTransaction">
+                            <h2>Payment Transaction Details</h2>
+                            
+                            <div class="transaction-section">
+                                <h3>Transaction Information</h3>
+                                <div class="info-row">
+                                    <span class="label">Transaction ID:</span>
+                                    <span class="value">{{ paymentTransaction.transactionId || 'N/A' }}</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="label">Payment Method:</span>
+                                    <span class="value">{{ paymentTransaction.paymentMethod }}</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="label">Amount:</span>
+                                    <span class="value">{{ paymentTransaction.amount }} {{ paymentTransaction.moneyCode }}</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="label">Status:</span>
+                                    <span class="value">{{ paymentTransaction.status }}</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="label">Created At:</span>
+                                    <span class="value">{{ paymentTransaction.createdAt | date:'medium' }}</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="label">Payment Token:</span>
+                                    <span class="value">{{ paymentTransaction.pay_token }}</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="label">payment Request Id:</span>
+                                    <span class="value">{{ paymentTransaction.paymentRequestId }}</span>
+                                </div>
+                            </div>
+                        
+                            <div class="transaction-section">
+                            <h3>User Information</h3>
+                            <div class="info-row">
+                                <span class="label">User ID:</span>
+                                <span class="value">{{ paymentTransaction.user._id }}</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="label">Name:</span>
+                                <span class="value">{{ paymentTransaction.user.firstname }} {{ paymentTransaction.user.lastname }}</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="label">Email:</span>
+                                <span class="value">{{ paymentTransaction.user.address.email }}</span>
+                            </div>
+                                <div class="info-row">
+                                    <span class="label">Phone:</span>
+                                    <span class="value">{{ paymentTransaction.user.address.phone }}</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="label">Country:</span>
+                                    <span class="value">{{ paymentTransaction.user.address.country }}</span>
+                                </div>
+                            </div>
+                        
+                            <div class="transaction-section">
+                            <h3>Service Information</h3>
+                            <div class="info-row">
+                                <span class="label">Service Title:</span>
+                                <span class="value">{{ paymentTransaction.service.title }}</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="label">Description:</span>
+                                <span class="value">{{ paymentTransaction.service.description }}</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="label">Price:</span>
+                                <span class="value">{{ paymentTransaction.service.suggestedPrice }} {{ paymentTransaction.moneyCode }}</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="label">Service Date:</span>
+                                <span class="value">{{ paymentTransaction.service.date_rent }}</span>
+                            </div>
+                            </div>
+                        </div>
+                        
+                        <div class="loading" *ngIf="!paymentTransaction">
+                            <p>Loading transaction details...</p>
+                        </div>
+                        
+
+                        
+                        <!-- <div class="row">
+                            <div class="col-xs-7">
+                                Showing 1 - 20 of 289
+                            </div>
+                            <div class="col-xs-5">
+                                <div class="btn-group pull-right">
+                                <button type="button" class="btn btn-default"><i class="fa fa-chevron-left"></i></button>
+                                <button type="button" class="btn btn-default"><i class="fa fa-chevron-right"></i></button>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div> <!-- panel body -->
+                </div> <!-- panel -->
+            </div> <!-- end Col-9 -->
+        
+        </div><!-- End row -->
+
+
+    </div>
+</div>

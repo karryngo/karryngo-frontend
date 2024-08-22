@@ -1,0 +1,91 @@
+<section id="main-container" class="main-container">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 pb-5">
+                <!-- <label for="sel1" class="form-label" style="width: 100%;">Select the state:</label>
+                <select class="form-select" id="sel1" name="sellist1" style="width: 100%; height: 40px;" (change)="onChange($event.target.value)">
+                    <option [value]="TransactionServiceState.SERVICE_ACCEPTED_AND_WAITING_PAIEMENT"> {{ TransactionServiceLabel.service_accepted_and_waiting_paiement }} </option>
+                    <option [value]="TransactionServiceState.SERVICE_PAIEMENT_DONE_AND_WAITING_START"> {{ TransactionServiceLabel.service_paiement_done_and_waiting_start }} </option>
+                    <option [value]="TransactionServiceState.SERVICE_RUNNING"> {{ TransactionServiceLabel.service_running }} </option>
+                    <option [value]="TransactionServiceState.SERVICE_DONE_AND_WAIT_PROVIDER_PAIEMENT"> {{ TransactionServiceLabel.service_done_and_wait_provider_paiement }} </option>
+                    <option [value]="TransactionServiceState.SERVICE_PROVIDER_PAIEMENT_DONE"> {{ TransactionServiceLabel.service_provider_paiement_done }} </option>
+                    <option [value]="TransactionServiceState.SERVICE_END"> {{ TransactionServiceLabel.service_end }} </option>
+                </select> -->
+                <mat-form-field appearance="fill" style="width: 100%;">
+                    <!-- <h1> {{selectedCat}} </h1> -->
+                    <mat-label>{{ 'my_services.my_services_search' | translate }}</mat-label>
+                    <mat-select [formControl]="stat" [(value)]="selectedCat" (selectionChange)="selectionChange($event.value)" style="width: 100%;">
+                        <mat-option [value]="TransactionServiceState.SERVICE_ACCEPTED_AND_WAITING_PAIEMENT"> {{ TransactionServiceLabel.service_accepted_and_waiting_paiement | translate }} </mat-option>
+                        <mat-option [value]="TransactionServiceState.SERVICE_PAIEMENT_DONE_AND_WAITING_START"> {{ TransactionServiceLabel.service_paiement_done_and_waiting_start | translate }} </mat-option>
+                        <mat-option [value]="TransactionServiceState.SERVICE_RUNNING"> {{ TransactionServiceLabel.service_running | translate }} </mat-option>
+                        <mat-option [value]="TransactionServiceState.SERVICE_DONE_AND_WAIT_PROVIDER_PAIEMENT"> {{ TransactionServiceLabel.service_done_and_wait_provider_paiement | translate }} </mat-option>
+                        <mat-option [value]="TransactionServiceState.SERVICE_PROVIDER_PAIEMENT_DONE"> {{ TransactionServiceLabel.service_provider_paiement_done | translate }} </mat-option>
+                        <mat-option [value]="TransactionServiceState.SERVICE_END"> {{ TransactionServiceLabel.service_end | translate }} </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-md-12 py-4">
+                <span><i><b>{{ status | translate }}</b></i></span>
+            </div>
+            <div class="col-md-12 card text-center" *ngIf="services.length==0">
+                <div class="card-body">
+                    <h5 class="card-title">.</h5>
+                    <p class="card-text" style="font-size: 30px;">{{ 'my_services.my_services_no_service' | translate }}</p>
+                </div>
+                
+            </div>
+            <!-- <div class="col-lg-4 col-md-6 mb-5" *ngFor="let service of services; let i=index">
+                <div class="ts-service-box" id="target{{i+1}}">
+                    <div class="ts-service-image-wrapper">
+                        <img loading="lazy" *ngIf="service.images && service.images.length==0" class="w-100" src="https://demo.themefisher.com/constra/images/services/service2.jpg"  alt="service-image">
+                        <img loading="lazy" *ngIf="service.images && service.images.length!==0" class="w-100" [src]="service.images[0]" style="height: 250px;" alt="service-image">
+                        <img loading="lazy" *ngIf="!service.images" class="w-100" src="https://demo.themefisher.com/constra/images/services/service2.jpg"  alt="service-image">
+                        
+                    </div>
+                    <div class="d-flex">
+                        <div class="ts-service-box-img"> 
+                            <img  [src]="'assets/data/service_icons/'+service.type+'.png'" alt="service-icon"><br>
+                            
+                        </div>
+                        <div class="ts-service-info">
+                            <h3 class="service-box-title text-center"><a href="javascript:void(0)">{{ service.title }}</a></h3>
+                            <p> {{ (service.description.length>100)? (service.description | slice:0:100)+'...':(service.description) }} </p>
+                            <p style="text-align: right"> 
+                                <small > {{ service.publicationDate | date }}, {{ service.publicationDate | date: 'shortTime' }} </small> 
+                            </p>
+                            <a class="learn-more d-inline-block" [routerLink]="['/carrier/service-details/'+service._id]" href="javascript:void(0)" aria-label="service-details"><i class="fa fa-caret-right"></i>More Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+            <div class="container row" >
+                <!-- <h1>News Card</h1> -->
+                <div class="cardcontainer" *ngFor="let service of services; let i=index">
+                    <div class="photo">
+                        <!-- <img src="https://images.pexels.com/photos/2346006/pexels-photo-2346006.jpeg?auto=format%2Ccompress&cs=tinysrgb&dpr=1&w=500"> -->
+                        <img src="assets/img/service.jpg">
+                        <!-- <div class="photos">Photos</div> -->
+                    </div>
+                    <div class="content">
+                        <p class="txt4 " style="margin-top: 10px !important; margin-bottom: 30px !important;">{{ service.title }}</p>
+                        <!-- <p class="txt5">A city that never sleeps</p> -->
+                        <p class="txt5"></p>
+                        <p class="txt2">{{ (service.description.length>100)? (service.description | slice:0:100)+'...':(service.description) }}</p>
+                    </div>
+                    <div class="footer">
+                        <p>
+                            <a class="waves-effect waves-light btn" [routerLink]="['/carrier/service-details/'+service._id]" href="javascript:void(0)">{{'find_services.read_more' | translate }}</a>
+                            <!-- <a id="heart"><span class="like"><i class="fas fa-route"></i>{{ (service.dist.distance/1000).toFixed(2) }} Km</span></a> -->
+                        </p>
+                        <p class="txt3">
+                            <i class="far fa-clock"></i>{{ service.publicationDate | date }}, {{ service.publicationDate | date: 'shortTime' }} 
+                            <!-- <span class="comments"><i class="fas fa-comments"></i>45 Comments</span> -->
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

@@ -1,0 +1,180 @@
+<section style="background-color: #eee;">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+                    <h4>{{ 'management.m_user_profile.title' | translate }}</h4>
+                </nav>
+            </div>
+        </div>
+
+        <div class="row" *ngIf="user">
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <img [src]="user.picture ? (fileUrl + user.picture.name) : defaultImg" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                        <h5 class="my-3">{{ user.firstname }} {{ user.lastname }} </h5>
+                        <p class="text-muted mb-4">{{ user.adresse?.city }}, {{ user.adresse?.country }} </p>
+                        <p> {{ user.adresse.phone }} </p>
+                        <div class="d-flex justify-content-center mb-2">
+                            <!-- Buttons for Follow and Message -->
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-4 mb-lg-0">
+                    <div class="card-body p-0">
+                        <ul class="list-group list-group-flush rounded-3">
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <i class="fas fa-globe fa-lg text-warning"></i>
+                                <!-- <p class="mb-0">{{ 'management.m_user_profile.language' | translate }}</p> -->
+                                <p class="mb-0">{{user.language}}</p>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                {{ 'management.m_user_profile.passport' | translate }}
+                                <p class="mb-0">{{ user.passportNumber }}</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card mb-4 mb-lg-0" *ngIf="provider">
+                    <div class="card-body p-0">
+                        <ul class="list-group list-group-flush rounded-3">
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <button type="button" *ngIf="!user.isAcceptedProvider" (click)="validerAccount(provider)" class="btn btn-success btn-sm">{{ 'management.m_user_profile.confirm_account' | translate }}</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">{{ 'management.m_user_profile.full_name' | translate }}</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0"> {{ user.firstname }} {{ user.lastname }} </p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">{{ 'management.m_user_profile.email' | translate }}</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{ user.adresse?.email }}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">{{ 'management.m_user_profile.phone' | translate }}</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{ user.adresse?.phone }}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">{{ 'management.m_user_profile.mobile' | translate }}</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{ user.adresse?.phone }}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">{{ 'management.m_user_profile.address' | translate }}</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{ user.adresse?.city }}, {{ user.adresse?.country }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Remaining profile sections -->
+                <hr>
+                <div class="row" *ngIf="provider">
+                    <div class="col-md-12 mb-3" style="text-align: center;">
+                        <div class="card mb-4 mb-md-0">
+                            <div class="card-body">
+                                <h2>{{ 'management.m_user_profile.provider_title' | translate }}</h2>
+                                <p>{{ provider.created_at | date }}</p>
+                            </div>
+                            <div class="card-body">
+                                <!-- <h2>{{ 'management.m_user_profile.provider_title' | translate }}</h2> -->
+                                <p style="font-weight: bold; font-size: 16px;"> {{ 'management.m_user_profile.registration_number' | translate }} :  {{ provider.registrationNumber }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card mb-4 mb-md-0">
+                            <div class="card-body">
+                                <p class="mb-4"><span class="text-primary font-italic me-1">{{ 'management.m_user_profile.documents' | translate }}</span> (Files) </p>
+                                <div *ngFor="let document of provider.documents" class="mb-5">
+                                    <p class="mb-1" style="font-size: .77rem;">
+                                        <a [href]="fileUrl + document.name" target="_blank">
+                                            {{ document.originalname }}
+                                        </a></p>
+                                    <div class="progress rounded" style="height: 5px;">
+                                        <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100"
+                                        aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card mb-4 mb-md-0">
+                            <div class="card-body">
+                                <p class="mb-4"><span class="text-primary font-italic me-1">{{ 'management.m_user_profile.services' | translate }}</span> (Area of expertise) </p>
+                                <div>
+                                    <span class="badge badge-info mx-4" *ngFor="let service of provider.services">{{ service }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12" *ngIf="provider.vehicles">
+                        <div class="card mb-4 mb-md-0">
+                            <div class="card-body">
+                                <p class="mb-4"><span class="text-primary font-italic me-1">{{ 'management.m_user_profile.vehicles' | translate }}</span> </p>
+                                <div class="row">
+                                    <div class="form-row form-group m2 col-md-12 my-2" *ngFor="let item of provider.vehicles; let index=index" style="border-bottom: 1px solid gray;">
+                                        <div class="row">
+                                            <div class=" col-md-12">
+                                                <h3><strong>{{ item.marque }} {{ item.name }}</strong></h3>
+                                                <p>{{ item.type }} . {{ item.placeNumbler }} {{ 'management.m_user_profile.seats' | translate }}</p>
+
+                                                <div *ngIf="item.photo?.length>0" class="row">
+                                                    <div *ngFor="let image of item.photo; let i = index" class="image-container col-md-4">
+                                                        <!-- <span class="bi bi-trash remove-button" style="cursor: pointer;" (click)="removeImage(i)"></span> -->
+                                                        <img  alt="Selected Image" [src]="sanitizeUrl(image)" style="max-width: 200px; max-height: 200px;">
+                                                    </div>
+                                                </div>
+                                            </div><br>
+                                        </div>
+                                    </div>  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="card mb-4 mb-md-0">
+                            <div class="card-body">
+                                <p class="mb-4"><span class="text-primary font-italic me-1">{{ 'management.m_user_profile.location' | translate }}</span> {{ 'management.m_user_profile.project_status' | translate }}</p>
+                                <div>
+                                    <app-map [set_coord]="{ latitude: provider.location?.coordinates[0], longitude: provider.location?.coordinates[1]}" ></app-map>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End of Remaining profile sections -->
+
+            </div>
+        </div>
+    </div>
+</section>

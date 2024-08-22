@@ -1,0 +1,188 @@
+<app-nav-bar></app-nav-bar>
+
+<!-- figurative filling of content -->
+<div class="site-section bg-image overlay custom-works" style="background-image: url('assets/img/bg-tile.jpg');" id="section-how-it-works">
+  <!-- Suivre -->
+  <app-tracking></app-tracking>
+  <!-- end suivre-->
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-md-7 text-center border-primary">
+        <h2 class="font-weight-light text-warning box-title animated fadeIn delay-0.4s">{{'how.title' | translate}}</h2>
+      </div>
+    </div>
+    <div class="row text-center">
+      <div class="col-md-6 col-lg-4 mb-5 mb-lg-0">
+        <div class="how-it-work-item animated fadeIn delay-0.5s">
+          <span class="number">1</span>
+          <div class="how-it-work-body">
+            <h2>{{'how.step_1' | translate}}</h2>
+            <p class="mb-5">{{'how.step_1_content' | translate}}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="200">
+        <div class="how-it-work-item animated fadeIn delay-0.6s">
+          <span class="number">2</span>
+          <div class="how-it-work-body">
+            <h2>{{'how.step_2' | translate}}</h2>
+            <p class="mb-5">{{'how.step_2_content' | translate}}</p>
+            
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="300">
+        <div class="how-it-work-item animated fadeIn delay-0.7s">
+          <span class="number">3</span>
+          <div class="how-it-work-body">
+            <h2>{{'how.step_3' | translate}}</h2>
+            <p class="mb-5">{{'how.step_3_content' | translate}}</p>
+            
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="row align-items-center custom-brand">
+      <div class="col-md-6 col-lg-6 mb-5 mb-lg-0">
+          <ul class="ul-check list-unstyled success">
+              <li class="text-white animated fadeIn delay-0.4s">
+                <strong>{{'how.transport_persons' | translate}}</strong><br>
+                {{'how.transport_persons_content' | translate}}
+              </li>
+              <li class="text-white animated fadeIn delay-0.6s">
+                <strong>{{'how.transport_shipping' | translate}}</strong><br>
+                {{'how.transport_shipping_content' | translate}}<br>
+              </li>
+              <!-- <li class="text-white">Voluptas unde sit pariatur earum</li> -->
+          </ul>
+      </div>
+      <div class="col-md-6 col-lg-6 mb-5 mb-lg-0 text-right">
+        <div class="call_add_action">
+          <a routerLink="/register" class="boxed-btn3">{{'how.transport_button' | translate}}</a>
+        </div>
+      </div>
+    </div>  
+  </div>
+</div>
+
+<br><hr>
+<div class="row">
+  <div class="col-md-12">
+    <div class="container">
+      <div class="row justify-content-center mb-5">
+        <div class="col-md-7 text-center border-primary">
+          <h2 class="font-weight-light text-warning box-title animated fadeIn delay-0.4s">{{'how.features.title' | translate}}</h2>
+        </div>
+      </div>
+      <div class="row">
+          <div class="col-md-6 col-lg-4 mb-5 mb-lg-0">
+              <div class="work-item">
+                <h5>{{'how.features.feature_1' | translate}}</h5>
+                <p> {{'how.features.feature_1_content' | translate}}</p>
+              </div>
+          </div>
+          <div class="col-md-6 col-lg-4 mb-5 mb-lg-0">
+              <div class="work-item">
+                <h5>{{'how.features.feature_2' | translate}}</h5>
+                <p> {{'how.features.feature_2_content' | translate}}</p>
+              </div>
+          </div>
+          <div class="col-md-6 col-lg-4 mb-5 mb-lg-0">
+              <div class="work-item">
+                <h5>{{'how.features.feature_3' | translate}}</h5>
+                <p> {{'how.features.feature_3_content' | translate}}</p>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- bloc more -->
+  <div class="col-md-12">
+    <div class="container mt-5 text-center">
+      <p class="bloc-more">
+        <button class="btn btn-link" data-toggle="modal" data-target="#content">{{'how.show_more' | translate}}</button>
+      </p>
+    </div>
+  </div>
+</div>
+
+<app-front-footer></app-front-footer>
+
+
+<div class="modal fade" id="content" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{'how.title' | translate}} ?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h3>{{'how.more.trans' | translate}}</h3>
+ 
+          <h5>{{'how.more.trans_subtitle' | translate}}</h5>
+          <p>{{'how.more.trans_content' | translate}}</p>
+        
+          <h5>{{'how.more.take_subtitle' | translate}}</h5>
+          <p>{{'how.more.take_content' | translate}}</p>
+          
+          <h5>{{'how.more.as_subtitle' | translate}}</h5>
+          <p>{{'how.more.as_content' | translate}}</p>
+          <ul>
+            <li>{{'how.more.as_content_1' | translate}}</li>
+            <li>{{'how.more.as_content_2' | translate}}</li>
+            <li>{{'how.more.as_content_3' | translate}}</li>
+          </ul>
+          
+          <h5>{{'how.more.secure_subtitle' | translate}}</h5>
+          <p>{{'how.more.secure_content' | translate}}</p>
+          
+          <h3>{{'how.more.vehicles' | translate}}</h3>
+          
+          <h5>{{'how.more.vehicle_subtitle' | translate}}</h5>
+          <p>{{'how.more.trans_content' | translate}}</p>
+        
+            <h5>{{'how.more.vehicle_take_subtitle' | translate}}</h5>
+            <p>{{'how.more.vehicle_take_content' | translate}}</p>
+            
+            <h5>{{'how.more.vehicle_as_subtitle' | translate}}</h5>
+            <p>{{'how.more.vehicle_as_content' | translate}}</p>
+            <ul>
+              <li>{{'how.more.vehicle_as_content_1' | translate}}</li>
+              <li>{{'how.more.vehicle_as_content_2' | translate}}</li>
+              <li>{{'how.more.vehicle_as_content_3' | translate}}</li>
+            </ul>
+            
+            <p>{{'how.more.vehicles_as_content_4' | translate}}</p>
+            
+            <h5>{{'how.more.secure_subtitle' | translate}}</h5>
+            <p>{{'how.more.secure_content' | translate}}</p>
+            
+            <h3>{{'how.more.customer' | translate}}</h3>
+            
+            <h5>{{'how.more.customer_subtitle' | translate}}</h5>
+            <p>{{'how.more.customer_content' | translate}}</p>
+            
+            <h5>{{'how.more.customer_take' | translate}}</h5>
+            <p>{{'how.more.customer_take_content' | translate}}</p>
+            
+            <h5>{{'how.more.customer_as' | translate}}</h5>
+            <p>{{'how.more.customer_as_content' | translate}}</p>
+            
+            <h5>{{'how.more.secure_subtitle' | translate}}</h5>
+            <p>{{'how.more.secure_content' | translate}}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" data-dismiss="modal">{{'buttons.close' | translate}}</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+

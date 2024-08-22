@@ -1,0 +1,207 @@
+<div class="card-body">
+    <div class="form-group row">
+        <div class="col-md-12"> 
+            <div class="p-3" style="background-color:#efefef !important;">
+                <select  class="form-control" (change)="onCountrySelected($event.target.value)">
+                    <option value="" disabled selected>{{ 'management.m_providers.choose_country' | translate }}</option>
+                    <option style="font-weight: bold;" *ngFor="let country of countries" [value]="country._id">{{ 'countries.' + country.name | translate }}</option>
+                </select> 
+            </div> 
+            <div>
+                <br>
+                <h3>{{ 'management.m_providers.list_providers_title' | translate }}</h3>
+                <table class="table table-responsive-sm table-hover table-outline mb-0">
+                    <thead class="thead-light">
+                        <tr>
+                            <th class="text-center">#</th>
+                            <th class="text-center"><i class="icon-people"></i></th>
+                            <th>{{ 'management.m_providers.fullname_label' | translate }}</th>
+                            <th>{{ 'management.m_providers.status_label' | translate }}</th>
+                            <th>{{ 'management.m_providers.created_on_label' | translate }}</th>
+                            <th>{{ 'management.m_providers.actions_label' | translate }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="!obj_loader && list_providers?.length==0">
+                            <td colspan="6" class="text-center">{{ 'management.m_providers.no_provider_found' | translate }}</td>
+                        </tr>
+                        <tr *ngFor="let item of list_providers; let index = index;">
+                            <td class="text-center">{{ index+1 }}</td>
+                            <td class="text-center">
+                                <div class="avatar">
+                                    <img src="../../../../assets/img/user_image.png" class="img-avatar">
+                                </div>
+                            </td>
+                            <td>
+                                <div>{{ item.firstname }} {{ item.lastname }}</div>
+                                <div *ngIf="item.isCompany" class="small text-muted">
+                                    <span>{{ 'management.m_providers.company_label' | translate }}</span> | {{ item.companyName }}
+                                </div>
+                                <div *ngIf="!item.isCompany" class="small text-muted">
+                                    <span>{{ 'management.m_providers.personal_label' | translate }}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="badge badge-success" *ngIf="item.isAcceptedProvider">{{ 'management.m_providers.confirmed_status' | translate }}</span>
+                                <span class="badge badge-danger" *ngIf="!item.isAcceptedProvider">{{ 'management.m_providers.waiting_status' | translate }}</span>
+                            </td>
+                            <td>{{ item.created_at | date }}</td>
+                            <td>
+                                <button type="button" [routerLink]="['/management/user-profile/', item?._id]" class="btn btn-outline-info btn-sm">{{ 'management.m_providers.info_button' | translate }}</button>
+                                <button type="button" [disabled]="item.loader" *ngIf="!item.isAcceptedProvider" (click)="validerAccount(item)" class="btn btn-success btn-sm">{{ 'management.m_providers.confirm_account' | translate }}</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- Loading spinner -->
+                <div class="d-flex justify-content-center" *ngIf="obj_loader">
+                    <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+                <!-- "More" button when waiting -->
+                <div class="d-flex justify-content-center" *ngIf="!obj_loader && waiting">
+                    <button type="button" class="btn btn-info" data-mdb-ripple-init (click)="getMoreProviders()">{{ 'management.m_providers.more_button' | translate }}</button>
+                </div>
+                <!-- Message when all providers are listed -->
+                <div class="d-flex justify-content-center" *ngIf="!waiting">
+                    <p>{{ 'management.m_providers.all_listed_text' | translate }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
+
+<ng-template #services class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center">{{currentProvider?.firstname}} {{currentProvider?.lastname}}</h5>
+                <button type="button" class="close" (click)="modalRef.hide()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-responsive-sm table-hover table-outline mb-5">
+                    <tr>
+                        <td>{{ 'management.m_providers.status_label' | translate }}</td>
+                        <td>
+                            <span class="badge badge-success" *ngIf="currentProvider && currentProvider.isAcceptedProvider">{{ 'management.m_providers.confirmed_status' | translate }}</span>
+                            <span class="badge badge-danger" *ngIf="currentProvider && !currentProvider.isAcceptedProvider">{{ 'management.m_providers.waiting_status' | translate }}</span> | 
+                            <button type="button" *ngIf="currentProvider && !currentProvider.isAcceptedProvider" (click)="validerAccount(currentProvider)" class="btn btn-success btn-sm">{{ 'management.m_providers.confirm_account' | translate }}</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'management.m_providers.fullname_label' | translate }}</td>
+                        <td>{{currentProvider?.firstname}} {{currentProvider?.lastname}}</td>
+                    </tr>
+                    <!-- Other table rows will be dynamically generated here based on the specific data -->
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="modalRef.hide()">{{ 'management.m_providers.close_button' | translate }}</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</ng-template><!-- /.modal -->
+
+
+
+
+<!-- <ng-template #services class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center">{{currentProvider?.firstname}} {{currentProvider?.lastname}}</h5>
+                <button type="button" class="close" (click)="modalRef.hide()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            
+                <table class="table table-responsive-sm table-hover table-outline mb-5">
+                    <tr>
+                    <td>Status</td>
+                    <td>
+                        <span class="badge badge-success" *ngIf="currentProvider && currentProvider.isAcceptedProvider" >Confirmed</span>
+                        <span class="badge badge-danger" *ngIf="currentProvider && !currentProvider.isAcceptedProvider" >Waiting</span> | 
+                        <button type="button" *ngIf="currentProvider && !currentProvider.isAcceptedProvider" (click)="validerAccount(currentProvider)" class="btn btn-success btn-sm">Confirm account</button>
+                    </td>
+                    </tr>
+                    <tr>
+                    <td>Firstname</td>
+                    <td>{{currentProvider?.firstname}} {{currentProvider?.lastname}}</td>
+                    </tr>
+                    
+                    <tr>
+                    <td>Company</td>
+                    <td>
+                        <span *ngIf="currentProvider && currentProvider.isCompany">Yes ({{currentProvider?.companyName}})</span>
+                        <span *ngIf="currentProvider && !currentProvider.isCompany">No</span> <br>
+                        <span>Import & Export code : {{currentProvider?.importExportCompagnyCode}}</span>
+                    </td>
+                    </tr>
+                    <tr>
+                    <td>Registration Number</td>
+                    <td>
+                        {{currentProvider?.registrationNumber}}
+                    </td>
+                    </tr>
+                    <tr>
+                    <td>Passport Number</td>
+                    <td>
+                        {{currentProvider?.passportNumber}}
+                    </td>
+                    </tr>
+                    <tr>
+                    <td>Address</td>
+                    <td>
+                        {{currentProvider?.address.country}}, {{currentProvider?.address.city}} - {{currentProvider?.address.zip}}
+                    </td>
+                    </tr>
+                    <tr>
+                    <td>Email</td>
+                    <td>
+                        {{currentProvider?.address.email}}
+                    </td>
+                    </tr>
+                    <tr>
+                        <td>Phone number</td>
+                        <td>
+                            {{currentProvider?.address.phone}}
+                        </td>
+                    </tr>
+                    <tr *ngFor="let doc of provider_profile.documents; let index = index;">
+                        <td>Document N°{{index+1}} </td>
+                        <td>
+                            <a [href]="fileUrl+doc.name" target="_blank">
+                                {{ doc.originalname }}
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="modalRef.hide()">Close</button>
+            </div>
+        </div>
+    </div>
+</ng-template> -->
+<!-- Default switch -->
+<!-- <div class="custom-control custom-switch">
+    <input type="checkbox" class="custom-control-input" id="customSwitches">
+    <label class="custom-control-label" for="customSwitches">Toggle this switch element</label>
+</div> -->
+<!--Basic textarea-->
+<!-- <div class="md-form">
+    <textarea type="text" id="form7" class="md-textarea form-control" mdbInput></textarea>
+    <label for="form7">Basic textarea</label>
+  </div>
+  <div class="md-form">
+    <mdb-icon fas icon="pencil-alt" class="prefix"></mdb-icon>
+    <textarea type="text" id="form8" class="md-textarea form-control" mdbInput></textarea>
+    <label for="form8">Icon Prefix</label>
+  </div> -->
+
+  

@@ -1,0 +1,45 @@
+<!-- <button type="button" class="btn btn-fill pull-center" data-toggle="modal" (click)="myModal.show()">
+  A Detail</button> -->
+
+
+<div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="card card-profile shadow">
+        <div class="row">
+          <div class="card-body">
+            <button type="button" class="close" (click)="myModal.hide()" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <app-passenger-detail #passengerDetail *ngIf="passenger"></app-passenger-detail>
+
+            <app-parcel-detail #parcelDetail *ngIf="parcel"
+              parcelName ="parcelName"
+              [startLocation]="startLocation"
+              [endLocation]="endLocation"
+              [parcelType]="parcelType"
+              [vehiculType]="vehiculType"
+              [volume]="volume"
+              [isFragile]="isFragile"
+              [isUrgent]="isUrgent"
+              [collectionDate]="collectionDate"
+              [description]="description"
+              [price]="price"
+              [receiverName]="receiverName"
+              [receiverLocation]="receiverLocation"
+              [receiverPhone]="receiverPhone"
+              [senderName]="senderName"
+              [senderLocation]="senderLocation"
+              [senderPhone]="senderPhone">
+            </app-parcel-detail>
+
+            <app-transport #transport *ngIf="transport"></app-transport>
+            <app-wait-payment #waitPayment *ngIf="waitPayment"></app-wait-payment>
+            <app-confirm-payment #confirmPayment *ngIf="confirmPayment"></app-confirm-payment>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

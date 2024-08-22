@@ -1,0 +1,13 @@
+<!-- Package Details-->
+<h4 class="mb-2 text-center title-form"><b> <u>Transport</u></b></h4>
+<!-- row-item-->
+<br>
+<app-progress-indeterminate *ngIf="isAnsware"></app-progress-indeterminate>
+<div class="modal-footer" *ngIf="!isAnsware">
+  <button type="button" [disabled]="transportStart" class="btn btn-danger" (click)="startTransport()"
+    style="background-color: orange !important;">Start transport</button>
+  <!-- <button type="button" [disabled]="!transportStop" class="btn" style="background-color: red !important;"
+    (click)="endTransport()">Stop</button> -->
+  <button type="button" [disabled]="!transportStart" class="btn btn-success" style="background-color: green !important;"
+    (click)="endTransport()">End transport</button>
+</div>

@@ -1,0 +1,18 @@
+.site-blocks-cover {
+  // background-image: url("../../../../assets/img/bg-tile.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+  height: 425px;
+  .container{
+    top: 150px;
+    position: relative;
+    h1{
+      color: #fecd0a;
+    }
+
+    p{
+      color: #ffffff;
+    }
+  }
+}

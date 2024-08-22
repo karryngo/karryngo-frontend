@@ -1,0 +1,420 @@
+<form [formGroup]="packageForm" (ngSubmit)="submit()" class="text-center p-1 form-horizontal">
+ 
+<!-- <div *ngIf="!submitted"> -->
+<div>
+    <!-- Package Details--> 
+    <p class="mx-4 text-left title-form">{{'post_requests.post_request_colis.post_request_colis0.form_title' | translate }}</p>
+    <!-- row-item-->
+    <br>
+    <div class="card-body">
+    <div class="form-group row">
+        <div class="col-md-6"> 
+            <!-- <label for="exampleFormControlSelect1">{{'post_requests.post_request_colis.post_request_colis0.form_select_placeholder' | translate }}</label> -->
+            <label for="">{{'post_requests.post_request_colis.post_request_colis0.form_select_service' | translate }}</label>
+            <select class="form-control" formControlName="field_typeof" [ngClass]="{ 'is-invalid': submitted && f.field_typeof.errors }" (change)="onSelectChange($event)">
+                <!-- <option value="" selected disabled>{{ service_colis.TRANSPORTER[0] }}</option> -->
+                <!-- <option value="food">{{'post_requests.post_request_colis.post_request_colis0.form_select_option2' | translate }}</option>
+                <option value="courier">{{'post_requests.post_request_colis.post_request_colis0.form_select_option3' | translate }}</option>
+                <option value="parcel">{{'post_requests.post_request_colis.post_request_colis0.form_select_option4' | translate }}</option> -->
+                <!-- <option style="font-weight: bold;" *ngFor="let service of service_colis.TRANSPORTER | slice:1" [value]="service">{{ service }}</option> -->
+                <ng-container *ngIf="(servs$ | async) as services">
+                    <!-- <option value="" selected disabled>{{ services[0].name }}</option> -->
+                    <!-- <option style="font-weight: bold;" *ngFor="let service of services" [value]="service.value">
+                        {{  service.name  }}
+                    </option> -->
+                    <!-- <option style="font-weight: bold;" *ngFor="let service of services; let first = first" [value]="service.value" [disabled]="first">
+                        {{ service.name }}
+                    </option> -->
+                    <option style="font-weight: bold;" *ngFor="let service of services; let first = first" [value]="service.value" [ngStyle]="{'opacity': first ? '0.9' : '1'}" [disabled]="first">
+                        {{ service.name }}
+                    </option>
+                </ng-container>
+            </select>
+            <!-- <small>Service</small> -->
+            <div *ngIf="submitted && f.field_typeof.errors" class="invalid-feedback text-danger"> 
+                <div *ngIf="f.field_typeof.errors.required">{{'post_requests.post_request_colis.post_request_colis0.form_required_field' | translate }}</div>
+            </div>
+        </div> 
+        <!-- <div class="col-md-6">
+            <input type="text" id="field_name" formControlName="field_name" class="form-control" placeholder="{{'post_requests.post_request_colis.post_request_colis0.form_name' | translate }}"
+                [ngClass]="{ 'is-invalid': submitted && f.field_name.errors }">
+            <div *ngIf="submitted && f.field_name.errors" class="invalid-feedback text-danger">
+                <div *ngIf="f.field_name.errors.required">{{'post_requests.post_request_colis.post_request_colis0.form_required_field' | translate }}</div>
+            </div>
+        </div>  -->
+        <div class="col-md-6" *ngIf="countries.length!=0"> 
+            <label for="">{{'post_requests.post_request_colis.post_request_colis0.form_select_country' | translate }} </label>
+            <select placeholder="Country" class="form-control" formControlName="field_country" (change)="get_cities($event.target.value)" [ngClass]="{ 'is-invalid': submitted && f.field_country.errors }">
+                <!-- <option value="" selected disabled>{{ countries[0].name }}</option> -->
+                <!-- <option style="font-weight: bold;" *ngFor="let country of countries" [ngValue]="country">{{ country.name }}</option> -->
+                <option style="font-weight: bold;" *ngFor="let country of countries" [ngValue]="country">{{ 'countries.' + country.name | translate }}</option>
+            </select>
+            <!-- <small>Country</small> -->
+            <div *ngIf="submitted && f.field_country.errors" class="invalid-feedback text-danger"> 
+                <div *ngIf="f.field_country.errors.required">{{'post_requests.post_request_colis.post_request_colis0.form_required_field' | translate }}</div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <!-- <div class="col-md-6" *ngIf="countries.length!=0"> 
+            <select class="form-control" formControlName="field_country" (change)="get_cities($event.target.value)" [ngClass]="{ 'is-invalid': submitted && f.field_country.errors }">
+                <option value="" selected disabled>{{ countries[0].name }}</option>
+                <option style="font-weight: bold;" *ngFor="let country of countries" [value]="country.name">{{ country.name }}</option>
+            </select>
+            <div *ngIf="submitted && f.field_country.errors" class="invalid-feedback text-danger"> 
+                <div *ngIf="f.field_country.errors.required">{{'post_requests.post_request_colis.post_request_colis0.form_required_field' | translate }}</div>
+            </div>
+        </div> -->
+        <!-- <div class="col-md-6" *ngIf="cities.length!=0"> 
+            <select class="form-control" formControlName="field_city" [ngClass]="{ 'is-invalid': submitted && f.field_city.errors }">
+                <option value="" selected disabled>{{ cities[0].name }}</option>
+                <option style="font-weight: bold;" *ngFor="let city of cities" [value]="city.city">{{ city.city }}</option>
+            </select>
+            <div *ngIf="submitted && f.field_city.errors" class="invalid-feedback text-danger"> 
+                <div *ngIf="f.field_city.errors.required">{{'post_requests.post_request_colis.post_request_colis0.form_required_field' | translate }}</div>
+            </div>
+        </div> -->
+    </div>
+    <div class="form-row mb-2" *ngIf="country_code">
+        <div class="col">
+            <app-search-location [country_code]="country_code"  label="{{'post_requests.post_request_colis.post_request_colis0.form_depart' | translate }}" placeholder="" #fromZone></app-search-location>
+        </div>
+        <div class="col">
+            <app-search-location [country_code]="country_code" label="{{'post_requests.post_request_colis.post_request_colis0.form_arrival' | translate }}" placeholder="" #toZone></app-search-location>
+        </div>
+    </div>
+
+    <div class="form-row mb-2" *ngIf="isRemoval">
+        <div class="col">
+            <!-- Bootstrap Modal Trigger Button -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#inventoryModal" (click)="openInventoryView()" style="width: 100%;">
+                {{ 'post_requests.post_request_colis.post_request_colis0.make_inventory' | translate }}
+            </button>
+        </div>
+    </div>
+    <!-- Address block -->
+    <div class="form-group row mb-2 mt-5">
+        <div class="col-md-12">
+        <input type="text" formControlName="departure_address" class="form-control" placeholder="{{'post_requests.post_request_colis.post_request_colis0.form_departure_address' | translate }}"
+            [ngClass]="{ 'is-invalid': submitted && f.departure_address.errors }">
+            <div *ngIf="submitted && f.departure_address.errors" class="error-msg">
+                <span *ngIf="f.departure_address.errors.required"> {{'post_requests.post_request_colis.post_request_colis0.form_required_field' | translate }} </span>
+            </div>
+        </div>
+        
+        <!-- <div *ngIf="submitted && f.field_typeof.errors" class="invalid-feedback text-danger"> 
+            <div *ngIf="f.field_typeof.errors.required">{{'post_requests.post_request_colis.post_request_colis0.form_required_field' | translate }}</div>
+        </div> -->
+        <!-- <div class="col-md-6">
+        <input type="text" formControlName="arrival_address" class="form-control" placeholder="{{'post_requests.post_request_colis.post_request_colis0.form_arrival_address' | translate }}"
+            [ngClass]="{ 'is-invalid': submitted && f.arrival_address.errors }">
+        </div> -->
+    </div>
+    <!-- end of block -->
+
+    <!-- row-item-->
+    
+    <div class="form-group row">
+        <!-- <div class="col-md-4">
+        <select id="field_typeof" formControlName="field_typeof" class="form-control">
+            <option value="documents">Documents</option>
+            <option value="smallPackage" selected>Small Parcel</option>
+            <option value="bigPackage">Big Parcel</option>
+        </select>
+        <p class="title-form sub-indication text-left">Type</p>
+        </div> -->
+        
+    </div>
+    <!-- <div class="form-group row">
+        <div class="col-md-5">
+        <select id="field_vehicleType" formControlName="field_vehicleType" class="form-control">
+            <option value="bike">Bike</option>
+            <option value="car">car</option>
+            <option value="truck">Truck</option>
+        </select>
+        </div>
+    </div> -->
+    <div class="bloc-colis mb-4">
+        <!-- <div class="alert alert-info">
+            {{'post_requests.post_request_colis.post_request_colis0.form_note' | translate }}
+        </div>  -->
+
+        <div class="form-group row">
+        <div class="col-md-3">
+            <input type="number" id="weightPackage" min="0" formControlName="field_weightPackage" class="form-control"
+            placeholder="{{'post_requests.post_request_colis.post_request_colis0.form_weight_placeholder' | translate }}" [ngClass]="{ 'is-invalid': submitted && f.field_weightPackage.errors }">
+            <p class="title-form sub-indication text-left">{{'post_requests.post_request_colis.post_request_colis0.form_weight' | translate }}</p>
+            <div *ngIf="submitted && f.field_weightPackage.errors" class="invalid-feedback text-danger">
+                <div *ngIf="f.field_weightPackage.hasError('required')">
+                  {{ 'post_requests.post_request_colis.post_request_colis0.form_required_field' | translate }}
+                </div>
+                <div *ngIf="f.field_weightPackage.hasError('pattern')">
+                  {{ 'post_requests.post_request_colis.post_request_colis0.form_Positive_number_required' | translate }}
+                </div>
+            </div>
+            <!-- <div *ngIf="submitted && f.departure_address.errors" class="error-msg">
+                <span *ngIf="f.departure_address.errors.required"> {{'post_requests.post_request_colis.post_request_colis0.form_required_field' | translate }} </span>
+            </div> -->
+            
+        </div>
+        <div class="col-md-3">
+            <input type="number" id="field_heightPackages" min="0" formControlName="field_heightPackages" class="form-control"
+            placeholder="{{'post_requests.post_request_colis.post_request_colis0.form_height_placeholder' | translate }}" [ngClass]="{ 'is-invalid': submitted && f.field_heightPackages.errors }" />
+            <p class="title-form sub-indication text-left">{{'post_requests.post_request_colis.post_request_colis0.form_height' | translate }}</p>
+            <div *ngIf="submitted && f.field_heightPackages.errors" class="invalid-feedback text-danger">
+                <div *ngIf="f.field_heightPackages.hasError('required')">
+                  {{ 'post_requests.post_request_colis.post_request_colis0.form_required_field' | translate }}
+                </div>
+                <div *ngIf="f.field_heightPackages.hasError('pattern')">
+                  {{ 'post_requests.post_request_colis.post_request_colis0.form_Positive_number_required' | translate }}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <input type="number" id="field_widhtPackage" min="0" formControlName="field_widhtPackage" class="form-control"
+            placeholder="{{'post_requests.post_request_colis.post_request_colis0.form_width_placeholder' | translate }}" [ngClass]="{ 'is-invalid': submitted && f.field_widhtPackage.errors }" />
+            <p class="title-form sub-indication text-left">{{'post_requests.post_request_colis.post_request_colis0.form_width' | translate }}</p>
+            <div *ngIf="submitted && f.field_widhtPackage.errors" class="invalid-feedback text-danger">
+                <div *ngIf="f.field_widhtPackage.hasError('required')">
+                  {{ 'post_requests.post_request_colis.post_request_colis0.form_required_field' | translate }}
+                </div>
+                <div *ngIf="f.field_widhtPackage.hasError('pattern')">
+                  {{ 'post_requests.post_request_colis.post_request_colis0.form_Positive_number_required' | translate }}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <input type="number" id="field_lengthPackage" min="0" formControlName="field_lengthPackage" class="form-control"
+            placeholder="{{'post_requests.post_request_colis.post_request_colis0.form_length_placeholder' | translate }}" [ngClass]="{ 'is-invalid': submitted && f.field_lengthPackage.errors }">
+            <p class="title-form sub-indication text-left">{{'post_requests.post_request_colis.post_request_colis0.form_length' | translate }}</p>
+            <div *ngIf="submitted && f.field_lengthPackage.errors" class="invalid-feedback text-danger">
+                <div *ngIf="f.field_lengthPackage.hasError('required')">
+                  {{ 'post_requests.post_request_colis.post_request_colis0.form_required_field' | translate }}
+                </div>
+                <div *ngIf="f.field_lengthPackage.hasError('pattern')">
+                  {{ 'post_requests.post_request_colis.post_request_colis0.form_Positive_number_required' | translate }}
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-6">
+        <input type="date" id="field_delayDate" min="{{current_date}}" formControlName="field_delayDate" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.field_delayDate.errors }">
+        <div *ngIf="submitted && f.field_delayDate.errors" class="invalid-feedback text-danger">
+            <div *ngIf="f.field_delayDate.errors.required">{{'post_requests.post_request_colis.post_request_colis0.form_required_field' | translate }}</div>
+        </div>
+        <p class="title-form sub-indication text-left">{{'post_requests.post_request_colis.post_request_colis0.form_collection_date' | translate }}</p>
+
+        <!-- Price -->
+        <input type="number" id="field_price" formControlName="field_price" min="0" class="form-control" placeholder="{{'post_requests.post_request_colis.post_request_colis0.form_price' | translate }}"
+            [ngClass]="{ 'is-invalid': submitted && f.field_price.errors }">
+        <div *ngIf="submitted && f.field_price.errors" class="invalid-feedback text-danger">
+            <div *ngIf="f.field_price.errors.required">{{'post_requests.post_request_colis.post_request_colis0.form_required_field' | translate }}</div>
+        </div>
+        <p class="title-form sub-indication text-left">{{'post_requests.post_request_colis.post_request_colis0.form_shipping_costs' | translate }} <span *ngIf="currency" style="font-weight: bold;">( {{ currency }} )</span></p>
+        </div>
+        <div class="col-md-6">
+        <div class="form-check">
+            <input type="checkbox" id="isWeak" formControlName="field_isWeak" class="form-check-input">
+            <label for="isWeak">{{'post_requests.post_request_colis.post_request_colis0.form_is_fragile' | translate }}</label>
+        </div>
+        <div class="form-check">
+            <input type="checkbox" id="isUrgent" formControlName="field_isUrgent" class="form-check-input">
+            <label for="isUrgent">{{'post_requests.post_request_colis.post_request_colis0.form_is_urgent' | translate }}</label>
+        </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-6">
+            <label for="">{{'post_requests.post_request_colis.post_request_colis0.form_departure_place' | translate }}</label>
+            <app-map (get_coord)="get_coord($event)" ></app-map>
+            <!-- <app-map (newImageEvent)="get_coord($event)" label="Attach documents (vehicle documentation, Number plate, Registration ID)"></app-map> -->
+        </div>
+        <div class="col-md-6">
+            <label for="">{{'post_requests.post_request_colis.post_request_colis0.form_arrival_place' | translate }}</label>
+            <app-map (get_coord)="get_arr_coord($event)" ></app-map>
+            <!-- <input #arr_mapSearchField class="my-map-search-field" type="text" placeholder="search for a location"/>
+                <google-map (mapClick)="arr_click($event)"
+                    height="500px"
+                    width="100%"
+                    [zoom]="zoom"
+                    [center]="arr_center"
+                    [options]="arr_options">
+
+                    <map-marker *ngIf="arr_marker"
+                        [position]="arr_marker.position"
+                        [label]="arr_marker.label"
+                        [title]="arr_marker.title"
+                        [options]="arr_marker.options"
+                        (mapClick)="arr_openInfo(markerElem)"
+                    ></map-marker>
+                    <map-info-window>{{ arr_infoContent }}</map-info-window>
+                </google-map> -->
+        </div>
+    </div>
+    <!-- row-item-->
+    <!-- <div class="alert alert-warning">
+        {{'post_requests.post_request_colis.post_request_colis0.form_note' | translate }}
+    </div> -->
+    </div>
+    <!-- package image-->
+    <!-- <app-input-file-upload-list accept="image/png, image/jpeg" #uploadFile label="Parcel pictures">
+    </app-input-file-upload-list> -->
+
+    <!-- row-item-->
+    <div class="form-group mb-4 row">
+        <div class="col-md-12">
+            <label for="descriptionPackage"> {{'post_requests.post_request_colis.post_request_colis0.form_description' | translate }}</label>
+            <textarea class="form-control" id="field_descriptionPackage" formControlName="field_descriptionPackage" rows="3"
+            placeholder="{{'post_requests.post_request_colis.post_request_colis0.form_description_placeholder' | translate }}"></textarea>
+        </div>
+    </div>
+
+
+    <div class="form-group row">
+        <div class="col-md-12"><hr style="border: 1px gray solid;"></div>
+        <div class="col-md-12">
+            <h4> {{ 'post_requests.post_request_colis.post_request_colis0.form_recipient' | translate }} </h4>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-6">
+            <input type="text" id="field_recipientName" formControlName="field_recipientName" class="form-control"
+                placeholder="{{'post_requests.post_request_colis.post_request_colis0.form_recipient_name' | translate }}" [ngClass]="{ 'is-invalid': submitted && f.field_recipientName.errors }">
+            <div *ngIf="submitted && f.field_recipientName.errors" class="invalid-feedback text-danger">
+                <div *ngIf="f.field_recipientName.errors.required">{{'post_requests.post_request_colis.post_request_colis0.form_required_field' | translate }}</div>
+            </div>
+            <!-- <p class="title-form sub-indication text-left"> {{'post_requests.post_request_colis.post_request_colis0.form_leave_blank' | translate }}</p> -->
+        </div>
+        <div class="col-md-6">
+            <input type="text" id="field_recipientContact" formControlName="field_recipientContact" class="form-control"
+                placeholder="{{'post_requests.post_request_colis.post_request_colis0.form_contact' | translate }}" [ngClass]="{ 'is-invalid': submitted && f.field_recipientContact.errors }">
+            <div *ngIf="submitted && f.field_recipientContact.errors" class="invalid-feedback text-danger">
+                <div *ngIf="f.field_recipientContact.errors.required">{{'post_requests.post_request_colis.post_request_colis0.form_required_field' | translate }}</div>
+            </div>
+            <!-- <p class="title-form sub-indication text-left"> {{'post_requests.post_request_colis.post_request_colis0.form_leave_blank' | translate }}</p> -->
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-6">
+            <input type="email" id="field_recipientEmail" formControlName="field_recipientEmail" class="form-control"
+                placeholder="{{'post_requests.post_request_colis.post_request_colis0.form_recipient_email' | translate }}" [ngClass]="{ 'is-invalid': submitted && f.field_recipientEmail.errors }">
+            <div *ngIf="submitted && f.field_recipientEmail.errors" class="invalid-feedback text-danger">
+                <div *ngIf="f.field_recipientEmail.errors.required">{{'post_requests.post_request_colis.post_request_colis0.form_required_field' | translate }}</div>
+            </div>
+            <!-- <p class="title-form sub-indication text-left"> {{'post_requests.post_request_colis.post_request_colis0.form_leave_blank' | translate }}</p> -->
+        </div>
+        <div class="col-md-6">
+            <input type="text" id="field_recipientAddress" formControlName="field_recipientAddress" class="form-control"
+                placeholder="{{'post_requests.post_request_colis.post_request_colis0.form_recipient_address' | translate }}" [ngClass]="{ 'is-invalid': submitted && f.field_recipientAddress.errors }">
+            <div *ngIf="submitted && f.field_recipientAddress.errors" class="invalid-feedback text-danger">
+                <div *ngIf="f.field_recipientAddress.errors.required">{{'post_requests.post_request_colis.post_request_colis0.form_required_field' | translate }}</div>
+            </div>
+            <!-- <p class="title-form sub-indication text-left"> {{'post_requests.post_request_colis.post_request_colis0.form_leave_blank' | translate }}</p> -->
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-12">
+            <input type="text" id="field_code" formControlName="field_code" class="form-control"
+                placeholder="{{'post_requests.post_request_colis.post_request_colis0.form_secret_code' | translate }}" [ngClass]="{ 'is-invalid': submitted && f.field_code.errors }">
+            <div *ngIf="submitted && f.field_code.errors" class="invalid-feedback text-danger">
+                <div *ngIf="f.field_code.errors.required">{{'post_requests.post_request_colis.post_request_colis0.form_required_field' | translate }}</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="form-group row">
+        <div class="col-md-12"><hr style="border: 1px gray solid;"></div>
+        <div class="col-md-12"> 
+            <h4> {{ 'post_requests.post_request_colis.post_request_colis0.form_attachment' | translate }}  </h4>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-12">
+            <app-input-file-upload-list (newImageEvent)="fileUpload($event)" (removeImageEvent)="removeFile($event)" [maxFileSize]="maxFileSize" #compagnyUploadFile label="Attach documents (vehicle documentation, Number plate, Registration ID)">
+            </app-input-file-upload-list>
+        </div>    
+                
+    </div>
+          
+    <!-- <div class="form-group row">
+        <div class="col-md-6">
+            <input type="text" id="field_recipientPhoneNumber" formControlName="field_recipientPhoneNumber" class="form-control"
+                placeholder="{{'post_requests.post_request_colis.post_request_colis0.form_contact' | translate }}" [ngClass]="{ 'is-invalid': submitted && f.field_recipientPhoneNumber.errors }">
+            <div *ngIf="submitted && f.field_recipientPhoneNumber.errors" class="invalid-feedback text-danger">
+                <div *ngIf="f.field_recipientPhoneNumber.errors.required">{{'post_requests.post_request_colis.post_request_colis0.form_required_field' | translate }}</div>
+            </div>
+            <p class="title-form sub-indication text-left"> {{'post_requests.post_request_colis.post_request_colis0.form_leave_blank' | translate }}</p>
+        </div>
+    </div> -->
+    <!-- row-footer-->
+    <!-- <div class="footer-registration text-right">
+        <button *ngIf="visible" type="submit" class="btn next-button">
+            {{'post_requests.post_request_colis.post_request_colis0.submit' | translate }}
+        </button>
+    </div> -->
+    <!-- <div *ngIf="submitted && !packageForm.valid" class="invalid-feedback text-danger">AAAAAAAAAAAAA
+        <div >{{'post_requests.post_request_colis.post_request_colis0.form_incomplete' | translate }}</div>
+    </div> -->
+    <div class="footer-registration text-center">
+        <button  type="submit" class="btn next-button"  *ngIf="!savingPackage">
+            {{'post_requests.post_request_colis.post_request_colis0.submit' | translate }}
+        </button>
+    </div>
+    
+        <!-- <idv *ngIf="savingPackage" class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </idv> -->
+    </div>
+    <app-progress-indeterminate *ngIf="savingPackage"></app-progress-indeterminate>
+</form>
+
+
+
+
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="inventoryModal" tabindex="-1" role="dialog" aria-labelledby="inventoryModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+        <h5 class="modal-title" id="inventoryModalLabel"> {{ 'post_requests.post_request_colis.post_request_colis0.inventory' | translate }} </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="modal-body">
+            <div class="bloc-inventory" *ngFor="let item of inventories; let i = index">
+                <div class="modal-item" [ngStyle]="{ 'background-color': item.color }">
+                    <h2>{{ item.name }}</h2>
+                </div>
+
+                <div class="modal-row" *ngFor="let obj of item.items; let j = index;">
+                    <div class="row align-items-center">
+                        <div class="col-10">
+                        <label>{{ obj.name | titlecase }}</label>
+                        </div>
+                        <div class="col-2">
+                        <input type="number" [min]="0" class="form-control" [(ngModel)]="obj.quantity" [ngStyle]="{'background-color': item.color}" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+ 
+        <!-- Modal Footer -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onClose()">{{ 'post_requests.post_request_colis.post_request_colis0.cancel_inventory' | translate }}</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="validateInventory()">{{ 'post_requests.post_request_colis.post_request_colis0.validate_inventory' | translate }}</button>
+        </div>
+    </div>
+    </div>
+</div>
+  

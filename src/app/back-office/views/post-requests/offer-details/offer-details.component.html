@@ -1,0 +1,105 @@
+
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h4 class="modal-title">{{'post_requests.how_provider_infos.provider_informations' | translate }}</h4> 
+        <button type="button" class="close" (click)="cancelModel()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body">
+        <div class="col-xl-12 order-xl-2 mb-xl-0">
+            <div class="row">
+            <div class="col-6">
+                <div class="card-profile-image pull-left">
+                <img class="rounded-circle responsive-img" src="{{userProfileImg}}" alt="Image" />
+                </div>
+            </div>
+            </div>
+            <div class="card-body pt-0 pt-md-4">
+            <div class="text-center">
+                <label *ngIf="provider.isCompany; else noCompany">{{provider.companyName}}</label>
+                <ng-template #noCompany> <label>{{'post_requests.how_provider_infos.no_company' | translate }}</label></ng-template>              
+                <br>
+                <div>
+                <span>
+                    <span class="badge material-icons-profil black-text black">4.5</span>
+                    <i class="fas fa-star jaune"></i>
+                    <i class="fas fa-star jaune"></i>
+                    <i class="fas fa-star jaune"></i>
+                    <i class="fas fa-star jaune"></i>
+                </span>
+                </div>
+                <h3>
+                {{provider.getSimpleName()}}
+                </h3>
+                <div class="h5 font-weight-300">
+                <i class="ni location_pin mr-2"></i>{{provider.username}}
+                </div>
+                <div class="h5 mt-4">
+                {{provider.adresse.phone}}
+                </div>
+                <div>
+                {{provider.adresse.country}}; {{provider.adresse.city}}
+                </div>
+                <br>
+                <hr class="my-4">
+                <!-- <p>{{selectedUserInfos.getSimpleName()}}</p> -->
+                <div class="text-center">
+                <button href="#" class="btn btn-simple"><i class="fa fa-facebook-square"></i></button>
+                <button href="#" class="btn btn-simple"><i class="fa fa-twitter"></i></button>
+                <button href="#" class="btn btn-simple"><i class="fa fa-google-plus-square"></i></button>
+                </div>
+            </div>
+            </div>
+            <div class="col-sm-6 col-md-12">
+            <div class="card">
+                <h3 class="jaune">
+                    {{'post_requests.how_provider_infos.vehicles_list' | translate }}
+                </h3>
+                <div class="card-body">
+                <table class="table table-bordered table-striped table-sm">
+                    <thead>
+                    <tr>
+                        <th>{{'post_requests.how_provider_infos.status' | translate }}</th>
+                        <th>{{'post_requests.how_provider_infos.type' | translate }}</th>
+                        <th>{{'post_requests.how_provider_infos.brand' | translate }}</th>
+                        <th>{{'post_requests.how_provider_infos.registration_date' | translate }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let vehicle of service.vehicles">
+                        <td>
+                        <span class="badge badge-success">{{'post_requests.how_provider_infos.active' | translate }}</span>
+                        </td>
+                        <td>{{vehicle.type}}</td>
+                        <td>{{vehicle.name}}</td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!-- <nav>
+                    <ul class="pagination pull-right">
+                    <li class="page-item"><a class="page-link">Prev</a></li>
+                    <li class="page-item active">
+                        <a class="page-link">1</a>
+                    </li>
+                    <li class="page-item"><a class="page-link">2</a></li>
+                    <li class="page-item"><a class="page-link">3</a></li>
+                    <li class="page-item"><a class="page-link">Next</a></li>
+                    </ul>
+                </nav> -->
+                </div>
+
+            </div>
+
+
+            </div>
+
+        </div>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="cancelModel()">{{'post_requests.how_provider_infos.OK' | translate }}</button>
+        </div>
+    </div>
+</div>

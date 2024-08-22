@@ -1,0 +1,6 @@
+{
+    "TRANSPORTER": ["TRANSPORTER/CARRIER", "Transport/Delivery for Food Services", "Transport/Delivery for couriers", "Transport/Delivery for parcels", "Transport/Delivery for bulk goods", "Removals"],
+    "PERSONS": ["TRANSPORT OF PERSONS (PASSENGERS)", "Lift/Taxi Motobike", "Lift/Taxi Tricycle", "Lift/Taxi Normal Vehicle", "Lift/Taxi VIP", "Carpooling Vehicle", "Carpooling Minibus", "Carpooling Bus", "Carpooling VIP"],
+    "VEHICLE RENTALS": ["VEHICLE RENTALS/HIRE", "Motorbike", "Motorbike Luxury", "Vehicle", "Vehicle VIP", "SUVs", "SUV VIP", "Pickup", "Pickup 4x4", "Minibus", "Minibus VIP", "Motorbike", "Bus", "Bus VIP", "Mini-truck", "Truck", "Trailer", "Skip Bins"],
+    "KARRYNGO TRAVELER": ["KARRYNGO TRAVELER", "KARRYNGO TRAVELER"]
+}

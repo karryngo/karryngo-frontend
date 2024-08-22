@@ -1,0 +1,7 @@
+<div class="col-span-1 bg-white shadow-md rounded-lg p-4">
+    <h5>{{ 'management.m_provider_stat.top_skills_title' | translate }}</h5>
+    <div *ngIf="!(chartData?.data.length>0)" class="text-center">
+        <p class="text-muted">{{ 'management.m_provider_stat.change_values_text' | translate }}</p>
+    </div>
+    <canvas id="chart1">{{ chart1 }}</canvas>
+</div>

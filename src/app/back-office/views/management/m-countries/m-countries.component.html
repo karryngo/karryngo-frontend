@@ -1,0 +1,163 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="jaune text-center mx-4 mb-4">
+                        {{'management.m_countries.countries_list' | translate }} 
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="custom-list p-3">
+                        <div class="card-body">
+                            <div class="custom-list p-3">
+                                <div class="container cont2">
+                                    <table class="table table-bordered table-striped table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th style="align: center"><b> N<sup>0</sup> </b></th>
+                                                <th><b>{{'management.m_countries.Countries' | translate }} 
+                                                </b></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- <tr>
+                                                <td style="align: center">1</td>
+                                                <td>
+                                                    <i class="flag-icon flag-icon-cm h1" title="cm" id="cm"></i>
+                                                    {{'management.m_countries.CMR' | translate }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>
+                                                    <i class="flag-icon flag-icon-za h1" title="cm" id="cm"></i>{{'management.m_countries.south_africa' | translate }}
+                                                </td>
+                                            </tr> -->
+                                            <tr *ngFor="let country of countries; let index=index">
+                                                <td> {{ index+1 }} </td>
+                                                <td  style="width: 100%;">
+                                                    {{ country.name }}
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-primary" (click)="open_country(country)">Details</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <nav>
+                                        <ul class="pagination pull-right">
+                                            <li class="page-item"><a class="page-link">{{'management.m_countries.prev' | translate }}</a></li>
+                                            <li class="page-item active">
+                                                <a class="page-link">1</a>
+                                            </li>
+                                            <li class="page-item"><a class="page-link">2</a></li>
+                                            <li class="page-item"><a class="page-link">3</a></li>
+                                            <li class="page-item"><a class="page-link">{{'management.m_countries.next' | translate }}</a></li>
+                                        </ul>
+                                    </nav>
+
+                                </div>
+                                <br>
+
+                                <div>
+                                    <button type="button" class="btn btn-secondary" data-toggle="modal"
+                                        (click)="myModal.show()">
+                                        {{'management.m_countries.add_countries' | translate }}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+<div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{'management.m_countries.add_countries_simple' | translate }}</h4>
+                <button type="button" class="close" (click)="myModal.hide()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div class="form-group">
+                        <label>{{'management.m_countries.one_or_multiple' | translate }}</label><br>
+                        <div class="form-group row">
+                            <div class="col-md-9 col-form-label">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="option1" id="checkbox1">
+                                    <label class="form-check-label" for="checkbox1">
+                                        <i class="flag-icon flag-icon-cm h1" title="{{'management.m_countries.CMR' | translate }}"></i>
+                                        {{'management.m_countries.CMR' | translate }}
+                                    </label>
+                                </div><br>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="option1" id="checkbox2">
+                                    <label class="form-check-label" for="checkbox2">
+                                        <i class="flag-icon flag-icon-ga h1" title="{{'management.m_countries.Gabon' | translate }}"></i>
+                                        {{'management.m_countries.Gabon' | translate }}
+                                    </label>
+                                </div><br>
+                                <div class="form-check checkbox">
+                                    <input class="form-check-input" type="checkbox" value="option1" id="checkbox3">
+                                    <label class="form-check-label" for="checkbox3">
+                                        <i class="flag-icon flag-icon-za h1" title="{{'management.m_countries.south_africa' | translate }}"></i>
+                                        {{'management.m_countries.south_africa' | translate }}
+                                    </label>
+                                </div><br>
+                                <div class="form-check checkbox">
+                                    <input class="form-check-input" type="checkbox" value="option1" id="checkbox3">
+                                    <label class="form-check-label" for="checkbox3">
+                                        <i class="flag-icon flag-icon-ls h1" title="{{'management.m_countries.Lesotho' | translate }}"></i>
+                                        {{'management.m_countries.Lesotho' | translate }}
+                                    </label>
+                                </div><br>
+                                <div class="form-check checkbox">
+                                    <input class="form-check-input" type="checkbox" value="option1" id="checkbox3">
+                                    <label class="form-check-label" for="checkbox3">
+                                        <i class="flag-icon flag-icon-sz h1" title=" {{'management.m_countries.Swaziland' | translate }}"></i>
+                                        {{'management.m_countries.Swaziland' | translate }}
+                                    </label>
+                                </div><br>
+                                <div class="form-check checkbox">
+                                    <input class="form-check-input" type="checkbox" value="option1" id="checkbox3">
+                                    <label class="form-check-label" for="checkbox3">
+                                        <i class="flag-icon flag-icon-ng h1" title=" {{'management.m_countries.Nigeria' | translate }}"></i>
+                                        {{'management.m_countries.Nigeria' | translate }}
+                                    </label>
+                                </div><br>
+                                <div class="form-check checkbox">
+                                    <input class="form-check-input" type="checkbox" value="option1" id="checkbox3">
+                                    <label class="form-check-label" for="checkbox3">
+                                        <i class="flag-icon flag-icon-ne h1" title=" {{'management.m_countries.Niger' | translate }}"></i>
+                                        {{'management.m_countries.Niger' | translate }}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="myModal.hide()"> {{'management.m_countries.cancel' | translate }}</button>
+                <button type="button" class="btn btn-success"
+                    (click)="myModal.hide();showNotification('top','center', 'danger', 'pe-7s-close-circle', '\<b>Sorry\</b>\<br>Service no available')">{{'management.m_countries.add' | translate }}</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

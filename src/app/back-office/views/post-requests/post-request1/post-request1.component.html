@@ -1,0 +1,49 @@
+<app-nav-bar></app-nav-bar>
+
+<!-- Start your project here-->
+<div class="container container-global cont-margin text-center">
+  <h3 class="jaune text-left mx-4">{{title}}</h3>
+  <div class="row cont">
+
+    <div class="col-sm bg-jaune mag-div">
+      <div class="row">
+        <div class="col-11 media">
+          <img class="profile rounded-circle border" alt="{{'post_requests.post_request1.transport_of_persons' | translate }}"
+            src="assets/img/Transport of person new.png" data-holder-rendered="true"> 
+          <div class="media-body">
+            <h4 class="text-left"><strong>{{'post_requests.post_request1.transport_of_persons' | translate }}</strong></h4>
+            <p class="my-4 mx-2 text-left">{{'post_requests.post_request1.request_transport_yourself' | translate }}</p> 
+
+          </div>
+        </div>
+        <!-- Default checked -->
+        <div class="col-1">
+          <input type="radio" class="radio-style align-middle" id="" name="">
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm bg-jaune mag-div mx-4">
+      <div class="row">
+        <div class="col-11 media">
+          <img class="profile rounded-circle border" alt="{{'post_requests.post_request1.transport_of_persons' | translate }}"
+            src="assets/img/Shipment_carrier new.png" data-holder-rendered="true">
+          <div class="media-body">
+            <h4 class="text-left"><strong>{{'post_requests.post_request1.transport_of_packages' | translate }}</strong></h4>
+            <p class="my-4 mx-2 text-left">{{'post_requests.post_request1.request_transport_package' | translate }}</p>
+
+          </div>
+        </div>
+        <!-- Default checked -->
+        <div class="col-1">
+          <input type="radio" class="radio-style align-middle" id="" name="">
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <button type="button" class="btn next-button btn-weith" routerLink="/post-request-transport-1">{{'post_requests.post_request1.next' | translate }}</button>
+</div>
+<!-- Start your project here-->
+
+<app-front-footer></app-front-footer>

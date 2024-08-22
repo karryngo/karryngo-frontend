@@ -1,0 +1,48 @@
+<div >
+  <div class="row">
+    <br>
+    <h4 class="mx-4 text-left title-form">{{'post_requests.post_request_colis.post_request_colis1.providers_available' | translate }}</h4> 
+    <br><br>
+  </div>
+
+  <div class="row">
+    
+    <div class="col-12">
+      <mat-selection-list #listSelectUser>
+        <ng-container *ngIf="(!loadProvidersData && providerList.length>0) || !waitSelectedProvider">
+            <mat-list-option class="container" *ngFor="let provider of providerList" [value]="provider">
+                <div class="row">
+                    <!-- <div class="col-2">
+                        <img src="assets/img/user_image.png" width="20px" height="20px" class="responsive-img rounded" alt="...">
+                    </div> -->
+                    <div class="col-12">
+                        <strong>{{provider.getSimpleName()}}</strong>
+                        <span style="font-style: italic;" matLine> {{provider.isCompany?provider.companyName:'No Company'}} </span>
+                        <a (click)="showProviderDetail(provider)" class="suppier-detail"  matLine> {{'post_requests.post_request_colis.post_request_colis1.provider_details' | translate }}</a>
+                    </div>
+                </div>       
+                <mat-divider></mat-divider>   
+                <br>                        
+            </mat-list-option>                     
+        </ng-container>   
+        <div *ngIf="loadProvidersData==false && providerList.length==0" class="d-flex-justify-content-center"><span> {{'post_requests.post_request_colis.post_request_colis1.no_provider_found' | translate }}</span></div>
+        <div class="d-flex justify-content-center" *ngIf="loadProvidersData==true || waitSelectedProvider">
+          <app-progress-indeterminate></app-progress-indeterminate>
+        </div>
+                      
+      </mat-selection-list> 
+    </div>
+  </div>
+  <div class="footer-registration text-right">
+
+  </div>
+  <div class="footer-registration text-right">
+    <a [routerLink]="['/post-requests/packages/add']" class="btn next-button">
+      {{'post_requests.post_request_colis.post_request_colis1.previous' | translate }}
+    </a>
+
+    <button type="button" (click)="confirmAction()" [disabled]="selectedUserProviderInfos==null || waitSelectedProvider" class="btn next-button btn-w">
+      {{'post_requests.post_request_colis.post_request_colis1.submit' | translate }}
+    </button>
+  </div>
+</div>

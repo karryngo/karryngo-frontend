@@ -1,0 +1,53 @@
+<div style="background-color: #e5e7eb;" >
+    <header class="text-center left-0 w-full h-16 bg-gray-400 text-white flex items-center px-4" >
+        <h1 class="text-center w-full text-xl">User</h1>
+    </header>
+    <div class="grid grid-cols-3 gap-4 mx-2 my-6">
+        <div class="col-span-1">
+            <div class="bg-white shadow-md rounded-lg p-4 overflow-hidden">
+                <label for="driverTypeSelect" class="block mb-2 text-sm font-medium text-gray-700" >CLIENT</label >
+                <select id="driverTypeSelect" class="block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500">
+                    <option value="full-time">All</option>
+                    <option value="part-time">Type 1</option>
+                    <option value="contractor">Type 2</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-span-2">
+            <div class="bg-white shadow-md rounded-lg p-4 overflow-hidden">
+                <div class="mb-2 text-sm font-medium text-gray-700">Months</div>
+                <div class="flex overflow-auto py-2">
+                    <div class="flex-none px-3" *ngFor="let month of months">
+                        <button class="text-center text-sm font-medium text-gray-700 hover:bg-gray-400 hover:text-white rounded-lg px-4 py-2" >
+                            {{ month }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="p-2 flex gap-2">
+        <div id="sidebar" [class]="'w-64 '">
+            <app-count-cart
+            *ngFor="let item of countCard"
+            [count]="item.count"
+            [text]="item.label"
+            ></app-count-cart>
+        </div>
+        <div class="flex-1">
+            <div class="grid-chart lg:grid-cols-1 md:grid-cols-2 grid-cols-1 gap-2 mt-3">
+                <div class="col-span-1 bg-white shadow-md rounded-lg p-4">
+                    <h1>Client Trips Each Month</h1>
+                    <canvas id="myChart" ></canvas>
+                    <!-- <apx-chart
+                    [series]="chart4.series"
+                    [chart]="chart4.chart"
+                    [xaxis]="chart4.xaxis"
+                    [title]="chart4.title"
+                    ></apx-chart> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

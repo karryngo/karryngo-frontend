@@ -1,0 +1,116 @@
+<div style="background-color: #e5e7eb;">
+    <header class="top-0 text-center left-0 w-full h-16 bg-gray-400 text-white flex items-center px-4" >
+        <h1 class="text-center w-full text-xl">{{ 'management.m_service_stat.service_stat_title' | translate }}</h1>
+    </header>
+    <div class="grid-total lg:grid-cols-1 md:grid-cols-2 grid-cols-1 gap-2 mt-3 p-1" >
+        <!-- <div class="col-span-1 bg-white shadow-md rounded-lg p-4 text-center m-1" *ngFor="let item of totalData"> -->
+        <div class="col-span-1 bg-white shadow-md rounded-lg p-4 text-center m-1" >
+            <div *ngIf="!!(totalData.data&&(totalData.data.length>0))">
+                <app-total-chart [data]="totalData"></app-total-chart>
+            </div>
+        </div>
+        <div class="col-span-1 bg-white shadow-md rounded-lg p-4 text-center m-1" >
+            <div class="row">
+                <div class="col-md-12 mb-5">
+                    <h1>Total Revenue</h1>
+                </div>
+                <div class="col-md-6 " *ngFor="let item of totalRevenueData; let i = index">
+                    <div class=" mb-5 py-4" [ngClass]="getBackgroundClass(i)" style="border-radius: 10px;">
+                        <h3 class="text-gradient text-light">{{item.country}}</h3>
+                        <!-- <h3 class="text-gradient text-primary">country</h3> -->
+                        <h5 class="mt-3">{{item.totalRevenue }} {{ item.currency?.symbol }}</h5>
+                        <!-- <h5 class="mt-3">{{item.totalRevenue }} {{ item.currency?.symbol }} ({{item.currency?.name}})</h5> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- <div class="col-span-1 bg-white shadow-md rounded-lg p-4 text-center m-1" >
+            <div *ngIf="!!(revenueData.data&&(revenueData.data.length>0))">
+                <app-total-revenue-chart [data]="revenueData"></app-total-revenue-chart>
+            </div>
+        </div> -->
+    </div>
+    <div class="grid grid-cols-5 gap-4 mx-2 my-6" >
+        <div class="col-span-1">
+            <div class="bg-white shadow-md rounded-lg p-4 overflow-hidden">
+                <label
+                    for="driverTypeSelect"
+                    class="block mb-2 text-sm font-medium text-gray-700"
+                    >{{ 'management.m_service_stat.year_label' | translate }}</label>
+                <select
+                    id="yearSelect"
+                    class="block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+                    [(ngModel)]="selectedYear"
+                    (change)="onYearSelected()">
+                    <option *ngFor="let year of allowedYears" [value]="year">{{ year }}</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-span-2">
+            <div class="bg-white shadow-md rounded-lg p-4 overflow-auto">
+                <div class="mb-2 text-sm font-medium text-gray-700">{{ 'management.m_service_stat.month_label' | translate }}</div>
+                <div class="flex overflow-x-auto py-2">
+                    <div class="flex-none px-3" *ngFor="let month of months">
+                        <button 
+                            class="text-center text-sm font-medium text-gray-700 hover:bg-gray-400 hover:text-white rounded-lg px-4 py-2"
+                            [class.bg-gray-400]="selectedMonth === month.number" 
+                            (click)="onMonthClicked(month.number)">
+                            {{ month.name }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-span-2">
+            <div class="bg-white shadow-md rounded-lg p-4 overflow-auto">
+                <div class="mb-2 text-sm font-medium text-gray-700">{{ 'management.m_service_stat.countries_label' | translate }}</div>
+                <div class="flex overflow-x-auto py-2">
+                    <div class="flex-none px-3" *ngFor="let country of countries">
+                        <button 
+                            class="text-center text-sm font-medium text-gray-700 hover:bg-gray-400 hover:text-white rounded-lg px-4 py-2"
+                            [class.bg-gray-400]="selectedCountry === country._id"
+                            (click)="onCountryClicked(country._id)">
+                            {{ country.name }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="p-2 flex gap-2">
+        <div id="sidebar" [class]="'w-64 '">
+            <app-count-cart
+            *ngFor="let item of countCard1"
+            [count]="item.count"
+            [text]="item.label"
+            ></app-count-cart>
+        </div>
+        <div class="flex-1">
+            <div class="flex gap-4">
+                <div class="flex-1" *ngFor="let item of countCard2" >
+                    <app-count-cart
+                    [count]="item.count"
+                    [text]="item.label"
+                    ></app-count-cart>
+                </div>
+            </div>
+            <div class="grid-chart lg:grid-cols-1 md:grid-cols-2 grid-cols-1 gap-2 mt-3">
+                <div class="col-span-1 bg-white shadow-md rounded-lg p-4" *ngIf="!!(chartData?.data.length>0)">
+                    <h6>{{ 'management.m_service_stat.revenue_title' | translate }}</h6>
+                    <app-chart [chartData]="chartData" ></app-chart>
+                </div>
+                <div class="col-span-1 bg-white shadow-md rounded-lg p-4 text-center" *ngIf="!(chartData?.data.length>0)">
+                    <h1 class="text-muted">{{ 'management.m_service_stat.no_data_text' | translate }}</h1>
+                </div>
+            </div>
+        </div>
+        <div id="sidebar" [class]="'w-64 '">
+            <app-count-cart
+            *ngFor="let item of countCard3"
+            [count]="item.count"
+            [text]="item.label"
+            ></app-count-cart>
+        </div>
+    </div>
+</div>

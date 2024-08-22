@@ -1,0 +1,417 @@
+<app-nav-bar></app-nav-bar>
+
+<!-- Start your project here-->
+<div class="container cont text-center">
+  <h3 class="jaune title-mag">Normal User Profile</h3>
+  <div class="row">
+    <!--partie 1-->
+    <div class="col-9">
+      <!--section1-->
+      <mat-tab-group class="tab-group">
+        <mat-tab label="PROFILE">
+          <div class="row container tab-profile">
+            <div class="col-3 text-center">
+              <div>
+                <i class="fas fa-user-circle fa-10x user-profil"></i>
+              </div>
+              <div>
+                <span class="mb-4">
+                  <span class="badge material-icons-profil black-text">4.5</span>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </span>
+              </div>
+              <button type="button" class="btn  account-pending black-text">Account
+                Pending</button>
+            </div>
+            <div class="col-9 text-center">
+              <form class="">
+                <!-- row-item-->
+                <div class="form-row mb-4">
+                  <div class="col">
+                    <!-- First name -->
+                    <input type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="First name">
+                  </div>
+                  <div class="col">
+                    <!-- Last name -->
+                    <input type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Last name">
+                  </div>
+                </div>
+                <!-- row-item-->
+
+                <!-- row-item-->
+                <div class="form-row mb-4">
+                  <div class="col">
+                    <!-- First name -->
+                    <input type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="Email">
+                  </div>
+                  <div class="col">
+                    <!-- Last name -->
+                    <input type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Language">
+                  </div>
+                </div>
+                <!-- row-item-->
+
+                <!-- row-item-->
+                <div class="form-row mb-4">
+                  <div class="col">
+                    <!-- First name -->
+                    <input type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="Country">
+                  </div>
+                  <div class="col">
+
+                  </div>
+                </div>
+                <!-- row-item-->
+
+                <!-- row-item-->
+                <div class="form-row">
+                  <div class="col text-right">
+                    <!-- EDIT button -->
+                    <button class="btn  next-button edit-btn " type="submit">EDIT</button>
+                  </div>
+                  <div class="col">
+
+                  </div>
+                </div>
+                <!-- row-item-->
+              </form>
+            </div>
+          </div>
+        </mat-tab>
+        <mat-tab label="Documents">
+          <div class="doc-div">
+            <div *ngFor="let document of documents" class="items row mr-1 ml-1 mt-1">
+              <div class="col media text-left item-col">
+                <i class="far fa-file-pdf fa-2x"></i>
+                <div class="media-body">
+                  <p class="mx-1 doc-name"><strong>{{document.name}}</strong></p>
+                  <p class="mx-1 doc-desc-perso">Document description</p>
+                </div>
+              </div>
+              <div class="col text-right item-col">
+                <i class="far fa-edit fa-2x jaune"></i>
+                <i class="far fa-window-close fa-2x mx-2"></i>
+              </div>
+            </div>
+            <div *ngIf="!savePersoIsVisible" class="mt-3" id="saveDoc">
+              <!-- row-item-->
+              <div class="form-row mb-2">
+                <div class="col">
+                  <!-- First name -->
+                  <input type="text" id="defaultRegisterFormFirstName" class="form-control field"
+                    placeholder="File Name">
+                  <p class="title-form sub-indication text-left">File NAme</p>
+                </div>
+                <div class="col">
+                  <div class="custom-file field-file mt-2">
+                    <input type="file" class="f2" id="validatedCustomFile" placeholder="Select file">
+                    <label class="custom-file-label" for="validatedCustomFile">File</label>
+                  </div>
+                </div>
+              </div>
+              <!-- row-item-->
+              <!-- row-item-->
+              <div class="form-row mb-2">
+                <div class="col">
+                  <!-- First name -->
+                  <input type="text" id="defaultRegisterFormFirstName" class="form-control field"
+                    placeholder="File Description">
+                  <p class="title-form sub-indication text-left">File Description</p>
+                </div>
+              </div>
+              <!-- row-item-->
+              <div class="mt-3 text-right">
+                <button class="btn manage-button black-text" (click)="savePersonalDocument()">
+                  <strong class="text2">SAVE DOCUMENT</strong>
+                </button>
+              </div>
+              <!-- row-item-->
+            </div>
+            <div class="text-right">
+              <button *ngIf="savePersoIsVisible" class="btn manage-button black-text" (click)="addPersonalDocument()">
+                <strong class="text2">ADD DOCUMENT</strong>
+              </button>
+            </div>
+          </div>
+        </mat-tab>
+        <mat-tab label="FUNDS">
+          <div>
+            Content 3
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+      <!--section1-->
+
+      <!--section2-->
+      <!-- table-->
+      <div class="card cont-table">
+        <div class="mr-2 ml-2 mb-4">
+          <p class="text-left"><strong>Tracking</strong></p>
+          <div class="text-right">
+            <div class="search-div">
+              <label for="search">Search</label>
+              <input type="text" [(ngModel)]="searchTextTracking" class="form-control  field" id="search"
+                placeholder="Ref Code">
+            </div>
+          </div>
+        </div>
+        <table mdbTable #tableEl="mdbTable" class="table-responsive z-depth-1 table-style">
+          <thead>
+            <tr>
+              <th *ngFor="let head of headElementsTracking; let i = index" scope="col"><strong
+                  class="table-header">{{head}}</strong></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let el of elementsTracking; let i = index">
+              <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" scope="row">
+                {{el.col1}}
+              </th>
+              <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                {{el.col2}}
+              </td>
+              <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                {{el.col3}}
+              </td>
+              <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                {{el.col4}}
+              </td>
+              <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                {{el.col5}}
+              </td>
+              <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                {{el.col6}}
+              </td>
+            </tr>
+          </tbody>
+          <tfoot class="w-100 tfooter">
+            <tr>
+              <td colspan="7">
+                <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="elementsTracking">
+                </mdb-table-pagination>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <!-- table-->
+      <!--section2-->
+
+
+      <!--section3-->
+      <!-- table-->
+      <div class="card cont-table">
+        <div class="mr-2 ml-2 mb-4">
+          <p class="text-left"><strong>Transport of persons</strong></p>
+          <div class="text-right">
+            <div class="search-div">
+            </div>
+          </div>
+        </div>
+        <table mdbTable #tableEl="mdbTable" class="table-responsive z-depth-1 table-style">
+          <thead>
+            <tr>
+              <th *ngFor="let head of headElementsTransportOfPersons; let i = index" scope="col"><strong
+                  class="table-header">{{head}}</strong></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let el of elementsTransportOfPersons; let i = index">
+              <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" scope="row">
+                {{el.col1}}
+              </th>
+              <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                {{el.col2}}
+              </td>
+              <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                {{el.col3}}
+              </td>
+              <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                {{el.col4}}
+              </td>
+              <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                {{el.col5}}
+              </td>
+              <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                {{el.col6}}
+              </td>
+              <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                {{el.col7}}
+              </td>
+            </tr>
+          </tbody>
+          <tfoot class="w-100 tfooter">
+            <tr>
+              <td colspan="7">
+                <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="elementsTransportOfPersons">
+                </mdb-table-pagination>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <!-- table-->
+      <!--section3-->
+
+
+      <!--section4-->
+      <!-- table-->
+      <div class="card cont-table">
+        <div class="mr-2 ml-2 mb-4">
+          <p class="text-left"><strong>Carrier/Shipment</strong></p>
+          <div class="text-right">
+            <div class="search-div">
+            </div>
+          </div>
+        </div>
+        <table mdbTable #tableEl="mdbTable" class="table-responsive z-depth-1 table-style">
+          <thead>
+            <tr>
+              <th *ngFor="let head of headElementsCarrierShipment; let i = index" scope="col"><strong
+                  class="table-header">{{head}}</strong></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let el of elementsCarrierShipment; let i = index">
+              <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" scope="row">
+                {{el.col1}}
+              </th>
+              <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                {{el.col2}}
+              </td>
+              <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                {{el.col3}}
+              </td>
+              <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                {{el.col4}}
+              </td>
+              <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                {{el.col5}}
+              </td>
+              <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                {{el.col6}}
+              </td>
+              <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                {{el.col7}}
+              </td>
+            </tr>
+          </tbody>
+          <tfoot class="w-100 tfooter">
+            <tr>
+              <td colspan="7">
+                <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="elementsCarrierShipment">
+                </mdb-table-pagination>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <!-- table-->
+      <!--section3-->
+
+
+    </div>
+    <!--partie 1-->
+
+    <!--partie 2-->
+    <div class="col-3">
+      <!--card-->
+      <div class="card card-profil mb-4">
+        <strong class="title-card1">Fotech User</strong>
+        <hr class="line-profil">
+        <div class="card-content-profil mb-2">
+          <p class="card-p text-left">Browse requests</p>
+        </div>
+        <div class="card-content-profil mb-2">
+          <p class="card-p text-left">My Bids</p>
+        </div>
+        <div class="card-content-profil mb-2">
+          <p class="card-p text-left">My Trips</p>
+        </div>
+        <div class="card-content-profil mb-2">
+          <p class="card-p text-left">My Message</p>
+        </div>
+        <hr class="line-profil">
+        <div class="mb-2">
+          <span class="span1">ACCOUNT BALANCE : </span><span class="span2 mx-3"><strong>R
+              2000</strong></span>
+        </div>
+        <div class="mb-2 text-right">
+          <!-- EDIT button -->
+          <button class="btn   manage-button black-text" type="submit">
+            <strong>MANAGE FUNDS</strong>
+          </button>
+        </div>
+      </div>
+      <!--card-->
+
+      <!--card-->
+      <div class="card card-profil mb-4 c2">
+        <strong class="text-center">SERVICE INTERESTED IN</strong>
+        <hr class="line-separator-profil">
+        <div class="ml-2 mr-2">
+          <mat-chip-list #chipList class="mat-chip-list-stacked" aria-orientation="vertical">
+            <mat-chip *ngFor="let serviceOffered of serviceOffereds" [selectable]="selectable" [removable]="removable"
+              (removed)="remove(serviceOffered)">
+              <span class="text-left chip-mag">{{serviceOffered.name}}</span>
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+          </mat-chip-list>
+          <!--chip list-->
+        </div>
+        <!--chip list-->
+        <div class="mb-2 text-right">
+          <!-- EDIT button -->
+          <button class="btn   manage-button manage-button2  black-text" (click)="addService()">
+            <strong>ADD</strong>
+          </button>
+        </div>
+        <hr class="line-separator-profil">
+        <strong class="text-center">COUNTRIES AND CITIES INTEREST</strong>
+        <hr class="line-separator-profil">
+        <div class="cont-vehicule">
+          <mat-accordion>
+            <mat-expansion-panel *ngFor="let country of countries">
+              <mat-expansion-panel-header class="mat-header mb-1">
+                <mat-panel-title>
+                  <strong>{{country.name}}</strong>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <div class="mat-body2">
+                <mat-chip-list #chipList class="mat-chip-list-stacked" aria-orientation="vertical">
+                  <mat-chip *ngFor="let city of country.cities" [selectable]="selectable" [removable]="removable"
+                    (removed)="removeCity(country,city)">
+                    <span class="text-left chip-mag">{{city.name}}</span>
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                </mat-chip-list>
+                <!--chip list-->
+                <div class="text-right">
+                  <!-- EDIT button -->
+                  <button class="btn   manage-button black-text" (click)="addCityOfCountry(country)">
+                    <strong class="text-btn">ADD CITY</strong>
+                  </button>
+                </div>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+          <div class=" mt-3 text-right">
+            <!-- EDIT button -->
+            <button class="btn   manage-button black-text" (click)="addCountry()">
+              <strong class="text-btn">ADD COUNTRY</strong>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!--card-->
+    </div>
+    <!--partie 2-->
+  </div>
+</div>
+<!-- Start your project here-->
+
+<app-footer></app-footer>

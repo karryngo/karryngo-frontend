@@ -1,0 +1,530 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+            <h5 class="text-center mx-3 mb-3">
+                {{'carrier.be_provider_form.title_part1' | translate }} <br> 
+                <small>{{'carrier.be_provider_form.title_part2' | translate }}</small>
+            </h5>
+            
+            </div>
+            <div class="card-body">
+            <div class="modal-body col-md-12">
+                <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 bloc-customertype">
+
+                    <!-- Select type of provider -->
+                    <label for="customerType">{{'carrier.be_provider_form.label_select' | translate }}</label>
+                    <select placeholder="Customer Type" id="customerType" [(ngModel)]="customer_type" (change)="openSection($event)" class="form-control">
+                        <option value="" disabled>{{'carrier.be_provider_form.label_select' | translate }}</option>
+                        <option value="personal" selected>{{'carrier.be_provider_form.select_item2' | translate }}</option>
+                        <option value="company">{{'carrier.be_provider_form.select_item3' | translate }}</option>
+                    </select>
+                    <!-- end of select provider -->
+                    </div>
+                            
+                    <div class="col-md-12 centreVerticalemen">
+                    <!-- Personal Block-->
+                    <div id="personal" class="show active card-body col-12" *ngIf="!isCompagnyAccount">
+
+                        <div class="cont2">
+                        <div class="form">
+                            <div class="col-12">
+                            <h3 class="text-center">{{'carrier.be_provider_form.section2_title' | translate }}</h3>
+                            </div>
+
+                            <!-- Bloc form Add vehicle-->
+                            <app-vehicles (handleVehicle)="registerVehicle($event)"></app-vehicles>
+                            <!-- End of bloc add vehicle --> 
+                            <div class="row" *ngIf="list_vehicles.length>0">
+                                <div class="col-md-8">
+                                    <p class="text-right">{{'carrier.be_provider_form.section2_subtitle_part1' | translate }} {{list_vehicles.length}} {{'carrier.be_provider_form.section2_subtitle_part2' | translate }}</p>
+                                </div>
+                                <div class="col-md-4 text-right">
+                                    <button type="button" class="btn btn-link btn-sm bg-danger" (click)="list_vehicles = [];">{{'carrier.be_provider_form.section2_clear_list_button' | translate }}</button>
+                                </div>
+                            </div>
+                            <hr>
+                            <!-- <form *ngIf="!waitForSubmittionProviderPersonnalForm" [formGroup]="bePersonnalCarrierForm" -->
+                            <form [formGroup]="bePersonnalCarrierForm"
+                            (ngSubmit)="submit()" class="align-content-center col-12 pt-4 custom-form bg-light">
+                            
+                                <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <!-- <input type="text" id="service_title" formControlName="field_service_title"
+                                    class="form-control field-form1 field" 
+                                    placeholder="Service title" 
+                                    [ngClass]="{ 'is-invalid': submitted && fPersonnal.field_service_title.errors }" /> -->
+ 
+                                    <select placeholder="Service Title" class="form-control" formControlName="field_service_title" [ngClass]="{ 'is-invalid': submitted && fPersonnal.field_service_title.errors }">
+                                        <option value="" selected disabled>{{'carrier.be_provider_form.form_select_optgroup1_item1' | translate }}</option>
+                                        <optgroup label="{{'carrier.be_provider_form.form_select_optgroup1_item0' | translate }}">
+                                            <option [value]="services.form_select_optgroup1_item1">{{'carrier.be_provider_form.form_select_optgroup1_item1' | translate }}</option>
+                                            <option [value]="services.form_select_optgroup1_item2">{{'carrier.be_provider_form.form_select_optgroup1_item2' | translate }}</option>
+                                            <option [value]="services.form_select_optgroup1_item3">{{'carrier.be_provider_form.form_select_optgroup1_item3' | translate }}</option>
+                                            <option [value]="services.form_select_optgroup1_item4">{{'carrier.be_provider_form.form_select_optgroup1_item4' | translate }}</option>
+                                            <option [value]="services.form_select_optgroup1_item5">{{'carrier.be_provider_form.form_select_optgroup1_item5' | translate }}</option>
+                                        </optgroup>
+                                        <optgroup label="{{'carrier.be_provider_form.form_select_optgroup2_item0' | translate }}">
+                                            <option value="Transport of Persons">{{'carrier.be_provider_form.form_select_optgroup2_item1' | translate }}</option>
+                                            <option value="Deliver of goods or deliver of parcels">{{'carrier.be_provider_form.form_select_optgroup2_item2' | translate }}</option>
+                                            <option [value]="services.form_select_optgroup2_item3">{{'carrier.be_provider_form.form_select_optgroup2_item3' | translate }}</option>
+                                            <option [value]="services.form_select_optgroup2_item4">{{'carrier.be_provider_form.form_select_optgroup2_item4' | translate }}</option>
+                                            <option [value]="services.form_select_optgroup2_item5">{{'carrier.be_provider_form.form_select_optgroup2_item5' | translate }}</option>
+                                            <option [value]="services.form_select_optgroup2_item6">{{'carrier.be_provider_form.form_select_optgroup2_item6' | translate }}</option>
+                                            <option [value]="services.form_select_optgroup2_item7">{{'carrier.be_provider_form.form_select_optgroup2_item7' | translate }}</option>
+                                            <option [value]="services.form_select_optgroup2_item8">{{'carrier.be_provider_form.form_select_optgroup2_item8' | translate }}</option>
+                                        </optgroup>
+                                        <optgroup label="{{'carrier.be_provider_form.form_select_optgroup3_item0' | translate }}">
+                                            <option [value]="services.form_select_optgroup3_item1">{{'carrier.be_provider_form.form_select_optgroup3_item1' | translate }}</option>
+                                            <option [value]="services.form_select_optgroup3_item2">{{'carrier.be_provider_form.form_select_optgroup3_item2' | translate }}</option>
+                                            <option [value]="services.form_select_optgroup3_item3">{{'carrier.be_provider_form.form_select_optgroup3_item3' | translate }}</option>
+                                            <option [value]="services.form_select_optgroup3_item4">{{'carrier.be_provider_form.form_select_optgroup3_item4' | translate }}</option>
+                                            <option [value]="services.form_select_optgroup3_item5">{{'carrier.be_provider_form.form_select_optgroup3_item5' | translate }}</option>
+                                            <option [value]="services.form_select_optgroup3_item6">{{'carrier.be_provider_form.form_select_optgroup3_item6' | translate }}</option>
+                                            <option [value]="services.form_select_optgroup3_item7">{{'carrier.be_provider_form.form_select_optgroup3_item7' | translate }}</option>
+                                            <option [value]="services.form_select_optgroup3_item8">{{'carrier.be_provider_form.form_select_optgroup3_item8' | translate }}</option>
+                                            <option [value]="services.form_select_optgroup3_item9">{{'carrier.be_provider_form.form_select_optgroup3_item9' | translate }}</option>
+                                            <option [value]="services.form_select_optgroup3_item10">{{'carrier.be_provider_form.form_select_optgroup3_item10' | translate }}</option>
+                                            <option [value]="services.form_select_optgroup3_item11">{{'carrier.be_provider_form.form_select_optgroup3_item11' | translate }}</option>
+                                            <option [value]="services.form_select_optgroup3_item12">{{'carrier.be_provider_form.form_select_optgroup3_item12' | translate }}</option>
+                                            <option [value]="services.form_select_optgroup3_item13">{{'carrier.be_provider_form.form_select_optgroup3_item13' | translate }}</option>
+                                            <option [value]="services.form_select_optgroup3_item1">{{'carrier.be_provider_form.form_select_optgroup3_item14' | translate }}</option>
+                                            <option [value]="services.form_select_optgroup3_item1">{{'carrier.be_provider_form.form_select_optgroup3_item15' | translate }}</option>
+                                            <option [value]="services.form_select_optgroup3_item16">{{'carrier.be_provider_form.form_select_optgroup3_item16' | translate }}</option>
+                                        </optgroup>
+                                        <optgroup label="{{'carrier.be_provider_form.form_select_optgroup4_item0' | translate}}">
+                                            <option [value]="services.form_select_optgroup4_item1">{{'carrier.be_provider_form.form_select_optgroup4_item1' | translate }}</option>
+                                        </optgroup>
+                                        <!-- <optgroup label="Vehicle Hire Service">
+                                        <option value="Motorbikes/Tricycle">Motorbikes/Tricycle</option>
+                                        <option value="Car">Car</option>
+                                        <option value="Minibus/Bus">Minibus/Bus</option>
+                                        <option value="Bakkie/Minitruck">Bakkie/Minitruck</option>
+                                        <option value="Truck">Truck</option>
+                                        </optgroup> -->
+                                    </select>
+
+                                    <div *ngIf="submitted && fPersonnal.field_service_title.errors" class="invalid-feedback">
+                                        <div *ngIf="fPersonnal.field_service_title.errors.required">{{'carrier.be_provider_form.form_required_label' | translate }}</div>
+                                    </div>
+                                    <p class="title-form sub-indication text-left"><strong>{{'carrier.be_provider_form.form_required_service' | translate }}</strong></p>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <input type="text"
+                                    id="passportNum" 
+                                    formControlName="fiel_passportNumber"
+                                    class="form-control field-form1 field" 
+                                    placeholder="Passport Number or ID Number"
+                                    [ngClass]="{ 'is-invalid': submitted && fPersonnal.fiel_passportNumber.errors }">
+                                    <div *ngIf="submitted && fPersonnal.fiel_passportNumber.errors" class="invalid-feedback">
+                                        <div *ngIf="fPersonnal.fiel_passportNumber.errors.required">{{'carrier.be_provider_form.form_required_label' | translate }}</div>
+                                    </div>
+                                    <p class="title-form sub-indication text-left"><strong>{{'carrier.be_provider_form.form_required_input1_label2' | translate }}</strong></p>
+                                </div>
+                                </div>
+                                <!-- <div class="row">
+                                <div class="col-12">
+                                    <input type="text"
+                                    id="passportNum" 
+                                    formControlName="fiel_passportNumber"
+                                    class="form-control field-form1 field" 
+                                    placeholder="Passport Number or ID Number"
+                                    [ngClass]="{ 'is-invalid': submitted && fPersonnal.fiel_passportNumber.errors }">
+                                    <div *ngIf="submitted && fPersonnal.fiel_passportNumber.errors" class="invalid-feedback">
+                                        <div *ngIf="fPersonnal.fiel_passportNumber.errors.required">This field is required</div>
+                                    </div>
+                                    <p class="title-form sub-indication text-left"><strong>Passport Number</strong></p>
+                                </div>
+                                </div> -->
+                                <div class="row">
+                                <div class="col">
+                                    <!-- <app-search-location label="Address" #personnalZone></app-search-location> -->
+                                    <p class="text-center">
+                                    <i>{{'carrier.be_provider_form.form_zone_title' | translate }}</i>
+                                    </p>
+                                    <div class="row mb-3">
+                                    <div class="col-md-8">
+                                        <app-search-location label="{{'carrier.be_provider_form.select_city' | translate }}" #personnalZone></app-search-location>
+                                    </div>
+                                    <div class="col-md-4 pt-4 custom-btn">
+                                        <button type="button" (click)="addZone()" class="btn btn-success">{{'carrier.be_provider_form.form_zone_add_button' | translate }}</button>
+                                    </div>
+                                    <hr>
+                                    
+                                    <div class="col-12">
+                                        <ul class="list-group">
+                                            <li *ngFor="let obj of selectedLocations; let i = index" class="list-group-item d-flex justify-content-between align-items-center">
+                                                {{obj.city}}, {{obj.country}}
+                                                <span (click)="removeZone(i)" class="badge badge-danger badge-pill">{{'carrier.be_provider_form.form_zone_remove' | translate }}</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    </div>  
+                                </div>
+                                </div>
+                                <br>
+                                <p class="text-left"><strong>{{'carrier.be_provider_form.form_contact_label' | translate }}</strong></p>
+                                <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <input type="tel" 
+                                    id="adPersonal1"  
+                                    formControlName="fiel_adPersonal1"
+                                    class="form-control field-form1 field" 
+                                    placeholder="{{'carrier.be_provider_form.whatsapp' | translate }}"
+                                    [ngClass]="{ 'is-invalid': submitted && fPersonnal.fiel_adPersonal1.errors }">
+                                    <div *ngIf="submitted && fPersonnal.fiel_adPersonal1.errors" class="invalid-feedback">
+                                        <div *ngIf="fPersonnal.fiel_adPersonal1.errors.required">{{'carrier.be_provider_form.form_required_label' | translate }}</div>
+                                    </div>
+                                    <p class="title-form sub-indication text-left"><strong>{{'carrier.be_provider_form.form_contact_tel_label' | translate }}</strong></p>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <input type="email" id="adPersonal2" formControlName="fiel_adPersonal2" class="form-control field-form1 field" placeholder="Email Address"
+                                    [ngClass]="{ 'is-invalid': submitted && fPersonnal.fiel_adPersonal2.errors }">
+                                    <div *ngIf="submitted && fPersonnal.fiel_adPersonal2.errors" class="invalid-feedback">
+                                        <div *ngIf="fPersonnal.fiel_adPersonal2.errors.required">{{'carrier.be_provider_form.form_required_label' | translate }}</div>
+                                    </div>
+                                    <p class="title-form sub-indication text-left"><strong>{{'carrier.be_provider_form.form_contact_email_label' | translate }}</strong></p>
+                                </div>
+                                </div>
+                                <div class="row">
+                                <div class="col-md-6">
+                                    <!-- <input type="text" 
+                                    id="adPersonal3" 
+                                    formControlName="fiel_adPersonal3"
+                                    class="form-control field-form1 field" 
+                                    placeholder="Personal Adress 3"
+                                    [ngClass]="{ 'is-invalid': submitted && fPersonnal.fiel_adPersonal3.errors }">
+                                    <div *ngIf="submitted && fPersonnal.fiel_adPersonal3.errors" class="invalid-feedback">
+                                        <div *ngIf="fPersonnal.fiel_adPersonal3.errors.required">This field is required</div>
+                                    </div>
+                                    <p class="title-form sub-indication text-left"><strong>Service Type</strong></p> -->
+                                </div>
+                                <div class="col-md-6">
+                                    <!-- <input type="text" id="adPersonal4" formControlName="fiel_adPersonal4" class="form-control field-form1 field" 
+                                    placeholder="Vehicle type"
+                                    [ngClass]="{ 'is-invalid': submitted && fPersonnal.fiel_adPersonal4.errors }" /> -->
+
+                                    <!-- <select placeholder="Vehicle Type" class="form-control" formControlName="fiel_adPersonal4" [ngClass]="{ 'is-invalid': submitted && fPersonnal.fiel_adPersonal4.errors }">
+                                        <option value="" selected disabled>Vehicle Type</option>
+                                        <option value="Motorbike">Motorbike</option>
+                                        <option value="Car">Car</option>
+                                        <option value="Bus">Bus</option>
+                                        <option value="Truck">Truck</option>
+                                    </select>
+                                    <div *ngIf="submitted && fPersonnal.fiel_adPersonal4.errors" class="invalid-feedback">
+                                        <div *ngIf="fPersonnal.fiel_adPersonal4.errors.required">This field is required</div>
+                                    </div>
+                                    <p class="title-form sub-indication text-left"><strong>Vehicle type</strong></p> -->
+                                </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p class="text-left"><strong>{{'carrier.be_provider_form.form_description_service' | translate }}</strong></p>
+                                        <textarea rows="5" class="form-control"
+                                        placeholder="{{'carrier.be_provider_form.form_description_service' | translate }}" formControlName="field_service_description"
+                                        ></textarea>
+                                    </div><br><br>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label for="">Select Your location</label>
+                                        <app-map (get_coord)="get_coord_pers($event)" ></app-map>
+                                    </div><br>
+                                </div>
+                                <!-- row-item-->
+                                <div class="row">
+                                    <div class="col-md-12 mt-3">
+                                        <!-- <app-input-file-upload-list #personnalUploadFile label="{{'carrier.be_provider_form.attach' | translate }}">
+                                        </app-input-file-upload-list> -->
+                                        <app-input-file-upload-list (newImageEvent)="fileUpload($event)" #personnalUploadFile label="Attach documents (vehicle documentation, Number plate, Registration ID)">
+                                        </app-input-file-upload-list>
+                                    </div>
+                                </div>
+                                <!-- row-item-->
+                            
+
+                            </form>
+                            <div class="row" *ngIf="waitForSubmittionProviderPersonnalForm">
+                                <app-progress-indeterminate></app-progress-indeterminate>
+                            </div>
+                        </div>
+                        <!-- row-item-->
+                        </div>
+                        <br>
+                        <!-- <div class="modal-footer" *ngIf="!waitForSubmittionProviderPersonnalForm"> -->
+                        <div class="modal-footer" *ngIf="!waitForSubmittionProviderPersonnalForm">
+                            <!-- <button type="button" class="btn btn-outline-dark" [routerLink]="['/carrier/be-carrier']">{{'carrier.be_provider_form.form_cancel' | translate }}</button> -->
+                            <button type="button" class="btn btn-dark" (click)="isCompagnyAccount=false;submit()">{{'carrier.be_provider_form.form_confirm' | translate }}</button>
+                        </div>
+
+                    </div>
+                    <!-- End of block -->
+
+
+                    <!-- Company block -->
+                    <div id="company" class="card-body col-12" *ngIf="isCompagnyAccount">
+
+                        <div class="cont2">
+                        <div class="form">
+                            <div class="col-12">
+                            <h3 class="text-center">{{'carrier.be_provider_form.form_company' | translate }}</h3>
+                            </div>
+                            <!-- Bloc form Add vehicle-->
+                            <app-vehicles (handleVehicle)="registerVehicle($event)"></app-vehicles>
+                            <!-- End of bloc add vehicle -->
+                            <div class="row" *ngIf="list_vehicles.length>0">
+                            <div class="col-md-8">
+                                <p class="text-right">{{'carrier.be_provider_form.form_add_vehicle_part1' | translate }} {{list_vehicles.length}} {{'carrier.be_provider_form.form_add_vehicle_part2' | translate }}</p>
+                            </div>
+                            <div class="col-md-4 text-right">
+                                <button type="button" class="btn btn-link btn-sm bg-danger" (click)="list_vehicles = [];">{{'carrier.be_provider_form.form_clear_list_button' | translate }}</button>
+                            </div>
+                            </div>
+                            <hr>
+                            <!-- <form *ngIf="!waitForSubmittionProviderCompanyForm" (ngSubmit)="submit()" [formGroup]="beCompagnyCarrierForm" class="align-content-center col-12 pt-4 custom-form bg-light"> -->
+                            <form  (ngSubmit)="submit()" [formGroup]="beCompagnyCarrierForm" class="align-content-center col-12 pt-4 custom-form bg-light">
+                            
+                                <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <!-- <input type="text" 
+                                    id="service_title2" 
+                                    formControlName="field_service_title"
+                                    class="form-control field-form1 field" 
+                                    placeholder="Service title"
+                                    [ngClass]="{ 'is-invalid': submitted && fCompagny.field_service_title.errors }"> -->
+
+                                    <select placeholder="Service Title" class="form-control" formControlName="field_service_title" [ngClass]="{ 'is-invalid': submitted && fCompagny.field_service_title.errors }">
+                                        <option value="" selected disabled>{{'carrier.be_provider_form.beCompagnyCarrierForm_optgroup1_item1' | translate }}</option>
+                                        <optgroup label="{{'carrier.be_provider_form.beCompagnyCarrierForm_optgroup1_item0' | translate }}">
+                                            <option [value]="company_services.beCompagnyCarrierForm_optgroup1_item1">{{'carrier.be_provider_form.beCompagnyCarrierForm_optgroup1_item1' | translate }}</option>
+                                            <option [value]="company_services.beCompagnyCarrierForm_optgroup1_item2">{{'carrier.be_provider_form.beCompagnyCarrierForm_optgroup1_item2' | translate }}</option>
+                                            <option [value]="company_services.beCompagnyCarrierForm_optgroup1_item3">{{'carrier.be_provider_form.beCompagnyCarrierForm_optgroup1_item3' | translate }}</option>
+                                            <option [value]="company_services.beCompagnyCarrierForm_optgroup1_item4">{{'carrier.be_provider_form.beCompagnyCarrierForm_optgroup1_item4' | translate }}</option>
+                                            <option [value]="company_services.beCompagnyCarrierForm_optgroup1_item5">{{'carrier.be_provider_form.beCompagnyCarrierForm_optgroup1_item5' | translate }}</option>
+                                        </optgroup>
+                                        <optgroup label="{{'carrier.be_provider_form.beCompagnyCarrierForm_optgroup2_item0' | translate }}">
+                                            <option value="Transport of Persons">{{'carrier.be_provider_form.beCompagnyCarrierForm_optgroup2_item1' | translate }}</option>
+                                            <option value="Deliver of goods or deliver of parcels">{{'carrier.be_provider_form.beCompagnyCarrierForm_optgroup2_item2' | translate }}</option>
+                                            <option [value]="company_services.beCompagnyCarrierForm_optgroup2_item3">{{'carrier.be_provider_form.beCompagnyCarrierForm_optgroup2_item3' | translate }}</option>
+                                            <option [value]="company_services.beCompagnyCarrierForm_optgroup2_item4">{{'carrier.be_provider_form.beCompagnyCarrierForm_optgroup2_item4' | translate }}</option>
+                                            <option [value]="company_services.beCompagnyCarrierForm_optgroup2_item5">{{'carrier.be_provider_form.beCompagnyCarrierForm_optgroup2_item5' | translate }}</option>
+                                            <option [value]="company_services.beCompagnyCarrierForm_optgroup2_item6">{{'carrier.be_provider_form.beCompagnyCarrierForm_optgroup2_item6' | translate }}</option>
+                                            <option [value]="company_services.beCompagnyCarrierForm_optgroup2_item7">{{'carrier.be_provider_form.beCompagnyCarrierForm_optgroup2_item7' | translate }}</option>
+                                            <option [value]="company_services.beCompagnyCarrierForm_optgroup2_item8">{{'carrier.be_provider_form.beCompagnyCarrierForm_optgroup2_item8' | translate }}</option>
+                                        </optgroup>
+                                        <optgroup label="{{'carrier.be_provider_form.beCompagnyCarrierForm_optgroup3_item0' | translate }}">
+                                            <option [value]="company_services.beCompagnyCarrierForm_optgroup3_item1">{{'carrier.be_provider_form.beCompagnyCarrierForm_optgroup3_item1' | translate }}</option>
+                                            <option [value]="company_services.beCompagnyCarrierForm_optgroup3_item2">{{'carrier.be_provider_form.beCompagnyCarrierForm_optgroup3_item2' | translate }}</option>
+                                            <option [value]="company_services.beCompagnyCarrierForm_optgroup3_item3">{{'carrier.be_provider_form.beCompagnyCarrierForm_optgroup3_item3' | translate }}</option>
+                                            <option [value]="company_services.beCompagnyCarrierForm_optgroup3_item4">{{'carrier.be_provider_form.beCompagnyCarrierForm_optgroup3_item4' | translate }}</option>
+                                            <option [value]="company_services.beCompagnyCarrierForm_optgroup3_item5">{{'carrier.be_provider_form.beCompagnyCarrierForm_optgroup3_item5' | translate }}</option>
+                                            <option [value]="company_services.beCompagnyCarrierForm_optgroup3_item6">{{'carrier.be_provider_form.beCompagnyCarrierForm_optgroup3_item6' | translate }}</option>
+                                            <option [value]="company_services.beCompagnyCarrierForm_optgroup3_item7">{{'carrier.be_provider_form.beCompagnyCarrierForm_optgroup3_item7' | translate }}</option>
+                                            <option [value]="company_services.beCompagnyCarrierForm_optgroup3_item8">{{'carrier.be_provider_form.beCompagnyCarrierForm_optgroup3_item8' | translate }}</option>
+                                            <option [value]="company_services.beCompagnyCarrierForm_optgroup3_item9">{{'carrier.be_provider_form.beCompagnyCarrierForm_optgroup3_item9' | translate }}</option>
+                                            <option [value]="company_services.beCompagnyCarrierForm_optgroup3_item10">{{'carrier.be_provider_form.beCompagnyCarrierForm_optgroup3_item10' | translate }}</option>
+                                            <option [value]="company_services.beCompagnyCarrierForm_optgroup3_item11">{{'carrier.be_provider_form.beCompagnyCarrierForm_optgroup3_item11' | translate }}</option>
+                                            <option [value]="company_services.beCompagnyCarrierForm_optgroup3_item12">{{'carrier.be_provider_form.beCompagnyCarrierForm_optgroup3_item12' | translate }}</option>
+                                            <option [value]="company_services.beCompagnyCarrierForm_optgroup3_item13">{{'carrier.be_provider_form.beCompagnyCarrierForm_optgroup3_item13' | translate }}</option>
+                                            <option [value]="company_services.beCompagnyCarrierForm_optgroup3_item1">{{'carrier.be_provider_form.beCompagnyCarrierForm_optgroup3_item14' | translate }}</option>
+                                            <option [value]="company_services.beCompagnyCarrierForm_optgroup3_item1">{{'carrier.be_provider_form.beCompagnyCarrierForm_optgroup3_item15' | translate }}</option>
+                                            <option [value]="company_services.beCompagnyCarrierForm_optgroup3_item16">{{'carrier.be_provider_form.beCompagnyCarrierForm_optgroup3_item16' | translate }}</option>
+                                        </optgroup>
+                                        <optgroup label="{{'carrier.be_provider_form.beCompagnyCarrierForm_optgroup4_item0' | translate}}">
+                                            <option [value]="company_services.beCompagnyCarrierForm_optgroup4_item1">{{'carrier.be_provider_form.beCompagnyCarrierForm_optgroup4_item1' | translate }}</option>
+                                        </optgroup>
+                                    </select>
+                                    <div *ngIf="submitted && fCompagny.field_service_title.errors" class="invalid-feedback">
+                                        <div *ngIf="fCompagny.field_service_title.errors.required">{{'carrier.be_provider_form.form_required_label' | translate }}</div>
+                                    </div>
+                                    <p class="title-form sub-indication text-left"><strong>{{'carrier.be_provider_form.beCompagnyCarrierForm_service_type' | translate }}</strong></p>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <input type="text" 
+                                    id="companyName" 
+                                    formControlName="field_companyName"
+                                    class="form-control field-form1 field" 
+                                    placeholder="Company's name"
+                                    [ngClass]="{ 'is-invalid': submitted && fCompagny.field_companyName.errors }">
+                                    <div *ngIf="submitted && fCompagny.field_companyName.errors" class="invalid-feedback">
+                                        <div *ngIf="fCompagny.field_companyName.errors.required">{{'carrier.be_provider_form.form_required_label' | translate }}</div>
+                                    </div>
+                                    <p class="title-form sub-indication text-left"><strong>{{'carrier.be_provider_form.beCompagnyCarrierForm_company_name' | translate }}</strong></p>
+                                </div>
+                                </div>
+                                <p class="text-center">
+                                <i>{{'carrier.be_provider_form.beCompagnyCarrierForm_zone_label' | translate }}</i>
+                                </p>
+                                <div class="row mb-3">
+                                <div class="col-md-8">
+                                    <app-search-location label="Select Covered city" #compagnyZone></app-search-location>
+                                </div>
+                                <div class="col-md-4 pt-4 custom-btn">
+                                    <button type="button" (click)="addZone()" class="btn btn-success">{{'carrier.be_provider_form.beCompagnyCarrierForm_add_zone' | translate }}</button>
+                                </div>
+                                <hr>
+                                
+                                <div class="col-12">
+                                    <ul class="list-group">
+                                        <li *ngFor="let obj of selectedLocations; let i = index" class="list-group-item d-flex justify-content-between align-items-center">
+                                            {{obj.city}}, {{obj.country}}
+                                            <span (click)="removeZone(i)" class="badge badge-danger badge-pill">{{'carrier.be_provider_form.beCompagnyCarrierForm_remove_zone' | translate }}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                
+                                </div>
+                                <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" id="regNum" formControlName="field_regNum"
+                                    class="form-control field-form1 field" 
+                                    placeholder="Registration Number"
+                                    [ngClass]="{ 'is-invalid': submitted && fCompagny.field_regNum.errors }"> 
+                                    <div *ngIf="submitted && fCompagny.field_regNum.errors" class="invalid-feedback">
+                                        <div *ngIf="fCompagny.field_regNum.errors.required">{{'carrier.be_provider_form.form_required_label' | translate }}</div>
+                                    </div>
+                                    <p class="title-form sub-indication text-left"><strong>{{'carrier.be_provider_form.beCompagnyCarrierForm_registration_number' | translate }}</strong>
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" id="impExpCode" formControlName="field_impExpCode" class="form-control field-form1 field" 
+                                    placeholder="Company Code"
+                                    [ngClass]="{ 'is-invalid': submitted && fCompagny.field_impExpCode.errors }">
+                                    <div *ngIf="submitted && fCompagny.field_impExpCode.errors" class="invalid-feedback">
+                                        <div *ngIf="fCompagny.field_impExpCode.errors.required">{{'carrier.be_provider_form.form_required_label' | translate }}</div>
+                                    </div>
+                                    <p class="title-form sub-indication text-left"><strong>{{'carrier.be_provider_form.beCompagnyCarrierForm_import_export' | translate }}</strong>
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" 
+                                    id="passportNum" 
+                                    formControlName="fiel_passportNumber"
+                                    class="form-control field-form1 field" 
+                                    placeholder="Passport Number"
+                                    [ngClass]="{ 'is-invalid': submitted && fCompagny.fiel_passportNumber.errors }">
+                                    <div *ngIf="submitted && fCompagny.fiel_passportNumber.errors" class="invalid-feedback">
+                                        <div *ngIf="fCompagny.fiel_passportNumber.errors.required">{{'carrier.be_provider_form.form_required_label' | translate }}</div>
+                                    </div>
+                                    <p class="title-form sub-indication text-left"><strong>{{'carrier.be_provider_form.beCompagnyCarrierForm_passport_id_provider' | translate }}</strong></p>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" 
+                                    id="comAdd" 
+                                    formControlName="fiel_compagnyaddress"
+                                    class="form-control field-form1 field" 
+                                    placeholder="Company Address"
+                                    [ngClass]="{ 'is-invalid': submitted && fCompagny.fiel_compagnyaddress.errors }">
+                                    <div *ngIf="submitted && fCompagny.fiel_compagnyaddress.errors" class="invalid-feedback">
+                                        <div *ngIf="fCompagny.fiel_compagnyaddress.errors.required">{{'carrier.be_provider_form.form_required_label' | translate }}</div>
+                                    </div>
+                                    <p class="title-form sub-indication text-left"><strong>{{'carrier.be_provider_form.beCompagnyCarrierForm_company_address' | translate }}</strong></p>
+                                </div>
+                                </div>
+
+                                <p class="text-left"><strong>{{'carrier.be_provider_form.beCompagnyCarrierForm_company_contact' | translate }}</strong></p>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input type="tel" 
+                                        id="adCompany1" 
+                                        formControlName="fiel_adCompany1"
+                                        class="form-control field-form1 field" 
+                                        placeholder="Phone Number"
+                                        [ngClass]="{ 'is-invalid': submitted && fCompagny.fiel_adCompany1.errors }">
+                                        <div *ngIf="submitted && fCompagny.fiel_adCompany1.errors" class="invalid-feedback">
+                                            <div *ngIf="fCompagny.fiel_adCompany1.errors.required">{{'carrier.be_provider_form.form_required_label' | translate }}</div>
+                                        </div>
+                                        <p class="title-form sub-indication text-left"><strong>{{'carrier.be_provider_form.beCompagnyCarrierForm_phone_number' | translate }}</strong></p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="email" 
+                                        id="adCompany2" 
+                                        formControlName="fiel_adCompany2"
+                                        class="form-control field-form1 field" 
+                                        placeholder="Email"
+                                        [ngClass]="{ 'is-invalid': submitted && fCompagny.fiel_adCompany2.errors }">
+                                        <div *ngIf="submitted && fCompagny.fiel_adCompany2.errors" class="invalid-feedback">
+                                            <div *ngIf="fCompagny.fiel_adCompany2.errors.required">{{'carrier.be_provider_form.form_required_label' | translate }}</div>
+                                        </div>
+                                        <p class="title-form sub-indication text-left"><strong>{{'carrier.be_provider_form.beCompagnyCarrierForm_email' | translate }}</strong></p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" 
+                                        id="adCompany3" 
+                                        formControlName="fiel_adCompany3"
+                                        class="form-control field-form1 field" 
+                                        placeholder="Website link"
+                                        [ngClass]="{ 'is-invalid': submitted && fCompagny.fiel_adCompany3.errors }">
+                                        <!-- <div *ngIf="submitted && fCompagny.fiel_adCompany3.errors" class="invalid-feedback">
+                                            <div *ngIf="fCompagny.fiel_adCompany3.errors.required">This field is required</div>
+                                        </div> -->
+                                        <p class="title-form sub-indication text-left"><strong>{{'carrier.be_provider_form.beCompagnyCarrierForm_web_site_link' | translate }}</strong></p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <!-- <input type="text" 
+                                        id="adCompany4" 
+                                        formControlName="fiel_adCompany4"
+                                        class="form-control field-form1 field" 
+                                        placeholder="Company address 4"
+                                        [ngClass]="{ 'is-invalid': submitted && fCompagny.fiel_adCompany4.errors }">
+                                        <div *ngIf="submitted && fCompagny.fiel_adCompany4.errors" class="invalid-feedback">
+                                            <div *ngIf="fCompagny.fiel_adCompany4.errors.required">This field is required</div>
+                                        </div>
+                                        <p class="title-form sub-indication text-left"><strong>Company Adress 4</strong></p> -->
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                    <p class="text-left"><strong>{{'carrier.be_provider_form.beCompagnyCarrierForm_description' | translate }}</strong></p>
+                                    <textarea rows="5" class="form-control"
+                                        placeholder="Here can be your description" formControlName="field_service_description"
+                                    ></textarea>
+                                    </div><br>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label for="">Select Your location</label>
+                                        <app-map (get_coord)="get_coord_comp($event)" ></app-map> 
+                                    </div><br>
+                                </div>
+                            <!--<div class="col-">
+                            <input type="text" id="field_cities2" formControlName="field_cities2"
+                            class="form-control field-form1 field" placeholder="Cities">
+                            <p class="title-form sub-indication text-left"><strong>Cities</strong></p>
+                        </div><br>-->
+                            <!-- row-item-->
+                            <app-input-file-upload-list (newImageEvent)="fileUpload($event)" #compagnyUploadFile label="Attach documents (vehicle documentation, Number plate, Registration ID)">
+                            </app-input-file-upload-list>
+
+                            <br>
+                            </form>
+                            <div class="row" *ngIf="waitForSubmittionProviderCompanyForm">
+                                <app-progress-indeterminate></app-progress-indeterminate>
+                            </div>
+                        </div>
+
+                        <!-- row-item-->
+
+                        <!-- row-item-->
+
+                        </div>
+                        <br>
+                        <div class="modal-footer" *ngIf="!waitForSubmittionProviderCompanyForm">
+                            <button type="button" class="btn btn-outline-dark" [routerLink]="['/carrier/be-carrier']">{{'carrier.be_provider_form.form_cancel' | translate }}</button>
+                            <button type="button" class="btn btn-dark" (click)="isCompagnyAccount=true;submit()">{{'carrier.be_provider_form.form_confirm' | translate }}</button>
+                        </div>
+                    </div>
+                    <!-- End of company Block-->
+                    </div>
+
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>

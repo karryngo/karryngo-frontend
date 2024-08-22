@@ -1,0 +1,18 @@
+.imag{
+    background-image: url('./../../../assets/img/chauffeur2.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: 'Numans', sans-serif;
+    margin: 70px 0 10px 0;
+}
+
+input:focus {
+    outline: 25 25 25 25 !important;
+    box-shadow: 25 25 25 25 !important;
+    border-color: rgb(240, 213, 60);
+
+}
+
+a{
+    color: rgb(240, 213, 60);
+}

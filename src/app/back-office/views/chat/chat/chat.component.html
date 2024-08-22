@@ -1,0 +1,148 @@
+<div class="container-fluid h-50 custom-chat">
+  <div class="row justify-content-center h-100">
+    <div class="col-md-4 col-xl-4 chat">
+      <app-list-user-message [listUser]="userDiscussionList" (selectUserEvent)="selectedUserDiscuss($event)"></app-list-user-message>
+    </div>  
+    <div class="col-md-8 col-xl-8 chat">
+      <div class="card">
+        <!-- selected user -->
+        <div class="card-header msg_head">
+          <div *ngIf="selectedUser!==undefined" class="d-flex bd-highlight">
+            <div class="img_cont">
+              <img src="assets/img/user_image.png" class="rounded-circle user_img">
+              <!-- <span class="online_icon"></span> -->
+            </div>
+            <div class="user_info">
+              <span>{{selectedUser?.firstname}} {{selectedUser?.lastname}}</span>
+              <p>{{selectedUser?.companyName}}</p>
+            </div>
+            <div *ngIf="currentUser && provider" class="video_cam">
+              <!-- <span *ngIf="currentUser._id!=provider._id" data-toggle="tooltip" data-placement="top" title="Click to change your price for your demand" (click)="updatePrice()"><i class="fas fa-edit"></i> {{'chat.chat.new_price' | translate}}</span> -->
+              <!-- <span *ngIf="currentUser._id==provider._id" data-toggle="tooltip" data-placement="top" title="Click to approve price suggested" (click)="validatePrice()"><i class="fas fa-check"></i> {{'chat.chat.validate_price' | translate}}</span> -->
+              <!-- <span *ngIf="currentUser._id==provider._id" data-toggle="tooltip" data-placement="top" [title]="!is_running ? 'Hit Start to begin service' : 'Hit stop to end service'" (click)="handleStartStop()">
+                <i *ngIf="!is_running" class="fas fa-play"></i> 
+                <i *ngIf="is_running" class="fas fa-stop"></i> 
+              </span> -->
+            </div>
+          </div>
+          <span id="action_menu_btn" (click)="refreshMessages()"><i class="fas fa-sync"></i></span>
+          <div class="action_menu">
+            <ul>
+              <!-- <li><i class="fas fa-user-circle"></i> View profile</li> -->
+              <!-- <li><i class="fas fa-users"></i> Add to close friends</li>
+              <li><i class="fas fa-plus"></i> Add to group</li>
+              <li><i class="fas fa-ban"></i> Block</li> -->
+            </ul>
+          </div>
+        </div>
+        <!-- end selected user header -->
+
+        <!-- body for message -->
+        <div #window class="card-body msg_card_body">
+          <app-display-messages [discussFils]="messageToDisplay"></app-display-messages>
+        </div>
+        <!-- end of body message -->
+        <div *ngIf="selectedUser" class="card-footer">
+          <app-typing-zone [discuss]="selectedUser" (payPackage)="handlePayment()" (sendInfoPackage)="getCurrentService()" (sendNewMessage)="newMessage($event)"></app-typing-zone>    
+        </div>
+      </div>  
+    </div>
+  </div>
+</div>  
+
+    <!-- The Modal for price changed form to display -->
+    <ng-template #contentPrice let-modal>
+    
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{'chat.chat.new_price' | translate }} </h4> 
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        
+      <!-- Modal body -->
+      <div class="modal-body">
+        <p>{{'chat.chat.upgrade_your_price' | translate }}</p>
+        <div class="form-group">
+          <label for="inputPrice">{{'chat.new_price' | translate }} </label>
+          <input type="number" class="form-control" id="inputPrice" aria-describedby="pricelHelp" [(ngModel)]="new_price" />
+          <small id="priceHelp" class="form-text text-muted">{{'chat.chat.price_mentionned' | translate }} </small>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" (click)="confirmedPrice()">{{'chat.chat.confirm' | translate }}</button>
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close(false)">{{'chat.chat.cancel' | translate }}</button>
+      </div>
+          
+  </ng-template>
+
+  <!-- The Modal for method payment to display -->
+  <ng-template #contentMethod let-modal>
+    
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{'chat.chat.start_payment' | translate }}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        
+      <!-- Modal body -->
+      <div class="modal-body">
+        <p>{{'chat.chat.select_payment_method' | translate }}</p>
+        <div class="list-group">
+          <a *ngFor="let item of paymentMethods" class="list-group-item list-group-item-action" (click)="handleMethodPayment(item)">{{item.name}}</a>
+        </div>
+
+        <div *ngIf="selectedPaymentMethod">
+          <hr>
+          <div *ngIf="selectedPaymentMethod=='orange' || selectedPaymentMethod=='mtn'" class="mobile-money">
+            <p class="mt-2">{{'chat.chat.mobile_money_number' | translate }} ({{selectedPaymentMethod}}) </p>
+            <ngx-intl-tel-input [cssClass]="'custom-chat'" [preferredCountries]="preferredCountries"
+                [enableAutoCountrySelect]="true" [enablePlaceholder]="true" [searchCountryFlag]="true"
+                [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]" [selectFirstCountry]="false"
+                [selectedCountryISO]="CountryISO.Cameroon" [maxLength]="15"
+                [phoneValidation]="true" [separateDialCode]="separateDialCode"
+                [numberFormat]="PhoneNumberFormat.National" 
+                name="cell_phone_number" 
+                [(ngModel)]="mm_phone">
+            </ngx-intl-tel-input> 
+
+            <button type="button" [disabled]="!this.mm_phone" (click)="startPayment()" class="btn btn-success">{{'chat.chat.make_payment' | translate }}</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close(false)">{{'chat.chat.cancel' | translate }}</button>
+      </div>
+          
+  </ng-template>
+
+    <!-- The Modal for display loading -->
+    <ng-template #contentLoader let-modal>
+        
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="p-4 text-center">
+          <div class="spinner-grow text-primary" role="status">
+            <span class="sr-only"></span>
+          </div>
+          <div class="spinner-grow text-secondary" role="status">
+            <span class="sr-only"></span>
+          </div>
+          <div class="spinner-grow text-success" role="status">
+            <span class="sr-only"></span>
+          </div>
+          <div class="spinner-grow text-danger" role="status">
+            <span class="sr-only"></span>
+          </div>
+        </div>
+        <p>{{'chat.chat.message_confirm_payment' | translate }}</p>
+        <div class="text-center p-4">
+          <button type="button" (click)="checkTransaction()" class="btn">{{'chat.chat.payment_done' | translate }}</button>
+        </div>
+      </div>
+      <div class="modal-footer text-center">
+        <button type="button" class="btn btn-dark" [disabled]="obj_spinner" (click)="cancelTransaction()">{{'chat.chat.cancel_transaction' | translate }}</button>
+      </div>
+          
+  </ng-template>

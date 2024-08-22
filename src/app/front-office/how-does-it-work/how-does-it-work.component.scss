@@ -1,0 +1,25 @@
+@import "../post-request/post-request0.component.scss";
+
+.custom-works{
+    padding-top: 100px;
+    
+    h2{
+        color: #f3ae02 !important;
+    }
+
+    h3, h5{
+        color: #fff;
+    }
+
+    h5{
+        margin-top: 25px !important;
+    }
+
+    p, .custom-div{
+        color: rgba(255, 255, 255, 0.87);
+    }
+    
+    .bloc-desc p{
+        text-align: justify;
+    }
+}

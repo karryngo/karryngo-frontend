@@ -1,0 +1,202 @@
+<div class="animated fadeIn"> 
+  <div class="row">
+    <div class="col">
+      <h4>{{'dashbord.country' | translate }}</h4>
+    </div>
+  </div> 
+
+  <div class="row bloc-resume">
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-body">
+          <h6>{{'dashbord.total_trips' | translate }}</h6>
+          <h2>00</h2>
+          <i class="fa fa-car"></i> 
+        </div>
+       </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-body">
+          <h6>{{'dashbord.total_carriers' | translate }}</h6>
+          <h2>00</h2>
+          <i class="fa fa-truck"></i>
+        </div>
+       </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-body">
+          <h6>{{'dashbord.total_orders' | translate }}</h6>
+          <h2>00</h2>
+          <i class="fa fa-file-o"></i>
+        </div>
+       </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-body">
+          <h6>{{'dashbord.earnings' | translate }}</h6>
+          <h2>00 <small>{{'dashbord.ZAR' | translate }}</small> </h2>
+          <i class="fa fa-money"></i>
+        </div>
+       </div>
+    </div>
+  </div>
+
+  <!-- Block graph -->
+  <div class="row">
+    <div class="col-lg-8 col-md-12 col-sm-12">
+        <div class="card shadow mb-30">
+            <div class="card-header border-0">
+                <h5 class="m-0">{{'dashbord.week_withdrawal' | translate }}</h5>
+            </div>
+            <div class="chart-wrapper">
+            <div class="typo__p text-right" *ngIf="loading">
+                <div class="spinner sm spinner-primary mt-3"></div>
+            </div>
+            <div echarts *ngIf="!loading" [options]="echartSales" ></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-12 col-sm-12">
+        <div class="card mb-30">
+            <div class="card-header border-0">
+                <h5 class="m-0">{{'dashbord.top_agencies' | translate }}</h5>
+            </div>
+            <div class="chart-wrapper">
+            <div lass="typo__p text-right" *ngIf="loading">
+                <div class="spinner sm spinner-primary mt-3"></div>
+            </div>
+            <div echarts *ngIf="!loading" [options]="echartProduct"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+  <!-- Block Services -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col">
+              <h5>{{'dashbord.money_claimed' | translate }}</h5>
+            </div>
+            <div class="col text-right">
+              <div class="btn-group btn-group-sm" role="group" aria-label="period">
+                <button type="button" class="btn btn-secondary">{{'dashbord.day' | translate }}</button>
+                <button type="button" class="btn btn-secondary">{{'dashbord.week' | translate }}</button>
+                <button type="button" class="btn btn-secondary">{{'dashbord.month' | translate }}</button>
+                <button type="button" class="btn btn-secondary">{{'dashbord.year' | translate }}</button>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+    
+        <table class="table align-items-center table-flush">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">{{'dashbord.th_services' | translate }}</th>
+              <th scope="col">{{'dashbord.th_amount' | translate }}</th>
+              <th scope="col">{{'dashbord.th_earnings_saler' | translate }}</th>
+              <th scope="col">{{'dashbord.th_earnings_manager' | translate }}</th>
+            </tr>
+          </thead>
+          <tbody>
+    
+            <tr>
+              <th scope="row">{{'dashbord.delivering' | translate }}</th>
+              <td>R 700</td>
+              <td>R 200</td>
+              <td>R 50</td>
+            </tr>
+            <tr>
+              <th scope="row">{{'dashbord.trips' | translate }}</th>
+              <td>R 800</td>
+              <td>R 300</td>
+              <td>R 40</td>
+            </tr>
+            
+          </tbody>
+        </table><br>
+      </div>
+    </div>
+  </div>
+
+  <!-- end block graph -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="m-0">
+            {{'dashbord.traffic' | translate }}
+          </h5>
+        </div>
+        <div class="card-body">
+          
+          <table class="table table-responsive-sm table-hover table-outline mb-0">
+            <thead class="thead-light">
+              <tr>
+                <th class="text-center">{{'dashbord.agency' | translate }}</th>
+                <th>{{'dashbord.drivers' | translate }}</th>
+                <th class="text-center">{{'dashbord.packages' | translate }}</th>
+                <th class="text-center">{{'dashbord.status' | translate }}</th>
+                <th class="text-center" style="color: #63c2de;">{{'dashbord.start' | translate }}</th>
+                <th style="color: green;" class="text-center">{{'dashbord.end' | translate }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let projet of unreadProjetList">
+                <td class="text-center">
+                  <div>{{projet.provider.isCompany?projet.provider.companyName :'/'}}</div>
+                </td>
+                <td>
+                  <div>{{projet.pkg.state=='service_in_transaction_state'?projet.provider.getSimpleName():'/'}}</div>
+                </td>
+                <td class="text-center">
+                  <div>{{projet.pkg.title}}</div>
+                </td>
+                <td class="text-center">
+                  <i class="bi-{{getPackageIcon(projet)}}" role="img" style="color: green !important;font-weight: bolder; font-size: larger;" aria-hidden="true"></i>
+                </td>
+                <td class="text-center">
+                  {{projet.pkg.from.city}}
+                  <div class="small text-muted">
+                     {{projet.pkg.date_departure}}
+                  </div>
+                </td>
+                <td class="text-center">
+                  {{projet.pkg.to.city}}
+                  <div class="small text-muted">
+                    {{projet.pkg.date_arrival}}
+                  </div>
+                </td>
+              </tr>
+              
+            </tbody>
+          </table>
+          <br>
+      </div>
+      <!-- ///// -->
+
+      <!-- <div class="card">
+        <div class="card-header">
+          General traffic
+        </div>
+        <div class="card-body">
+          <div class="row justify-content-center pt-4 pb-4">
+            <div class="col-md-12 text-center">
+              <router-outlet></router-outlet>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+      
+    </div>
+    <!--/.col-->
+  </div>
+  <!--/.row-->
+</div>

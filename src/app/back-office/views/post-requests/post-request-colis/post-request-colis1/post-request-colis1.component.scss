@@ -1,0 +1,47 @@
+
+.btn-w {
+  width: 25%;
+}
+.btn-w2 {
+  width: 16%;
+}
+
+.title-style {
+  margin-bottom: 6%;
+}
+.footer-registration {
+  margin-top: 5%;
+}
+.skip-btn {
+  background-color: rgb(245, 244, 201);
+}
+.cont {
+  height: 540px;
+}
+.b-mag {
+  margin-top: 20%;
+}
+
+.responsive-img{
+  object-fit: cover;
+  -o-object-fit: cover;
+}
+
+
+  mat-selection-list {
+    max-height: 400px;
+    overflow: auto;
+  }
+
+
+ .mat-list-base .mat-list-item, .mat-list-base .mat-list-option {
+    height: auto !important;
+    span{
+      color: #757c88;
+    }
+
+    a{
+      text-decoration: underline;
+      font-size: 0.8em;
+    }
+  }

@@ -1,0 +1,24 @@
+<!-- <a (click)="selectUser()" [class]="'list-group-item list-group-item-action  list-group-item-light rounded-0 '+ (active?'active':'') ">
+    <div class="media"><img [src]="img" alt="user" width="50" class="rounded-circle">
+    <div class="media-body ml-4">
+        <div class="d-flex align-items-center justify-content-between mb-1">
+        <h6 class="mb-0">{{user.getSimpleName()}}</h6><small class="small font-weight-bold">{{online?"online":"no online"}}</small>
+        </div>
+        <p class="font-italic text-muted mb-0 text-small">{{lastMessage}}</p>
+    </div>
+    </div>
+
+</a> -->
+
+<li (click)="selectUser()" [class]="''+ (active ? 'active' : '') ">
+    <div class="d-flex bd-highlight">
+      <div class="img_cont">
+        <img [src]="img" alt="user" class="rounded-circle user_img">
+        <span [class]="online ? 'online_icon': 'online_icon offline'"></span>
+      </div>
+      <div class="user_info">
+        <span>{{user.getSimpleName()}}</span>
+        <p>{{date | date:'medium':'':lang}}</p>
+      </div>
+    </div>
+  </li>

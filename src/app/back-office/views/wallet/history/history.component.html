@@ -1,0 +1,108 @@
+
+<div class="container">
+    <div class="wallet">
+        <aside class="left-wallet"> 
+            <div class="wallet-head">
+                <h4> {{ 'wallet.history.title' | translate }} </h4>
+            </div>
+            <div class="my-3">
+                <h6> {{ 'wallet.history.current_balance' | translate }} </h6>
+            </div>
+            <div class="list-group list-group-accent py-3" *ngFor="let money of wallet?.money">
+                <div class="list-group-item list-group-item-accent-secondary bg-light text-center font-weight-bold text-uppercase small">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div> <b>{{ money.cc }} {{ 'wallet.history.account' | translate }}</b></div>
+                        </div>
+                        <div class="col-md-12 mt-3" style="text-align: left;">
+                            {{ money.amount + " " + money.symbol }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="" style="text-align: center;">
+                <h1 class="mt-5 mb-auto" *ngIf="wallet"> {{ wallet.amount }} </h1>
+            </div> -->
+            <div class="cc-select">          
+            </div>
+        </aside>
+        <content class="right-trans" style="width: 100%; overflow: scroll;">
+            <h1 class="ml-auto mr-auto" style="text-align: center;"> {{ 'wallet.history.history' | translate }} </h1>
+            <h4 id="balance"></h4>
+            <div class="my-5" style="">
+                <div class="list-group" *ngFor="let history of wallet?.history" style="border-bottom: 1px solid gray;">
+                    <div class="list-group-item ">
+                        <!-- <p> {{ history.type }} </p> -->
+                        <p> {{ history.description }} on {{ history.date | date: 'fullDate' }} at {{ history.date | date: 'mediumTime' }} </p>
+                        <small> Old value: {{ history.old }} </small><br>
+                        <small> New value: {{ history.new }} </small><br>
+                        <small> Currency: {{ history.currency }} </small>
+                        <!-- <small> {{ history.value }} </small> -->
+                        <!-- <small> {{ history.type }} </small>
+                        <small> {{ history.description }} </small>
+                        <small> {{ history.old }} </small>
+                        <small> {{ history.new }} </small>
+                        <small> {{ history.value }} </small>
+                        <small> Date: {{ history.date | date }} </small> -->
+                    </div>
+                    <!-- <div class="list-group-item active">Dapibus ac facilisis in</div>
+                    <div class="list-group-item">Morbi leo risus</div>
+                    <div class="list-group-item">Porta ac consectetur ac</div>
+                    <div class="list-group-item">Vestibulum at eros</div> -->
+                </div>
+            </div>
+        </content>
+    </div>
+    <button type="button" class="btn bg-info" [routerLink]="['/wallet/withdrawal']" routerLinkActive="router-link-active" >Redraw Money</button> 
+
+</div>
+
+<div class="modal">
+    <div class="modal-body">
+        <h3>Add a New Card</h3>
+        <h5>Select a card on the left and enter the information</h5>
+        <div class="modal-close">x</div>      
+        <div class="modal-cards">
+            <div class="md-cc visa">
+                <div class="cc-img visa"></div>
+            </div>      
+            <div class="md-cc amex">
+                <div class="cc-img amex"></div>
+            </div>      
+            <div class="md-cc mc">
+                <div class="cc-img mc"></div>
+            </div>    
+        </div>      
+        <form>
+            <input type="text" id="ccnum" disabled> 
+            <select name="month" id="month" required disabled>
+            <option value="">Month</option>
+                <option value="01">Janaury</option>
+                <option value="02">February</option>
+                <option value="03">March</option>
+                <option value="04">April</option>
+                <option value="05">May</option>
+                <option value="06">June</option>
+                <option value="07">July</option>
+                <option value="08">August</option>
+                <option value="09">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+            </select>
+            <select name="year" id="year" required disabled>
+            <option value="">Year</option>
+            <option value="16">2016</option>
+            <option value="17">2017</option>
+            <option value="18">2018</option>
+            <option value="19">2019</option>
+            <option value="20">2020</option>
+            <option value="21">2021</option>
+            <option value="22">2022</option>
+            <option value="23">2023</option>
+            <option value="24">2024</option>
+            </select>
+        </form>      
+        <button class="modal-add-cc"> Add </button>      
+    </div>
+</div>

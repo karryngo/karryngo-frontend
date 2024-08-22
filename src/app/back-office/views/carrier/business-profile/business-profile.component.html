@@ -1,0 +1,276 @@
+<section class="bg-light">
+    <div class="col-md-12 card text-center py-5" *ngIf="!provider_profile">
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div> 
+        </div>
+    </div>
+    <div class="container" *ngIf="provider_profile">
+        <div class="row">
+            <div class="col-lg-12 mb-4 mb-sm-5">
+                <div class="card card-style1 border-0">
+                    <div class="card-body p-1-9 p-sm-2-3 p-md-6 p-lg-7">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6 mb-4 mb-lg-0">
+                                <!-- <img *ngIf="!current_user.picture" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="...">
+                                <img *ngIf="current_user.picture" [src]="current_user.picture" alt="..."> -->
+                                <!-- <img [src]="defaultImg" alt=""> -->
+                                <!-- <img *ngIf="current_user.picture" class="rounded-circle responsive-img" [src]="current_user.picture ? fileUrl+current_user.picture.name: defaultImg" alt="profile" alt="Profil img"> -->
+                                <img class="rounded-circle responsive-img" [src]="(current_user.picture && (current_user.picture != '')) ? fileUrl+current_user.picture.name: defaultImg" alt="profile" alt="Profil img">
+                            </div>
+                            <div class="col-lg-6 px-xl-10">
+                                <div class="bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded">
+                                    <h3 class="h2 text-white mb-0"> {{ current_user.firstname +" "+ current_user.lastname }} </h3>
+                                    <!-- <span class="text-primary">Coach</span> -->
+                                </div>
+                                <ul class="list-unstyled mb-1-9">
+                                    <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">{{'business_profile.registration_number' | translate}} : </span> <b>{{ provider_profile.registrationNumber }}</b> </li>
+                                    <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">{{'business_profile.main' | translate}} : </span>{{ provider_profile.title }}</li>
+                                    <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">{{'business_profile.passport_number' | translate}} : </span>{{ current_user.passportNumber }}</li>
+                                    <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">{{'business_profile.email' | translate}} : </span> {{ provider_profile.addressForVerification[0].email }}</li>
+                                    <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">{{'business_profile.website' | translate}} : </span> </li>
+                                    <li class="display-28"><span class="display-26 text-secondary me-2 font-weight-600">{{'business_profile.phone' | translate}} : </span> {{ provider_profile.addressForVerification[0].phone }} </li>
+                                </ul>
+                                <ul class="social-icon-style1 list-unstyled mb-0 ps-0">
+                                    <li><a href="#!"><i class="ti-twitter-alt"></i></a></li>
+                                    <li><a href="#!"><i class="ti-facebook"></i></a></li>
+                                    <li><a href="#!"><i class="ti-pinterest"></i></a></li>
+                                    <li><a href="#!"><i class="ti-instagram"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 mb-4 mb-sm-5">
+                <div>
+                    <span class="section-title text-primary mb-3 mb-sm-4">{{'business_profile.about_me' | translate}}</span>
+                    <p>{{ provider_profile.description }}</p>
+                    <!-- <p>Edith is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p> -->
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-lg-12 mb-4 mb-sm-5">
+                        <div class="mb-4 mb-sm-5" *ngIf="provider_profile.services">
+                            <span class="section-title text-primary mb-3 mb-sm-4">{{'business_profile.skill' | translate}}</span>
+                            <div *ngFor="let service of provider_profile.services">
+                                <div class="progress-text">
+                                    <div class="row">
+                                        <div class="col-6">{{service}}</div>
+                                        <!-- <div class="col-3 text-end">100%</div> -->
+                                        <div class="col-6 text-end">
+                                            <span class="badge badge-success mr-2" style="cursor: pointer;" (click)="remove_service(service)">{{'business_profile.delete' | translate}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="custom-progress progress progress-medium mb-3" style="height: 4px;">
+                                    <div class="animated custom-bar progress-bar slideInLeft bg-secondary" style="width:100%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="10" role="progressbar"></div>
+                                </div>
+                            </div>
+                            <div class="row pt-5">
+                                <div class="col-md-12">
+                                    <h5><b>{{'business_profile.add_skill' | translate}}</b></h5>
+                                </div>
+                                <div class="col-md-12">
+                                    <p>
+                                        <span *ngFor="let item of selectedToppings" class="badge badge-info mr-2 p-2" style="cursor: pointer;" (click)="remove_service(service)">{{item}}</span>
+                                    </p>
+                                    <p>
+                                        <button *ngIf="selectedToppings.length != 0" type="button" class="btn btn-secondary" (click)="add_service_skills()">{{'business_profile.save_skill' | translate}}</button>
+                                    </p>
+                                </div>
+                                
+                                <!-- <div class="col-md-6">
+                                    <mat-form-field style="width: 100%;">
+                                        <mat-select placeholder="Value" [formControl]="cat" [(value)]="selectedCat" >
+                                            <mat-option *ngFor="let category of categories" [value]="category">{{category}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div> -->
+                                <div class="col-md-6">
+                                    <mat-form-field appearance="fill" style="width: 100%;">
+                                        <mat-label>{{'business_profile.type_service' | translate}}</mat-label>
+                                        <mat-select [formControl]="cat" [(value)]="selectedCat">
+                                            <mat-option *ngFor="let category of categories" [value]="category">{{services[category][0]}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <mat-form-field style="width: 100%;">
+                                        <mat-select placeholder="{{'business_profile.value' | translate}}" [formControl]="toppings" [(value)]="selectedToppings" multiple>
+                                            <mat-option *ngFor="let service of services[selectedCat] | slice:1" [value]="service" [disabled]="service_exists(service)">{{service}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <!-- <div class="col-md-6">
+                                    <mat-form-field style="width: 100%;">
+                                        <mat-select placeholder="Value" [formControl]="toppings" [(value)]="selectedToppings" multiple>
+                                            <mat-option *ngFor="let topping of transporters" [value]="topping">{{topping}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field style="width: 100%;">
+                                        <mat-select placeholder="Value" [formControl]="toppings" [(value)]="selectedToppings" multiple>
+                                            <mat-option *ngFor="let topping of rentals" [value]="topping">{{topping}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div> -->
+                            </div>
+                        </div>
+                        <hr style="border: 1px solid gray;">
+                        <div>
+                            <span class="section-title text-primary mb-3 mb-sm-4">{{'business_profile.place' | translate}}</span>
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <label for="">{{'business_profile.change_place' | translate}}</label>
+                                    <app-map (get_coord)="get_coord($event)" [set_coord]="set_coord" ></app-map>
+                                </div>
+                                <div class="col-md-12">
+                                    <button *ngIf="location_changed" type="button" (click)="update_location()" class="btn btn-success">{{'business_profile.update_location' | translate}}</button>
+                                </div> 
+                            </div>
+                        </div>
+                        <!-- <div>
+                            <span class="section-title text-primary mb-3 mb-sm-4">Education</span>
+                            <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.</p>
+                            <p class="mb-1-9">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour.</p>
+                        </div> -->
+                        <div class="mt-5">
+                            <span class="section-title text-primary mb-3 mb-sm-4">{{ 'business_profile.vehicles' | translate }}</span>
+                            <!-- <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.</p>
+                            <p class="mb-1-9">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour.</p> -->
+                            <ol class="list-group list-group-numbered " >
+                                <li *ngFor="let vehicle of list_vehicles; let i = index" class="list-group-item d-flex justify-content-between align-items-start">
+                                    <img src="assets/imgs/car.png" alt="Car" class="vehicle-image" height="100px"/>
+                                    <div class="ms-2 me-auto">
+                                        <!-- <div class="fw-bold">Subheading</div> -->
+                                        <h3>{{ vehicle.marque }} {{ vehicle.name }}</h3>
+                                        <p>{{ vehicle.type }} . {{ vehicle.placeNumbler }} {{ 'business_profile.seats' | translate }}</p>
+                                        <!-- Cras justo odio -->
+                                    </div>
+                                    <span class="badge bg-primary rounded-pill p-3" (click)="removeCar(vehicle, i)" style="cursor: pointer;"><i class="bi bi-trash"></i></span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-start">
+                                    <div class="ms-2 me-auto">
+                                        <button class="btn bg-primary" data-toggle="modal" data-target="#vehicleModal">{{ 'business_profile.add_vehicles' | translate }}</button>
+                                    </div>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-center align-items-center">
+                                    <div *ngIf="vehicle_saved" class="alert alert-info alert-dismissible fade show" role="alert">
+                                        {{ 'business_profile.vehicles_saved' | translate }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeSavingAlert()">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div *ngIf="saving_vehicle" class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </li>
+                            </ol>                            
+                        </div>
+                        <div class="mt-5">
+                            <span class="section-title text-primary mb-3 mb-sm-4">{{ 'business_profile.documents' | translate }}</span>
+                            <ol class="list-group list-group-numbered " >
+                                <!-- <li *ngFor="let doc of provider_profile.documents; let index = index;" 
+                                    style="border-bottom: 1px solid black; border-top: 1px solid black;" 
+                                    class="list-group-item d-flex justify-content-between align-items-start hoverable-item">
+                                    <img src="assets/imgs/car.png" alt="Car" class="vehicle-image" height="40px"/>
+                                    <div class="ms-2 me-auto">
+                                        <a [href]="fileUrl+doc.name" target="_blank">{{ doc.originalname }}</a>
+                                    </div>
+                                    <span class="badge bg-primary rounded-pill p-3" (click)="removeCar(vehicle, i)" style="cursor: pointer;">
+                                        <i class="bi bi-trash trash-icon"></i>
+                                    </span>
+                                </li> -->
+                                <!-- <li *ngFor="let doc of provider_profile.documents; let index = index;" 
+                                    class="list-group-item d-flex justify-content-between align-items-start hoverable-item" 
+                                    (click)="openDocument(fileUrl + doc.name, $event)">
+                                    <img src="assets/imgs/car.png" alt="Car" class="vehicle-image" height="40px"/>
+                                    <div class="ms-2 me-auto">
+                                        <a [href]="fileUrl + doc.name" target="_blank">{{ doc.originalname }}</a>
+                                    </div>
+                                    <span class="badge bg-warning rounded-pill p-3" (click)="removeDocument(doc, i)" style="cursor: pointer;">
+                                        <i class="bi bi-trash trash-icon"></i>
+                                    </span>
+                                </li> -->
+                                <li *ngFor="let doc of provider_profile.documents; let index = index;" style="border-bottom: 1px solid gray; border-top: 1px solid gray;"
+                                    class="list-group-item d-flex justify-content-between align-items-start"  >
+                                    <!-- <img src="assets/imgs/car.png" alt="Car" class="vehicle-image" height="40px"/> -->
+                                    <i class="bi bi-file-earmark-text document-icon"></i>
+                                    <div class="ms-2 me-auto hoverable-item">
+                                        <a [href]="fileUrl + doc.name" target="_blank">{{ doc.originalname }}</a>
+                                    </div>
+                                    <div>
+                                        <span class="badge bg-primary rounded-pill p-3" (click)="openDocument(fileUrl + doc.name, $event)" style="cursor: pointer;">
+                                            <i class="bi bi-file-earmark-text document-icon"></i>
+                                        </span>
+                                        <span class="badge bg-warning rounded-pill p-3" (click)="removeDocument(doc, i)" style="cursor: pointer;">
+                                            <i class="bi bi-trash trash-icon"></i>
+                                        </span>
+                                    </div>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-center align-items-center" style="border-top: 1px solid gray; background-color: grey;">
+                                    <button class="btn bg-primary" data-toggle="modal" data-target="#documentModal">{{ 'business_profile.add_documents' | translate }}</button>
+                                </li>
+                                
+
+                                
+                                <!-- <li class="list-group-item d-flex justify-content-between align-items-start">
+                                    <div class="ms-2 me-auto">
+                                        <button class="btn bg-primary" data-toggle="modal" data-target=".bs-example-modal-lg">{{ 'business_profile.add_vehicles' | translate }}</button>
+                                    </div>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-center align-items-center">
+                                    <div *ngIf="vehicle_saved" class="alert alert-info alert-dismissible fade show" role="alert">
+                                        {{ 'business_profile.vehicles_saved' | translate }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeSavingAlert()">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div *ngIf="saving_vehicle" class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </li> -->
+                            </ol>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div class="ms-2 me-auto" >
+    <div class="modal fade bs-example-modal-lg" id="vehicleModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">{{ 'business_profile.add_vehicles_title' | translate }}</h4>
+                </div>
+                <div class="modal-body">
+                    <app-vehicles (handleVehicle)="registerVehicle($event)"></app-vehicles>
+                    <div class="row" *ngIf="new_vehicles.length>0">
+                        <div class="col-md-8">
+                            <p class="text-right">{{'carrier.be_provider_form.section2_subtitle_part1' | translate }} {{new_vehicles.length}} {{'carrier.be_provider_form.section2_subtitle_part2' | translate }}</p>
+                        </div>
+                        <div class="col-md-4 text-right">
+                            <button type="button" class="btn btn-link btn-sm bg-danger" (click)="new_vehicles = [];">{{'carrier.be_provider_form.section2_clear_list_button' | translate }}</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button #closeButton type="button" class="btn btn-default" data-dismiss="modal">{{ 'business_profile.add_vehicles_cancel' | translate }}</button>
+                    <button type="button" class="btn btn-primary" (click)="save_vehicle()" [disabled]="new_vehicles?.length==0">{{ 'business_profile.add_vehicles_save' | translate }}</button>
+                </div>  
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-add-documents [provider_profile]="provider_profile" (eventEmitter)="find_profile()" ></app-add-documents>

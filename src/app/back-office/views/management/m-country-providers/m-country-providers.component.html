@@ -1,0 +1,268 @@
+<div class="card-body">
+    <div class="form-group row">
+        <div class="col-md-12"> 
+        <div>
+            <br>
+            <h3>List of providers </h3>
+            
+            <table class="table table-responsive-sm table-hover table-outline mb-0">
+            <thead class="thead-light">
+                <tr>
+                <th class="text-center"><i class="icon-people"></i></th>
+                <th>Providers</th>
+                <th>Status</th>
+                <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="obj_loader">
+                <td colspan="4" class="text-center">Please wait moment, we are loading providers</td>
+                </tr>
+                <tr *ngIf="!obj_loader && list_providers.length==0">
+                <td colspan="4" class="text-center">Please wait moment, we are loading providers</td>
+                </tr>
+                <tr *ngFor="let item of list_providers">
+                <td class="text-center">
+                    <div class="avatar">
+                    <img src="../../../../assets/img/user_image.png" class="img-avatar">
+                    <!-- <span class="avatar-status badge-success"></span> -->
+                    </div>
+                </td>
+                <td>
+                    <div>{{item.user.firstname}} {{item.user.lastname}}</div>
+                    <div *ngIf="item.isCompany" class="small text-muted">
+                    <span>Company</span> | {{item.user.companyName}}
+                    </div>
+                    <div *ngIf="!item.user.isCompany" class="small text-muted">
+                    <span>Personnal</span>
+                    </div>
+                </td>
+                <td>
+                    <!-- <span class="badge badge-success" *ngIf="item.isAcceptedProvider" >Confirmed</div> -->
+                    <span class="badge badge-success" *ngIf="item.user.isAcceptedProvider" >Confirmed</span>
+                    <span class="badge badge-danger" *ngIf="!item.user.isAcceptedProvider" >Waiting</span>
+                </td>
+                <td>
+                    <button type="button" (click)="displayDetails(item.user, services)" class="btn btn-outline-info btn-sm">Infos</button>
+                    <button type="button" [disabled]="item.user.loadder" *ngIf="!item.user.isAcceptedProvider" (click)="validerAccount(item.user)" class="btn btn-success btn-sm">Confirm account</button>
+                    
+                </td>
+                </tr>
+                
+            </tbody>
+            </table>      
+        </div>
+    
+    </div>
+    <div class="col-md-2"></div>
+    </div>
+    
+    <mat-paginator 
+            [length]="dataLength"
+            [pageSize]="criteria.limit"
+            [pageSizeOptions]="[5, 10, 25, 100]"
+            (page)="onPageChange($event)"
+            aria-label="Select page">
+    </mat-paginator>
+    <ng-template #services class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-center">{{currentProvider?.firstname}} {{currentProvider?.lastname}}</h5>
+                    <button type="button" class="close" (click)="modalRef.hide()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                
+                <table class="table table-responsive-sm table-hover table-outline mb-5">
+                    <tr>
+                    <td>Status</td>
+                    <td>
+                        <span class="badge badge-success" *ngIf="currentProvider && currentProvider.isAcceptedProvider" >Confirmed</span>
+                        <span class="badge badge-danger" *ngIf="currentProvider && !currentProvider.isAcceptedProvider" >Waiting</span> | 
+                        <button type="button" *ngIf="currentProvider && !currentProvider.isAcceptedProvider" (click)="validerAccount(currentProvider)" class="btn btn-success btn-sm">Confirm account</button>
+                    </td>
+                    </tr>
+                    <tr>
+                    <td>Firstname</td>
+                    <td>{{currentProvider?.firstname}} {{currentProvider?.lastname}}</td>
+                    </tr>
+                    
+                    <tr>
+                    <td>Company</td>
+                    <td>
+                        <span *ngIf="currentProvider && currentProvider.isCompany">Yes ({{currentProvider?.companyName}})</span>
+                        <span *ngIf="currentProvider && !currentProvider.isCompany">No</span> <br>
+                        <span>Import & Export code : {{currentProvider?.importExportCompagnyCode}}</span>
+                    </td>
+                    </tr>
+                    <tr>
+                    <td>Registration Number</td>
+                    <td>
+                        {{currentProvider?.registrationNumber}}
+                    </td>
+                    </tr>
+                    <tr>
+                    <td>Passport Number</td>
+                    <td>
+                        {{currentProvider?.passportNumber}}
+                    </td>
+                    </tr>
+                    <tr>
+                    <td>Address</td>
+                    <td>
+                        {{currentProvider?.address.country}}, {{currentProvider?.address.city}} - {{currentProvider?.address.zip}}
+                    </td>
+                    </tr>
+                    <tr>
+                    <td>Email</td>
+                    <td>
+                        {{currentProvider?.address.email}}
+                    </td>
+                    </tr>
+                    <tr>
+                        <td>Phone number</td>
+                        <td>
+                            {{currentProvider?.address.phone}}
+                        </td>
+                    </tr>
+                    <tr *ngFor="let doc of provider_profile.documents; let index = index;">
+                        <td>Document N°{{index+1}} </td>
+                        <td>
+                            <img [src]="doc" alt="Document" width="100%">
+                        </td>
+                    </tr>
+                </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" (click)="modalRef.hide()">Close</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </ng-template><!-- /.modal -->
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <table class="table align-middle mb-0 bg-white">
+    <thead class="bg-light">
+    <tr>
+        <th>Name</th>
+        <th>Title</th>
+        <th>Status</th>
+        <th>Position</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+        <div class="d-flex align-items-center">
+            <img
+                src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                alt=""
+                style="width: 45px; height: 45px"
+                class="rounded-circle"
+                />
+            <div class="ms-3">
+            <p class="fw-bold mb-1">John Doe</p>
+            <p class="text-muted mb-0">john.doe@gmail.com</p>
+            </div>
+        </div>
+        </td>
+        <td>
+        <p class="fw-normal mb-1">Software engineer</p>
+        <p class="text-muted mb-0">IT department</p>
+        </td>
+        <td>
+        <span class="badge badge-success rounded-pill d-inline">Active</span>
+        </td>
+        <td>Senior</td>
+        <td>
+        <button type="button" class="btn btn-link btn-sm btn-rounded">
+            Edit
+        </button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+        <div class="d-flex align-items-center">
+            <img
+                src="https://mdbootstrap.com/img/new/avatars/6.jpg"
+                class="rounded-circle"
+                alt=""
+                style="width: 45px; height: 45px"
+                />
+            <div class="ms-3">
+            <p class="fw-bold mb-1">Alex Ray</p>
+            <p class="text-muted mb-0">alex.ray@gmail.com</p>
+            </div>
+        </div>
+        </td>
+        <td>
+        <p class="fw-normal mb-1">Consultant</p>
+        <p class="text-muted mb-0">Finance</p>
+        </td>
+        <td>
+        <span class="badge badge-primary rounded-pill d-inline"
+                >Onboarding</span
+            >
+        </td>
+        <td>Junior</td>
+        <td>
+        <button
+                type="button"
+                class="btn btn-link btn-rounded btn-sm fw-bold"
+                data-mdb-ripple-color="dark"
+                >
+            Edit
+        </button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+        <div class="d-flex align-items-center">
+            <img
+                src="https://mdbootstrap.com/img/new/avatars/7.jpg"
+                class="rounded-circle"
+                alt=""
+                style="width: 45px; height: 45px"
+                />
+            <div class="ms-3">
+            <p class="fw-bold mb-1">Kate Hunington</p>
+            <p class="text-muted mb-0">kate.hunington@gmail.com</p>
+            </div>
+        </div>
+        </td>
+        <td>
+        <p class="fw-normal mb-1">Designer</p>
+        <p class="text-muted mb-0">UI/UX</p>
+        </td>
+        <td>
+        <span class="badge badge-warning rounded-pill d-inline">Awaiting</span>
+        </td>
+        <td>Senior</td>
+        <td>
+        <button
+                type="button"
+                class="btn btn-link btn-rounded btn-sm fw-bold"
+                data-mdb-ripple-color="dark"
+                >
+            Edit
+        </button>
+        </td>
+    </tr>
+    </tbody>
+</table> -->

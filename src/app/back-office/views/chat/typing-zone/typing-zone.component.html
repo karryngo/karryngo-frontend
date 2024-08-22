@@ -1,0 +1,10 @@
+<div class="input-group">
+    <div *ngIf="!is_provider" class="input-group-append">
+      <span (click)="sendInfoService()" data-toggle="tooltip" data-placement="top" title="{{'chat.typing_zone.title1' | translate }}" class="input-group-text file_btn"><i class="fas fa-paperclip"></i></span>
+      <span (click)="sendPayment()" data-toggle="tooltip" data-placement="top" title="{{'chat.typing_zone.title2' | translate }}" class="input-group-text shop_btn"><i class="fas fa-shopping-cart"></i></span>
+    </div>
+    <textarea [formControl]="formInput" name="" class="form-control type_msg" placeholder="{{'chat.typing_zone.type_message' | translate }}"></textarea>
+    <div class="input-group-append">
+      <span (click)="sendMessage()" class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></span>
+    </div>
+</div>

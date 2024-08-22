@@ -1,0 +1,124 @@
+<!-- Package Details-->
+<h4 class="mb-2 text-center title-form"><b> <u>Passenger Details </u></b></h4>
+<!-- row-item-->
+<br>
+<div class="form-row">
+  <div class="col">
+    <div class="bg">
+      <b>{{passengerName}}</b>
+    </div>
+    <p class="title-form sub-indication text-left">Passenger Name</p>
+  </div>
+</div>
+
+<div class="form-row mb-2">
+  <div class="col">
+    <div class="bg"><b>{{startLocation}}</b></div>
+    <p class="title-form sub-indication text-left">start Location</p>
+  </div>
+  <div class="col">
+    <div class="bg"><b>{{endLocation}}</b></div>
+    <p class="title-form sub-indication text-left">arrived location</p>
+  </div>
+</div>
+<!-- row-item-->
+<div class="form-row">
+  <div class="col-4">
+    <div class="bg"><b>{{nuberOfPlace}}</b> P<sub><small>lcs</small></sub></div>
+    <p class="title-form sub-indication text-left">Nuber Of Place</p>
+  </div>
+  <div *ngIf="isUrgent" class="col-4">
+    <div class="bg"><label for="isUrgent"><b> is urgent</b></label></div>
+    <input type="checkbox" id="field_isUrgent" checked disabled>
+  </div>
+  <div *ngIf="!isUrgent" class="col-4">
+    <div class="bg"><label for="isUrgent">is urgent</label></div>
+    <input type="checkbox" id="field_isUrgent" disabled>
+  </div>
+  <div class="col-4">
+    <div class="bg"><b>{{collectionDate}}</b></div>
+    <p class="title-form sub-indication text-left">Collection Date</p>
+  </div>
+</div>
+<!-- row-item-->
+<div class="form-row mb-1 form-group col-sm-11 center">
+  <textarea class="form-control field-form2" id="field_descriptionPackage" rows="3"
+    disabled>{{passengerDescription}}</textarea>
+  <label for="descriptionPackage">Passenger description</label>
+</div>
+<div class="center-div col-4">
+  <div class="bg"><b style="color: green; size: 10px;">{{price}}</b> XOF</div>
+  <p class="title-form sub-indication text-left">Transport price</p>
+</div>
+<!-- row-item-->
+<div class="text-center">More Informations </div>
+<div class="col-sm-6 center-div">
+  <div class="tab">
+    <button class="tablinks" onclick="openTab(event, 'passenger')">Passenger</button>
+  </div>
+</div>
+
+<div id="passenger" class="tabcontent">
+  <b class="text-center">Passenger</b><br><br>
+  <div class="form-row">
+    <div class="col">
+      <div class="bg">
+        <b>{{passengerName}}</b>
+      </div>
+      <p class="title-form sub-indication text-left">Passenger Name</p>
+    </div>
+  </div>
+
+  <div class="form-row mb-2">
+    <div class="col">
+      <div class="bg"><b>{{passengerLocation}}</b></div>
+      <p class="title-form sub-indication text-left">Passenger Location</p>
+    </div>
+    <div class="col">
+      <div class="bg"><b>{{passengerPhone}}</b></div>
+      <p class="title-form sub-indication text-left">Passenger Contact</p>
+    </div>
+  </div>
+</div>
+
+<div id="Receiver" class="tabcontent">
+  <b>Receiver</b><br><br>
+  <div class="form-row">
+    <div class="col">
+      <div class="bg">
+        <b>{{receiverName}}</b>
+      </div>
+      <p class="title-form sub-indication text-left">Receiver Name</p>
+    </div>
+  </div>
+
+  <div class="form-row mb-1">
+    <div class="col">
+      <div class="bg"><b>{{receiverLocation}}</b></div>
+      <p class="title-form sub-indication text-left">Receiver Location</p>
+    </div>
+    <div class="col">
+      <div class="bg"><b>{{receiverPhone}}</b></div>
+      <p class="title-form sub-indication text-left">Receiver Contact</p>
+    </div>
+  </div>
+</div>
+<div id="Increase" class="tabcontent align-content-center">
+  <br>
+  <div class="form-row">
+    <p>Which price do you propose for this transport ?</p>
+    <div class="col-6 center-div">
+      <input type="number">
+      <button type="button" class="btn btn-success" style="background-color: green !important;"
+        (click)="increase()"><i class="fa fa-arrow-right"></i></button>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-danger" (click)="refuse()"
+    style="background-color: red !important;">Cancel</button>
+  <button type="button" class="btn" style="background-color: orange !important;"
+    onclick="openTab(event, 'Increase')">Increase</button>
+  <button type="button" class="btn btn-success" style="background-color: green !important;"
+    (click)="accept()">Accept</button>
+</div>

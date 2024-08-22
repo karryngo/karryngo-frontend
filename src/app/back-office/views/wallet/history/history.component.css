@@ -1,0 +1,73 @@
+.container {
+  width: 100%;
+  padding: 40px 0px 40px 0px;
+}
+
+.wallet {
+  margin: 0 auto;
+  border-radius: 5px;
+  background-color: #FFFFFF;
+  box-shadow: 0px 8px 20px 6px rgb(255, 178, 22);
+  -webkit-box-shadow: 0px 8px 20px 6px rgb(255, 178, 22);
+  -moz-box-shadow: 0px 8px 20px 6px rgb(255, 178, 22);
+  height: 680px;
+  max-width: 900px;
+  min-width: 800px;
+  display: flex;
+}
+
+.left-wallet {
+  background-color: #f2f2f2;
+  width: 300px;
+  height: initial;
+  padding: 40px;
+  border-radius: 5px;
+}
+
+
+h1 {
+  color: #7d818e;
+  margin: 0;
+  font-weight: 400;
+  font-size: 25px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+h4 {
+  margin: 0;
+  font-size: 30px;
+  font-weight: bold;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.left-wallet h1,
+.left-wallet modal-open,
+.right-trans h1,
+.right-trans #balance {
+  font-family: 'Open Sans', sans-serif;
+  display: inline-block;
+}
+
+#balance {
+  float: right;
+  line-height: 34px;
+  font-size: 30px;
+  font-weight: bold;
+  color: #464646;
+}
+
+
+.trans-list {
+  display: none;
+  border-top: 1px solid #f2f2f2;
+  margin-top: 40px;
+  overflow-y: scroll;
+  max-height: 550px;
+}
+
+.cc-select {
+  margin-top: 34px;
+  overflow-y: scroll;
+  max-height: 540px;
+  padding: 5px;
+}

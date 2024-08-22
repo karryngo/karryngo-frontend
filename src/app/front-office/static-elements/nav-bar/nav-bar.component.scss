@@ -1,0 +1,41 @@
+.navbar{
+   background: #fff;
+}
+
+#navbar-collapse{
+   margin-top: 15px;
+}
+
+ #liNav li{
+    margin-right: 15px;
+ }
+ #liAuth li, img{
+    list-style: none;
+    display: inline;
+    font-size: 17px;
+ }
+ .navbar-toggler{
+   background-color: #fecd0b !important;
+ }
+
+form ul li a{
+  color:rgb(253, 204, 9) !important;
+}
+
+.btn-primary{
+   background: #fecd0b !important;
+   -webkit-transition: 0.3s;
+   -moz-transition: 0.3s;
+   -o-transition: 0.3s;
+   transition: 0.3s;
+}
+
+.btn-primary:hover{
+   background: #000 !important;
+   color: #fecd0b !important;
+}
+
+.custom-lang{
+   margin-left: 10px;
+   text-transform: uppercase;
+}

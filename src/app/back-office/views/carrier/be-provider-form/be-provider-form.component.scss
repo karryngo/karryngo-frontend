@@ -1,0 +1,32 @@
+.card-body {
+  padding: 0 !important;
+}
+.card {
+  word-wrap: normal !important;
+}
+
+.centreVerticalement {
+  display: inline-block;
+  vertical-align: middle;
+  float: none;
+ }
+ 
+div.animated {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.bloc-customertype{
+  border-bottom: 1px solid #cccc;
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+}
+
+.cont2{
+  background: #fdfdfd6b;
+}
+
+.custom-form input, .custom-form textarea, .custom-form select{
+  background-color: #fff;
+}

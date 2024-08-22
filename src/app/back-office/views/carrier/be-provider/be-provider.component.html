@@ -1,0 +1,51 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div *ngIf="user && !user.isProvider && !user.isAcceptedProvider" class="col-md-12">
+      <div class="card"> <br><br><br> 
+        <h3 class="jaune text-center mx-4 mb-4" style="size: 10px;"> {{'carrier.be_provider.title' | translate }}</h3>
+        <p class="text-center">{{'carrier.be_provider.subtitle_p1' | translate }}</p>
+        <div class="card-body">
+          <p class="text-center"><strong>{{'carrier.be_provider.subtitle_p2' | translate }}</strong></p>
+          
+          <ul>
+            <li>{{'carrier.be_provider.p2_ietem1' | translate }}</li>
+            <li>{{'carrier.be_provider.p2_ietem2' | translate }}</li>
+            <li>{{'carrier.be_provider.p2_ietem3' | translate }}</li>
+            <li>{{'carrier.be_provider.p2_ietem4' | translate }}</li>
+          </ul>
+          <div style="text-align: center">
+            <button
+              type="button"
+              class="btn btn-weith"
+              [routerLink]="['/carrier/be-provider-form']"
+              >{{'carrier.be_provider.register_button' | translate }}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bloc is Provider -->
+    <div *ngIf="user && user.isProvider && user.isAcceptedProvider" class="col-md-12">
+      <div class="card"> <br><br><br>
+        <h3 class="jaune text-center mx-4 mb-4" style="size: 10px;">{{'carrier.be_provider.section2_title' | translate }}</h3>
+        
+        <div class="card-body">
+          <p class="text-center"><strong>{{'carrier.be_provider.section2_subtitle_p' | translate }}</strong></p>
+          
+          <ul>
+            <li>{{'carrier.be_provider.section2_p2_ietem1' | translate }}</li>
+            <li>{{'carrier.be_provider.section2_p2_ietem2' | translate }}</li>
+            <li>{{'carrier.be_provider.section2_p2_ietem3' | translate }}</li>
+            <li>{{'carrier.be_provider.section2_p2_ietem4' | translate }}</li>
+          </ul>
+          <div class="text-center">
+              <p>{{'carrier.be_provider.section2_chat_menu' | translate }}</p>
+          </div>
+        </div>
+      </div> 
+    </div>
+    <!-- End of block-->
+  </div>
+</div>
+
+

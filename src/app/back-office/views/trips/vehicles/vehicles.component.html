@@ -1,0 +1,150 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col">
+      <div class="alert alert-warning"> 
+        {{'trips.vehicles.note' | translate }}
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6 col-md-7">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="jaune text-left mx-4 mb-4">{{'trips.vehicles.add_vehicle' | translate }}</h4>
+        </div>
+        <div class="card-body">
+          <div class="container cont2">
+            <form class="p-2">
+              <div class="form-row mb-3">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="brand">{{'trips.vehicles.brand' | translate }}</label>
+                    <ng-select class="custom-widge">
+                      <ng-option value="" disabled selected hidden>{{'trips.vehicles.brand' | translate }}</ng-option>
+                      <ng-option *ngFor="let obj of list_brands" [value]="obj">{{obj?.name}}</ng-option>
+                    </ng-select>
+                    <!-- <input type="text" id="brand" class="form-control" placeholder="Brand" /> -->
+                  </div>  
+                  <!-- <p class="title-form sub-indication text-left">Vehicle Brand</p> -->
+                </div>
+                <div class="col">
+
+                  <div class="form-row mb-3">
+                    <div class="col">
+                      <div class="form-group">
+                        <label for="vehicle_type">{{'trips.vehicles.vehicle_type' | translate }}</label>
+                        <select class="form-control" id="vehicle_type">
+                          <!-- <option selected>Vehicle Type</option> -->
+                          <option value="bike">{{'trips.vehicles.form_option1' | translate }}</option>
+                          <option selected value="car">{{'trips.vehicles.form_option2' | translate }}</option>
+                          <option value="truck">{{'trips.vehicles.form_option3' | translate }}</option>
+                          <option value="truck">{{'trips.vehicles.form_option4' | translate }}</option>
+                          <option value="truck">{{'trips.vehicles.form_option5' | translate }}</option>
+                        </select>
+                      </div>
+                      <!-- <p class="title-form sub-indication text-left">Vehicle Type</p> -->
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+              <!-- row-item-->
+              <div class="form-row mb-3">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="matricule">{{'trips.vehicles.registration_number' | translate }}</label>
+                    <input type="text" id="matricule" class="form-control" placeholder="Ex. LT903UC" />
+                  </div>  
+                  <!-- <p class="title-form sub-indication text-left">Registration Number</p> -->
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label for="idSelect1">{{'trips.vehicles.seats' | translate }}</label>
+                    <select class="form-control" id="idSelect1">
+                      <!-- <option selected>Number of seats</option> -->
+                      <option value="1">1</option>
+                      <option selected value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                      <option value="15">15</option>
+                      <option value="20">20</option>
+                      <option value="30">30</option>
+                      <option value="70">70</option>
+                    </select>
+                  </div>
+                  <!-- <p class="title-form sub-indication text-left">Number of seat</p> -->
+                </div>
+              </div>
+              <!-- row-item-->
+
+              <!-- row-item-->
+              <div class="form-row form-group shadow-textarea m2">
+                <label for="exampleFormControlTextarea6">{{'trips.vehicles.description' | translate }}</label>
+                <textarea class="form-control" id="exampleFormControlTextarea6" rows="3"
+                  placeholder="{{'trips.vehicles.about_your_vehicle' | translate }}"></textarea>
+              </div>
+              <!-- row-item-->
+              <div class="m-1">
+                <ngx-dropzone (change)="onSelect($event)">
+                  <ngx-dropzone-label>{{'trips.vehicles.Drop_here_vehicle_images' | translate }}</ngx-dropzone-label>
+                  <ngx-dropzone-image-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+                    <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                  </ngx-dropzone-image-preview>
+                </ngx-dropzone>
+              </div>
+            </form>
+            <button type="button" class="btn next-button btn-weith">{{'trips.vehicles.save' | translate }}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-md-5">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="jaune text-left mx-4 mb-4">
+            {{'trips.vehicles.vehicles_list' | translate }}</h4>
+        </div>
+        <div class="card-body">
+          <table class="table table-bordered table-striped table-sm" (click)="showNotification('top','center', 'danger', 'pe-7s-close-circle', '\<b>Warning\</b>\<br>Try Later')">
+            <thead>
+              <tr>
+                <th>{{'trips.vehicles.type' | translate }}</th>
+                <th>{{'trips.vehicles.date_registered' | translate }}</th>
+                <th>{{'trips.vehicles.brand' | translate }}</th>
+                <th>{{'trips.vehicles.number_of_seats' | translate }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+              </tr>
+            </tbody>
+          </table>
+          <nav>
+            <ul class="pagination pull-right">
+              <li class="page-item"><a class="page-link">{{'trips.vehicles.prev' | translate }}</a></li>
+              <li class="page-item active">
+                <a class="page-link">1</a>
+              </li>
+              <li class="page-item"><a class="page-link">2</a></li>
+              <li class="page-item"><a class="page-link">3</a></li>
+              <li class="page-item"><a class="page-link">{{'trips.vehicles.next' | translate }}</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <!--/.col-->
+  </div>
+
+</div>

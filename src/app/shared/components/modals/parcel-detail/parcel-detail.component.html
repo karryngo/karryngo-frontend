@@ -1,0 +1,144 @@
+<!-- Package Details-->
+<h4 class="mb-2 text-center title-form"><b> <u>Parcel Details </u></b></h4>
+<!-- row-item-->
+<br>
+<div class="form-row">
+  <div class="col">
+    <div class="bg">
+      <b>{{parcelName}}</b>
+    </div>
+    <p class="title-form sub-indication text-left">Parcel Name</p>
+  </div>
+</div>
+
+<div class="form-row mb-2">
+  <div class="col">
+    <div class="bg"><b>{{startLocation}}</b></div>
+    <p class="title-form sub-indication text-left">start Location</p>
+  </div>
+  <div class="col">
+    <div class="bg"><b>{{endLocation}}</b></div>
+    <p class="title-form sub-indication text-left">arrived location</p>
+  </div>
+</div>
+<!-- row-item-->
+<div class="form-row">
+  <div class="col-4">
+    <div class="bg"><b>{{parcelType}}</b></div>
+    <p class="title-form sub-indication text-left">Type of parcel</p>
+  </div>
+  <div class="col-4">
+    <div class="bg"><b>{{vehiculType}}</b></div>
+    <p class="title-form sub-indication text-left">Vehicle Type</p>
+  </div>
+  <div class="col-4">
+    <div class="bg"><b>{{volume}}</b> m<sup><small>3</small></sup></div>
+    <p class="title-form sub-indication text-left">Volume</p>
+  </div>
+</div>
+<!-- row-item-->
+<div class="form-row mb-2">
+  <div *ngIf="isFragile" class="col-4">
+    <div class="bg"><label for="isWeak"><b> is fragile</b></label></div>
+    <input type="checkbox" id="field_isWeak" checked disabled>
+  </div>
+  <div *ngIf="!isFragile" class="col-4">
+    <div class="bg"><label for="isWeak"><b> is fragile</b></label></div>
+    <input type="checkbox" id="field_isWeak" disabled>
+  </div>
+  <div *ngIf="isUrgent" class="col-4">
+    <div class="bg"><label for="isUrgent"><b> is urgent</b></label></div>
+    <input type="checkbox" id="field_isUrgent" checked disabled>
+  </div>
+  <div *ngIf="!isUrgent" class="col-4">
+    <div class="bg"><label for="isUrgent">is urgent</label></div>
+    <input type="checkbox" id="field_isUrgent" disabled>
+  </div>
+  <div class="col-4">
+    <div class="bg"><b>{{collectionDate}}</b></div>
+    <p class="title-form sub-indication text-left">Collection Date</p>
+  </div>
+</div>
+<!-- row-item-->
+<div class="form-row mb-1 form-group col-sm-11 center">
+  <textarea class="form-control field-form2" id="field_descriptionPackage" rows="3" disabled>{{description}}</textarea>
+  <label for="descriptionPackage">Description</label>
+</div>
+<div class="center-div col-4">
+  <div class="bg"><b style="color: green; size: 10px;">{{price}}</b> XOF</div>
+  <p class="title-form sub-indication text-left">Transport price</p>
+</div>
+<!-- row-item-->
+<div class="text-center">More Informations </div>
+<div class="col-sm-6 center-div">
+  <div class="tab">
+    <button class="tablinks" onclick="openTab(event, 'Sender')">Sender</button>
+    <button class="tablinks" onclick="openTab(event, 'Receiver')">Receiver</button>
+  </div>
+</div>
+
+<div id="Sender" class="tabcontent">
+  <b class="text-center">Sender</b><br><br>
+  <div class="form-row">
+    <div class="col">
+      <div class="bg">
+        <b>{{senderName}}</b>
+      </div>
+      <p class="title-form sub-indication text-left">Sender Name</p>
+    </div>
+  </div>
+
+  <div class="form-row mb-2">
+    <div class="col">
+      <div class="bg"><b>{{senderLocation}}</b></div>
+      <p class="title-form sub-indication text-left">Sender Location</p>
+    </div>
+    <div class="col">
+      <div class="bg"><b>{{senderPhone}}</b></div>
+      <p class="title-form sub-indication text-left">Sender Contact</p>
+    </div>
+  </div>
+</div>
+
+<div id="Receiver" class="tabcontent">
+  <b>Receiver</b><br><br>
+  <div class="form-row">
+    <div class="col">
+      <div class="bg">
+        <b>{{receiverName}}</b>
+      </div>
+      <p class="title-form sub-indication text-left">Receiver Name</p>
+    </div>
+  </div>
+
+  <div class="form-row mb-1">
+    <div class="col">
+      <div class="bg"><b>{{receiverLocation}}</b></div>
+      <p class="title-form sub-indication text-left">Receiver Location</p>
+    </div>
+    <div class="col">
+      <div class="bg"><b>{{receiverPhone}}</b></div>
+      <p class="title-form sub-indication text-left">Receiver Contact</p>
+    </div>
+  </div>
+</div>
+<div id="Increase" class="tabcontent align-content-center">
+  <br>
+  <div class="form-row">
+    <p>Which price do you propose for this transport ?</p>
+    <div class="col-6 center-div">
+      <input type="number" [formControl]="increaseVal" >
+      <button type="button" class="btn btn-success" style="background-color: green !important;"
+        (click)="increase()"><i class="fa fa-arrow-right"></i></button>
+    </div>
+  </div>
+</div>
+<app-progress-indeterminate *ngIf="isAnsware"></app-progress-indeterminate>
+<div class="modal-footer" *ngIf="!isAnsware">
+  <button type="button" class="btn btn-danger" (click)="refuse()"
+    style="background-color: red !important;">Cancel</button>
+  <button type="button" class="btn btn-success" style="background-color: green !important;"
+    (click)="accept()">Accept</button>
+  <button type="button" class="btn" style="background-color: orange !important;"
+    onclick="openTab(event, 'Increase')">Increase</button>
+</div>

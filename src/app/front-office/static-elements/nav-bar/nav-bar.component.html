@@ -1,0 +1,65 @@
+<!-- Navbar -->
+<nav class="navbar fixed-top navbar-expand-lg navbar-light scrolling-navbar">
+<div class="logo">
+    <a class="d-block" routerLink="/welcome">
+    <img loading="lazy" src="assets/img/logo.png" height="60px" alt="KarrynGo logo" />
+    </a>
+</div><!-- logo end -->
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navbar-collapse" class="collapse navbar-collapse">
+    <ul class="nav navbar-nav ml-auto align-items-center">
+    <li class="nav-item">
+        <a class="nav-link link-h" routerLink="/welcome">{{'header.menu_1' | translate}}</a>
+    </li>
+
+    <li class="nav-item ">
+        <a class="nav-link link-h" routerLink="/requests">{{'header.menu_2' | translate}}</a>
+    </li>
+    <li class="nav-item ">
+        <a class="nav-link link-h" routerLink="/network">{{'header.menu_3' | translate}}</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link link-h" routerLink="/about-us">{{'header.menu_4' | translate}}</a>
+    </li>
+    <li class="header-get-a-quote">
+        <a *ngIf="!user" class="btn btn-primary shadow-none" [routerLink]="['/login']">{{'header.menu_6' | translate}}</a>
+        <a *ngIf="user" class="btn btn-primary shadow-none" [routerLink]="['/mykarryngo']">{{'header.menu_5' | translate}}</a>
+    </li>
+
+    </ul>
+    <!-- Define language widget -->
+    <div class="dropdown language">
+    <select [(ngModel)]="selected_lang" (change)="chooseLang($event)" class="selectpicker custom-lang">
+        <option *ngFor="let item of langues" value="{{item.id}}"><span class="flag-icon flag-icon-us" selected></span> {{item.id}}</option>  
+    </select>
+    <!-- <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="flag-icon flag-icon-us"></span> English
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" ><span class="flag-icon flag-icon-fr"> </span> French</a> 
+        <a class="dropdown-item" href="#it"><span class="flag-icon flag-icon-it"> </span> Italian</a>
+        <a class="dropdown-item" href="#ru"><span class="flag-icon flag-icon-ru"> </span> Russian</a>
+    </div> -->
+    </div>
+    <!-- End widget language-->
+</div>
+
+    <!-- Define language widget -->
+    <!-- <div class="dropdown language">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="flag-icon flag-icon-us"></span> English
+    </button>
+    <div class="dropdown-menu dropdown-menu-right text-right language" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" ><span class="flag-icon flag-icon-fr"> </span> French</a> 
+        <a class="dropdown-item" href="#it"><span class="flag-icon flag-icon-it"> </span> Italian</a>
+        <a class="dropdown-item" href="#ru"><span class="flag-icon flag-icon-ru"> </span> Russian</a>
+    </div>
+    </div> -->
+    <!-- End widget language-->
+
+</nav>
+<!-- Navbar -->

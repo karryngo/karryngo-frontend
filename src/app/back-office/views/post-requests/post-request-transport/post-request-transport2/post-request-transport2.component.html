@@ -1,0 +1,64 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-sm-6 col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <!-- Start your project here-->
+          <div class="container container-global cont-margin text-center">
+            <h3 class="jaune text-left">{{'post_requests.post_request_transport.post_request_transport2.trip_results' | translate }}</h3> 
+
+            <!-- table-->
+            <div class="">
+              <table mdbTable #tableEl="mdbTable" class="table-responsive z-depth-1 table-style">
+                <thead>
+                  <tr>
+                    <th *ngFor="let head of headElements; let i = index" scope="col"><strong>{{head}}</strong></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let el of elements; let i = index">
+                    <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+                      scope="row">
+                      {{el.provider}}</th>
+                    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                      {{el.service}}
+                    </td>
+                    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                      {{el.departure}}
+                    </td>
+                    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                      {{el.duration}}
+                    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                      {{el.total}}
+                    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                      {{el.weight}}
+                    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                      {{el.volume}}
+                    </td>
+                  </tr>
+                </tbody>
+                <tfoot class="w-100 tfooter">
+                  <tr>
+                    <td colspan="7">
+                      <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="elements"></mdb-table-pagination>
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- table-->
+
+            <a href="#" class="">
+              <p class="mb-2 no-happy">{{'post_requests.post_request_transport.post_request_transport2.not_happy' | translate }}</p>
+            </a>
+            <button type="button" class="btn next-button btn-hei mb-4" routerLink="/post-request-transport-3">{{'post_requests.post_request_transport.post_request_transport2.post_request' | translate }}</button>
+          </div>
+          <!-- Start your project here-->
+
+          <!-- <app-front-footer></app-front-footer> -->
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

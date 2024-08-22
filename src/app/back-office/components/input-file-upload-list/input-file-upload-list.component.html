@@ -1,0 +1,23 @@
+<p class="text-left"><strong>{{label}}</strong></p>
+<div class="card mb-4 c2">
+    <!-- <strong class="text-center">Add Pictures</strong> -->
+    <hr class="line-separator">
+    <div class="ml-2 mr-2">
+        <mat-chip-list #chipList class="mat-chip-list-stacked" aria-orientation="vertical">
+            <!-- <mat-chip *ngFor="let item of nbInputFile" selectable="false" removable="true" (removed)="remove()" style="height: auto;"> -->
+            <mat-chip *ngFor="let item of nbInputFile; let i = index" selectable="false" removable="true" (removed)="remove(i)" style="height: auto;">
+                <app-input-file-upload [maxFileSize]="maxFileSize" (image_event)="get_file($event, i)" [accept]="accept"></app-input-file-upload>
+                <button mat-icon-button (click)="remove(i)" class="delete-icon">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </mat-chip>
+        </mat-chip-list>
+    </div>
+    <div class="mb-2 text-right">
+        <!-- EDIT button -->
+        <a class="btn  manage-button manage-button2  black-text" (click)="addDoc()">
+            <strong>{{'carrier.be_provider_form.form_picture' | translate }}</strong>
+        </a>
+    </div>
+
+</div>

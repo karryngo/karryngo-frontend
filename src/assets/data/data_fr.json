@@ -1,0 +1,537 @@
+﻿[
+{
+	"id":"albums-outline",
+	"color":"tertiary",
+	"name":"Salon",
+	"items":[
+		{
+			"name": "Canapé 3 Places",
+			"quantity": ""
+		},
+		{
+			"name": "Canapé 2 Places",
+			"quantity": ""
+		},
+		{
+			"name": "Canapé 1 Place",
+			"quantity": ""
+		},
+		{
+			"name": "Canapé en forme de L/d'angle",
+			"quantity": ""
+		},
+		{
+			"name": "Pouf pouf",
+			"quantity": ""
+		},
+		{
+			"name": "Table Basse (Bois)",
+			"quantity": ""
+		},
+		{
+			"name": "Table Basse (Verre)",
+			"quantity": ""
+		},
+		{
+			"name": "Table d'appoint",
+			"quantity": ""
+		},
+		{
+			"name": "Table Demi-Lune",
+			"quantity": ""
+		},
+		{
+			"name": "Porte-chapeau/manteau",
+			"quantity": ""
+		},
+		{
+			"name": "Tapis",
+			"quantity": ""
+		},
+		{
+			"name": "Systeme audio",
+			"quantity": ""
+		},
+		{
+			"name": "\"Téléviseur à écran plat (jusqu'à 40\"\")\"",
+			"quantity": ""
+		},
+		{
+			"name": "\"Téléviseur à écran plat (40\"\" à 50\"\")\"",
+			"quantity": ""
+		},
+		{
+			"name": "\"Téléviseur à écran plat (55\"\" à 70\"\")\"",
+			"quantity": ""
+		},
+		{
+			"name": "Téléviseur incurvé/OLED/QLED",
+			"quantity": ""
+		},
+		{
+			"name": "Meuble TV/unité murale (moyen)",
+			"quantity": ""
+		},
+		{
+			"name": "Meuble TV/unité murale (grande)",
+			"quantity": ""
+		},
+		{
+			"name": "Vitrine/Vitrine",
+			"quantity": ""
+		},
+		{
+			"name": "Comptoir de bar",
+			"quantity": ""
+		},
+		{
+			"name": "Chaises de bar",
+			"quantity": ""
+		},
+		{
+			"name": "Billard/Billard",
+			"quantity": ""
+		},
+		{
+			"name": "Sculpture/Statue",
+			"quantity": ""
+		},
+		{
+			"name": "Image/Miroir",
+			"quantity": ""
+		}
+	]
+},
+{
+	"id":"restaurant-outline",
+	"color":"danger",
+	"name":"Salle à Manger",
+	"items": [
+		{
+			"name": "Table de salle à manger (Bois)",
+			"quantity": ""
+		},
+		{
+			"name": "Table de salle à manger (verre)",
+			"quantity": ""
+		},
+		{
+			"name": "Chaises de salle à manger",
+			"quantity": ""
+		},
+		{
+			"name": "Banc de salle à manger",
+			"quantity": ""
+		},
+		{
+			"name": "Buffet/Buffet (Moyen)",
+			"quantity": ""
+		},
+		{
+			"name": "Buffet/Buffet (Grand)",
+			"quantity": ""
+		},
+		{
+			"name": "Piano (Droit)",
+			"quantity": ""
+		},
+		{
+			"name": "Piano (à queue)",
+			"quantity": ""
+		},
+		{
+			"name": "Chariot à thé",
+			"quantity": ""
+		},
+		{
+			"name": "Cave à vin/casier à vin",
+			"quantity": ""
+		},
+		{
+			"name": "Chaises de bar",
+			"quantity": ""
+		},
+		{
+			"name": "Image/Miroir",
+			"quantity": ""
+		}
+	]
+},
+{
+	"id":"storefront-outline",
+	"color":"orange",
+	"name":"Cuisine",
+	"items": [
+		{
+			"name": "Réfrigérateur/congélateur (côte à côte)",
+			"quantity": ""
+		},
+		{
+			"name": "Réfrigérateur/Congélateur (Simple)",
+			"quantity": ""
+		},
+		{
+			"name": "Frigo de bar",
+			"quantity": ""
+		},
+		{
+			"name": "Four micro onde",
+			"quantity": ""
+		},
+		{
+			"name": "Lave-vaisselle",
+			"quantity": ""
+		},
+		{
+			"name": "Machine à laver",
+			"quantity": ""
+		},
+		{
+			"name": "Sèche-linge",
+			"quantity": ""
+		},
+		{
+			"name": "Four/cuisinière",
+			"quantity": ""
+		},
+		{
+			"name": "Aspirateur",
+			"quantity": ""
+		},
+		{
+			"name": "Table de Cuisine (Bois)",
+			"quantity": ""
+		},
+		{
+			"name": "Table de cuisine (verre)",
+			"quantity": ""
+		},
+		{
+			"name": "Chaises de cuisine",
+			"quantity": ""
+		},
+		{
+			"name": "Poubelle",
+			"quantity": ""
+		},
+		{
+			"name": "Panier à Linge/Linge",
+			"quantity": ""
+		},
+		{
+			"name": "Planche a repasser",
+			"quantity": ""
+		},
+		{
+			"name": "Vetements de cheval",
+			"quantity": ""
+		},
+		{
+			"name": "Balai/Vadrouille/Seau",
+			"quantity": ""
+		},
+		{
+			"name": "Glacière",
+			"quantity": ""
+		},
+		{
+			"name": "Image/Miroir",
+			"quantity": ""
+		}
+	]
+},
+{
+	"id":"school-outline",
+	"color":"vert",
+	"name":"Etude",
+	"items": [
+		{
+			"name": "Bureau (Moyen - Bois)",
+			"quantity": ""
+		},
+		{
+			"name": "Bureau (Moyen - Verre)",
+			"quantity": ""
+		},
+		{
+			"name": "Bureau (Grand - Bois)",
+			"quantity": ""
+		},
+		{
+			"name": "Bureau (Grand - Verre)",
+			"quantity": ""
+		},
+		{
+			"name": "Crédence",
+			"quantity": ""
+		},
+		{
+			"name": "Chaises de bureau",
+			"quantity": ""
+		},
+		{
+			"name": "Classeur",
+			"quantity": ""
+		},
+		{
+			"name": "Armoire à papeterie",
+			"quantity": ""
+		},
+		{
+			"name": "Bibliothèque (moyenne)",
+			"quantity": ""
+		},
+		{
+			"name": "Bibliothèque (Grande)",
+			"quantity": ""
+		},
+		{
+			"name": "Support d'ordinateur",
+			"quantity": ""
+		},
+		{
+			"name": "Moniteur d'ordinateur/écran",
+			"quantity": ""
+		},
+		{
+			"name": "Imprimante",
+			"quantity": ""
+		},
+		{
+			"name": "Sûr (non programmé)",
+			"quantity": ""
+		},
+		{
+			"name": "Image/Miroir",
+			"quantity": ""
+		}
+	]
+},
+{
+	"id":"bed-outline",
+	"color":"violet",
+	"name":"Chambres",
+	"items": [
+		{
+			"name": "Lit (King)",
+			"quantity": ""
+		},
+		{
+			"name": "Kist",
+			"quantity": ""
+		},
+		{
+			"name": "Valise",
+			"quantity": ""
+		},
+		{
+			"name": "Armoire à couture",
+			"quantity": ""
+		},
+		{
+			"name": "Canapé/Canapé-lit",
+			"quantity": ""
+		},
+		{
+			"name": "Lit bébé",
+			"quantity": ""
+		},
+		{
+			"name": "Compacte",
+			"quantity": ""
+		},
+		{
+			"name": "Vélo d'appartement",
+			"quantity": ""
+		},
+		{
+			"name": "Garde-robe",
+			"quantity": ""
+		},
+		{
+			"name": "Lit (Queen)",
+			"quantity": ""
+		},
+		{
+			"name": "Lit (Double)",
+			"quantity": ""
+		},
+		{
+			"name": "Lit (3/4 ou simple)",
+			"quantity": ""
+		},
+		{
+			"name": "Matelas Seigh/ à 4 colonnes",
+			"quantity": ""
+		},
+		{
+			"name": "Tête de lit",
+			"quantity": ""
+		},
+		{
+			"name": "Table de chevet",
+			"quantity": ""
+		},
+		{
+			"name": "Coiffeuse et chaise",
+			"quantity": ""
+		},
+		{
+			"name": "Commode",
+			"quantity": ""
+		},
+		{
+			"name": "Tapis roulant/Gym",
+			"quantity": ""
+		},
+		{
+			"name": "\"Téléviseur à écran plat (jusqu'à 40\"\")\"",
+			"quantity": ""
+		},
+		{
+			"name": "\"Téléviseur à écran plat (40\"\" à 55\"\")\"",
+			"quantity": ""
+		},
+		{
+			"name": "\"Téléviseur à écran plat (55\"\" à 70\"\")\"",
+			"quantity": ""
+		},
+		{
+			"name": "Téléviseur incurvé/OLED/QLED",
+			"quantity": ""
+		},
+		{
+			"name": "Image/Miroir",
+			"quantity": ""
+		}
+	]
+},
+{
+	"id":"build-outline",
+	"color":"dark-marron",
+	"name":"Garage et Extérieur",
+	"items":[
+		{
+			"name": "3 places",
+			"quantity": ""
+		},
+		{
+			"name": "2 places",
+			"quantity": ""
+		},
+		{
+			"name": "1 place",
+			"quantity": ""
+		},
+		{
+			"name": "Table Basse (Bois)",
+			"quantity": ""
+		},
+		{
+			"name": "Table Basse (Verre)",
+			"quantity": ""
+		},
+		{
+			"name": "Table de jardin (moyenne - bois)",
+			"quantity": ""
+		},
+		{
+			"name": "Table de jardin (moyenne - verre)",
+			"quantity": ""
+		},
+		{
+			"name": "Table de jardin (Grande - Bois)",
+			"quantity": ""
+		},
+		{
+			"name": "Table de jardin (Grande - Verre)",
+			"quantity": ""
+		},
+		{
+			"name": "Chaises de jardin",
+			"quantity": ""
+		},
+		{
+			"name": "Chaises de jardin (empilables)",
+			"quantity": ""
+		},
+		{
+			"name": "Banc de jardin",
+			"quantity": ""
+		},
+		{
+			"name": "Braaï",
+			"quantity": ""
+		},
+		{
+			"name": "Chauffage/ventilateur",
+			"quantity": ""
+		},
+		{
+			"name": "Plante en pot (moyenne)",
+			"quantity": ""
+		},
+		{
+			"name": "Plante en pot (grande)",
+			"quantity": ""
+		},
+		{
+			"name": "Chenil",
+			"quantity": ""
+		},
+		{
+			"name": "Balançoire/Jungle Gym",
+			"quantity": ""
+		},
+		{
+			"name": "Trampoline (Petit)",
+			"quantity": ""
+		},
+		{
+			"name": "Trampoline (Grand)",
+			"quantity": ""
+		},
+		{
+			"name": "Vélo",
+			"quantity": ""
+		},
+		{
+			"name": "Moto (cc)",
+			"quantity": ""
+		},
+		{
+			"name": "Tondeuse à gazon",
+			"quantity": ""
+		},
+		{
+			"name": "Outils de jardin",
+			"quantity": ""
+		},
+		{
+			"name": "Brouette",
+			"quantity": ""
+		},
+		{
+			"name": "Escabeau",
+			"quantity": ""
+		},
+		{
+			"name": "Échelle",
+			"quantity": ""
+		},
+		{
+			"name": "Armoire (Acier/Bois)",
+			"quantity": ""
+		},
+		{
+			"name": "Table de travail",
+			"quantity": ""
+		},
+		{
+			"name": "Boîte à outils",
+			"quantity": ""
+		}
+	]
+}
+    
+]

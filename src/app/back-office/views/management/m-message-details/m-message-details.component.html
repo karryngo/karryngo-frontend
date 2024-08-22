@@ -1,0 +1,46 @@
+<div class="animated fadeIn">
+    <div class="row" *ngIf="message.length!=0">
+        <div class="col-sm-6 col-lg-4">
+            <div class="card">
+            <div class="card-body">
+                <div>Sender : </div>
+                <div class="h1 text-muted mb-4">
+                    <!-- <i class="icon-pie-chart" style="color: rgb(255, 162, 0);"></i> -->
+                    <span class="h4 m-0 text-right">{{ message.name }}</span> <br>
+                    <span class="h4 m-0 text-right">Email: {{ message.email }} </span>
+                </div>
+                <div class="progress progress-xs my-5 ">
+                    <div class="progress-bar bg-warning" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <small class="text-muted">Object: {{ message.subject }} </small>
+            </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-8">
+            <div class="card">
+            <div class="card-body">
+                <div> On  </div>
+                <div class="h1 text-muted mb-4 pb-5">
+                    <i class="fa fa-check" style="color: green;"></i>
+                    <span class="h4 m-0 text-right">{{ message.created_at | date }} at {{ message.created_at | date: 'shortTime' }}</span>
+                </div>
+                <div class="progress progress-xs my-5">
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <small class="text-muted">{{ message.message }}</small>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="row py-5" *ngIf="message?.length==0">
+        <div class="col-sm-6 col-lg-12 py-5">
+            <div class="card">
+                <div class="card-body py-5">
+                    <div class="h1 text-muted my-4 py-5 text-center">
+                        <span class="h1 m-0 text-right">I formation not found</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

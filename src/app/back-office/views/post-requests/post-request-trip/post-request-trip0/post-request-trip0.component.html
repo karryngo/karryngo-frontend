@@ -1,0 +1,197 @@
+<form [formGroup]="tripForm" (ngSubmit)="submit()" class="text-center p-1 form-horizontal">
+
+<div >
+    <!-- Package Details--> 
+    <h3 *ngIf="slug!==undefined && slug=='person'" class="mx-4 text-left title-form jaune">{{'post_requests.post_request_trip.post_request_trip0.request_transport' | translate }}</h3>
+    <h3 *ngIf="slug!==undefined && slug=='rent'" class="mx-4 text-left title-form jaune">{{'post_requests.post_request_trip.post_request_trip0.rent_vehicle' | translate }}</h3>
+    <h3 *ngIf="slug!==undefined && slug=='hire'" class="mx-4 text-left title-form jaune">{{'post_requests.post_request_trip.post_request_trip0.hire_vehicle' | translate }}</h3>
+    <p class="mx-4 text-left">{{'post_requests.post_request_trip.post_request_trip0.fill_form' | translate }} </p>
+    <!-- <p *ngIf="slug!==undefined && slug!='person'" class="mx-4 text-left title-form">Please, fill the form below to perform your request</p> -->
+
+    <!-- row-item-->
+    <div class="card-body">
+    <div class="form-group row">
+        <div class="col-md-6" style="text-align: left;">
+            <label for="idType" ><small>{{'post_requests.post_request_trip.post_request_trip0.form_What_do_you_want' | translate }}</small></label>
+            <!-- <select class="form-control" style="font-weight: bold;" formControlName="field_typeof" (change)="handleType($event.target.value)"  [ngClass]="{ 'is-invalid': submitted && f.field_typeof.errors }" >
+                <option value="" selected disabled>{{ service_trip.PERSONS[0] }}</option>
+                <option style="font-weight: bold;" *ngFor="let service of service_trip.PERSONS | slice:1" [value]="service">{{ service }}</option>
+            </select> -->
+            <select class="form-control" style="font-weight: bold;" formControlName="field_typeof" (change)="handleType($event.target.value)" [ngClass]="{ 'is-invalid': submitted && f.field_typeof.errors }">
+                <!-- <option value="" selected disabled>{{ 'countries.' + (servs$ | async)[0] | translate }}</option>
+                <option style="font-weight: bold;" *ngFor="let service of servs$ | async" [value]="service">
+                    {{  service  }}
+                </option> -->
+                <ng-container *ngIf="(servs$ | async) as services">
+                    <!-- <option value="" selected disabled>{{ services[0] }}</option> -->
+                    <option style="font-weight: bold;" *ngFor="let service of services; let first = first" [value]="service.value" [disabled]="first">
+                        {{  service.name  }}
+                    </option>
+                </ng-container>
+                
+            </select>
+            <!-- <select class="form-control" style="font-weight: bold;" formControlName="field_typeof" (change)="handleType($event.target.value)" [ngClass]="{ 'is-invalid': submitted && f.field_typeof.errors }">
+                <ng-container *ngIf="(servs$ | async) as services">
+                  <option value="" selected disabled>{{ services[0].name | translate }}</option>
+                  <option style="font-weight: bold;" *ngFor="let service of services" [value]="service.value">
+                    {{ service.name | translate }}
+                  </option>
+                </ng-container>
+            </select> -->
+            <div *ngIf="submitted && f.field_typeof.errors" class="invalid-feedback text-danger">
+                <div *ngIf="f.field_typeof.errors.required">{{'post_requests.post_request_trip.post_request_trip0.form_required_field' | translate }}</div>
+            </div>
+            <div *ngIf="submitted && f.field_typeof.errors" class="invalid-feedback text-danger">
+                <div *ngIf="f.field_typeof.errors.required">{{'post_requests.post_request_trip.post_request_trip0.form_required_field' | translate }}</div>
+            </div>
+        </div>
+        <div class="col-md-6" *ngIf="countries.length!=0" style="text-align: left;"> 
+            <label for="idType"><small>{{'post_requests.post_request_trip.post_request_trip0.country_of_service' | translate }}</small></label>
+            <select placeholder="Country" class="form-control" formControlName="field_country" (change)="get_cities($event.target.value)" [ngClass]="{ 'is-invalid': submitted && f.field_country.errors }">
+                <!-- <option value="" selected disabled>{{ 'countries.' +  countries[0].name | translate }}</option> -->
+                <!-- <option style="font-weight: bold;" *ngFor="let country of countries" [value]="country.code2">{{ country.name }}</option> -->
+                <!-- <option style="font-weight: bold;" *ngFor="let country of countries" [ngValue]="country">{{ country.name }}</option> -->
+                <option style="font-weight: bold;" *ngFor="let country of countries" [ngValue]="country">{{ 'countries.' + country.name | translate }}</option>
+            </select>
+            <div *ngIf="submitted && f.field_country.errors" class="invalid-feedback text-danger"> 
+                <div *ngIf="f.field_country.errors.required">{{'post_requests.post_request_colis.post_request_colis0.form_required_field' | translate }}</div>
+            </div>
+        </div>
+        <!-- <div class="col-md-6">
+        <input type="text" id="field_passengerName" formControlName="field_passengerName" class="form-control"
+            placeholder="{{'post_requests.post_request_trip.post_request_trip0.form_full_name_placeholder' | translate }}" [ngClass]="{ 'is-invalid': submitted && f.field_passengerName.errors }">
+        <div class="error-msg" *ngIf="tripForm.get('field_passengerName').hasError('required') && (tripForm.get('field_passengerName').dirty || tripForm.get('field_passengerName').touched)">
+            {{'post_requests.post_request_trip.post_request_trip0.form_full_name_required' | translate }}
+        </div>
+        </div> -->
+        
+        <!-- <div class="col-md-3">
+        <label for="isUrgent">is urgent</label>
+        <input type="checkbox" id="field_isUrgent" formControlName="field_isUrgent" class="form-control checkbox">
+        </div> -->
+    </div>
+    <div class="form-row my-4" *ngIf="country_code" style="text-align: left;">
+        <div class="col">
+        <app-search-location [country_code]="country_code" label="{{'post_requests.post_request_colis.post_request_colis0.form_depart' | translate }}" placeholder="" #fromZone></app-search-location>
+        </div>
+        <div class="col">
+        <app-search-location [country_code]="country_code" label="{{'post_requests.post_request_colis.post_request_colis0.form_arrival' | translate }}" placeholder="" #toZone></app-search-location>
+        </div>
+    </div>
+    <!-- row-item-->
+    <div class="form-group row my-3">
+        <div class="col-md-4">
+            <p class="sub-indication text-left"> {{'post_requests.post_request_trip.post_request_trip0.form_seats' | translate }}</p>
+            <input type="number" min="0" id="field_numberPlace" formControlName="field_numberPlace" class="form-control" [ngClass]="{ 'is-invalid': is_form && f.field_numberPlace.errors }">
+            <div class="error-msg" *ngIf="tripForm.get('field_numberPlace').hasError('required') && (tripForm.get('field_numberPlace').dirty || tripForm.get('field_numberPlace').touched)">
+                {{'post_requests.post_request_trip.post_request_trip0.form_required_field' | translate }}
+            </div>
+            <div class="error-msg" *ngIf="tripForm.get('field_numberPlace').hasError('pattern') && (tripForm.get('field_numberPlace').dirty || tripForm.get('field_numberPlace').touched)">
+                {{'post_requests.post_request_trip.post_request_trip0.form_positive_field' | translate }}
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <p class="sub-indication text-left">{{'post_requests.post_request_trip.post_request_trip0.form_departure_date' | translate }}</p>
+            <input type="date" id="field_departureDate"  min="{{current_date}}" formControlName="field_departureDate" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.field_departureDate.errors }">
+            <div *ngIf="submitted && f.field_departureDate.errors" class="invalid-feedback text-danger">
+                <div *ngIf="f.field_departureDate.errors.required">{{'post_requests.post_request_trip.post_request_trip0.form_required_field' | translate }}</div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+        <p class="sub-indication text-left">{{'post_requests.post_request_trip.post_request_trip0.form_departure_time' | translate }}</p>
+        <input type="time" id="field_departureTime" formControlName="field_departureTime" class="form-control"
+            [ngClass]="{ 'is-invalid': is_form && f.field_departureTime.errors }" >
+        <div *ngIf="is_form && f.field_departureTime.errors" class="invalid-feedback text-danger">
+            <div *ngIf="f.field_departureTime.errors.required">{{'post_requests.post_request_trip.post_request_trip0.form_required_field' | translate }}</div>
+        </div>
+        
+        </div>
+    </div>
+        <div class="form-group row align-content-md-center my-5">
+            <div class="col-md-6">
+                <input type="text" formControlName="field_place" class="form-control mb-3" placeholder="{{'post_requests.post_request_trip.post_request_trip0.form_departure_place' | translate }}" [ngClass]="{ 'is-invalid': submitted && f.field_place.errors }">
+                <div *ngIf="submitted && f.field_place.errors" class="error-msg">
+                    <span *ngIf="f.field_place.errors.required"> {{'post_requests.post_request_trip.post_request_trip0.form_required_field' | translate }}</span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <input type="text" formControlName="arrival_place" class="form-control" placeholder="{{'post_requests.post_request_trip.post_request_trip0.form_arrival_place' | translate }}" [ngClass]="{ 'is-invalid': submitted && f.arrival_place.errors }">
+                <div *ngIf="submitted && f.arrival_place.errors" class="error-msg">
+                    <span *ngIf="f.arrival_place.errors.required"> {{'post_requests.post_request_trip.post_request_trip0.form_required_field' | translate }} </span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row align-content-md-center my-5">
+                
+            <div class="col-md-6">
+                <!-- <p class="title-form sub-indication text-left">Transport costs</p> -->
+                <input type="number" min="0" id="field_price" formControlName="field_price" class="form-control mb-3" placeholder="{{'post_requests.post_request_trip.post_request_trip0.form_transport_cost' | translate }}"
+                [ngClass]="{ 'is-invalid': is_form && f.field_price.errors }">
+                <div class="error-msg" *ngIf="tripForm.get('field_price').hasError('required') && (tripForm.get('field_price').dirty || tripForm.get('field_price').touched)">
+                    {{'post_requests.post_request_trip.post_request_trip0.form_proposal_price_required' | translate }}
+                </div>
+                <div class="error-msg" *ngIf="tripForm.get('field_price').hasError('pattern') && (tripForm.get('field_price').dirty || tripForm.get('field_price').touched)">
+                    {{'post_requests.post_request_trip.post_request_trip0.form_positive_value' | translate }}
+                </div>
+                <small>
+                    <p class="title-form sub-indication text-left">{{'post_requests.post_request_colis.post_request_colis0.form_shipping_costs' | translate }} <span *ngIf="currency" style="font-weight: bold;">( {{ currency }} )</span></p>
+                </small>
+            </div>
+            <div class="col-md-6">
+                <input type="number" min="0" id="luggage_weight" formControlName="luggage_weight" class="form-control" placeholder="{{'post_requests.post_request_trip.post_request_trip0.luggage_weight' | translate }}"
+                    [ngClass]="{ 'is-invalid': is_form && f.luggage_weight.errors }">
+                <div class="error-msg" *ngIf="tripForm.get('luggage_weight').hasError('required') && (tripForm.get('luggage_weight').dirty || tripForm.get('luggage_weight').touched)">
+                    {{'post_requests.post_request_trip.post_request_trip0.form_proposal_price_required' | translate }}
+                </div>
+                <div class="error-msg" *ngIf="tripForm.get('luggage_weight').hasError('pattern') && (tripForm.get('luggage_weight').dirty || tripForm.get('luggage_weight').touched)">
+                    {{'post_requests.post_request_trip.post_request_trip0.form_positive_value' | translate }}
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-6">
+                <label for=""> {{'post_requests.post_request_trip.post_request_trip0.map_departure_place' | translate }}</label>
+                <app-map (get_coord)="get_coord($event)" ></app-map>
+            </div>
+            <div class="col-md-6">
+                <label for=""> {{'post_requests.post_request_trip.post_request_trip0.map_arrival_place' | translate }}</label>
+                <app-map (get_coord)="get_arr_coord($event)" ></app-map>
+            </div>
+        </div>
+        <!-- row-item-->
+        <div class="form-row mb-4 form-group shadow-textarea">
+            <label for="tripDescription"> {{'post_requests.post_request_trip.post_request_trip0.form_description' | translate }}</label>
+            <textarea class="form-control field-form2 z-depth-1" id="field_tripDescription"
+            formControlName="field_tripDescription" rows="3"
+            placeholder="{{'post_requests.post_request_trip.post_request_trip0.form_about_trip' | translate }}"></textarea>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-12">
+                <input type="text" id="field_code" formControlName="field_code" class="form-control"
+                    placeholder="{{'post_requests.post_request_colis.post_request_colis0.form_secret_code' | translate }}" [ngClass]="{ 'is-invalid': submitted && f.field_code.errors }">
+                <div *ngIf="submitted && f.field_code.errors" class="invalid-feedback text-danger">
+                    <div *ngIf="f.field_code.errors.required">{{'post_requests.post_request_colis.post_request_colis0.form_required_field' | translate }}</div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- <div class="alert alert-warning">
+            {{'post_requests.post_request_trip.post_request_trip0.form_note' | translate }}
+        </div> -->
+
+        <!-- <div class="row">
+            <div class="col-md-12">
+                <select id="distance" class="form-control" formControlName="radius" [ngClass]="{ 'is-invalid': submitted && f.radius.errors }">
+                    <option *ngFor="let item of distance" value="{{item.value}}">{{item.dist}}</option>
+                </select>
+            </div>
+        </div> -->
+    </div>
+</div>
+
+    <button class="btn btn-primary" *ngIf="!savingService" type="submit">{{'post_requests.post_request_trip.post_request_trip0.form_confirm' | translate }}</button>
+    <app-progress-indeterminate *ngIf="savingService"></app-progress-indeterminate>
+</form>

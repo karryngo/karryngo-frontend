@@ -1,0 +1,25 @@
+.title-form{
+    color: #fff;
+}
+
+.my-form input, .my-form textarea, .my-form select{
+    background-color: #fff;
+  }
+
+
+  .image-container {
+    position: relative;
+    display: inline-block;
+    margin-right: 10px; /* Adjust margin as needed */
+}
+
+.selected-image {
+    max-width: 200px;
+    max-height: 200px;
+}
+
+.remove-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}

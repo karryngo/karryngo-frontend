@@ -1,0 +1,131 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-md-12">
+        <div class="card bg-dark text-white">
+            <div class="card-header">
+            <h5 class="text-left mx-4 text-white">{{'carrier.vehicles.title' | translate }}</h5>
+            </div>
+            <div class="card-body">
+            <div class="container cont2">
+                <form  [formGroup]="vehicleForm" (ngSubmit)="submit()" class="text-center p-2 my-form">
+                <div class="form-row">
+                    <div class="col">
+                        <select id="field_type" formControlName="type" class="form-control field-form1 field">
+                            <option selected disabled>{{'carrier.vehicles.form_vehicle_option1' | translate }}</option>
+                            <option value="Bike">{{'carrier.vehicles.form_vehicle_option2' | translate }}</option>
+                            <option value="Car">{{'carrier.vehicles.form_vehicle_option3' | translate }}</option>
+                            <option value="Backy">{{'carrier.vehicles.form_vehicle_option4' | translate }}</option>
+                            <option value="Truck">{{'carrier.vehicles.form_vehicle_option5' | translate }}</option>
+                            <option value="Bus">{{'carrier.vehicles.form_vehicle_option6' | translate }}</option>
+                        </select>
+                        <p class="title-form sub-indication text-left">{{'carrier.vehicles.form_vehicle_type' | translate }}</p>
+                    </div>
+                    <div class="col">
+                        <!-- <input type="text" id="field_brand" formControlName="field_brand" class="form-control field-form1 field"
+                            placeholder="Brand">
+                        <p class="title-form sub-indication text-left">Vehicle Brand*</p> -->
+                        <div class="form-group text-left">
+                            <!-- <label for="brand">Brand</label> -->
+                            <input type="text" id="brand" formControlName="marque" class="form-control" placeholder="Brand" />
+                            <!-- <ng-select class="custom-widge" formControlName="field_bran">
+                            <ng-option value="" disabled selected hidden>Brand</ng-option>
+                            <ng-option *ngFor="let obj of list_brands" [value]="obj.name">{{obj?.name}}</ng-option>
+                            </ng-select> -->
+                            <p class="title-form sub-indication text-left">{{'carrier.vehicles.form_vehicle_brand' | translate }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-row mb-3">
+                            <div class="col">
+                                <input type="text" id="name" formControlName="name" class="form-control field-form1 field"
+                                    placeholder="Model">
+                                <p class="title-form sub-indication text-left">{{'carrier.vehicles.form_vehicle_model' | translate }}</p>
+                                </div>
+                            <div class="col">
+                            <select id="field_numberSeat" formControlName="field_placeNumber" class="form-control field-form1 field">
+                                <option selected>{{'carrier.vehicles.form_vehicle_field_seats' | translate }}</option>
+                                <option *ngFor="let item of [1,2,3,4,5,6,7,8,9,10,15,20,30,70]" [value]="item">{{item}}</option>
+                            </select>
+                            <p class="title-form sub-indication text-left">{{'carrier.vehicles.form_vehicle_field_number_seats' | translate }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <div class="form-row mb-3">
+                            <div class="col">
+                                <input type="text" id="plate_number" formControlName="plate_number" class="form-control field-form1 field"
+                                    placeholder="{{'carrier.vehicles.form_vehicle_num_placeholder' | translate }}">
+                                <p class="title-form sub-indication text-left">{{'carrier.vehicles.form_vehicle_num' | translate }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="file" id="field_files" name="file-multiple-input" multiple (change)="handleFileInput($event)" accept="image/*">
+                        <p class="title-form sub-indication text-left">Add one or multiple vehicle pictures</p>
+                    </div>
+                </div>
+                <!-- <div class="form-row">
+                    <div class="col">
+                    <div class="form-group text-left">
+                        <input type="text" id="field_regnumber" formControlName="field_regnumber" class="form-control" placeholder="{{ 'carrier.vehicles.reg_number_placeholder' | translate }}" />
+                        <p class="title-form sub-indication text-left">{{'carrier.vehicles.reg_number' | translate }}</p>
+                    </div>
+                    </div>
+                    <div class="col">
+                    <input type="text" id="field_year" formControlName="field_year" class="form-control field-form1 field"
+                        placeholder="{{ 'carrier.vehicles.year_placeholder' | translate  }}">
+                    <p class="title-form sub-indication text-left">{{'carrier.vehicles.year' | translate }}</p>
+                    </div>
+                    
+                </div> -->
+                <!-- row-item-->
+    
+                <!-- row-item-->
+                <!-- <div class="form-row mb-4">
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <input type="file" id="field_files" name="file-multiple-input" multiple (change)="handleFileInput($event)">
+                            <p class="title-form sub-indication text-left">Add one or multiple vehicle pictures</p>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- row-item-->
+    
+    
+                <!-- row-item-->
+                <div class="form-row form-group m2" *ngIf="selectedFiles.length>0">
+                    <!-- Display selected images with remove buttons -->
+                    <div *ngFor="let image of selectedFiles; let i = index" class="image-container">
+                        <span class="bi bi-trash remove-button" style="cursor: pointer;" (click)="removeImage(i)"></span>
+                        <img  alt="Selected Image" [src]="sanitizeUrl(image)" style="max-width: 200px; max-height: 200px;">
+                        <!-- <button type="button" class="btn btn-danger btn-sm remove-button" (click)="removeImage(i)">Remove</button> -->
+                        
+                    </div>
+                </div>
+                <div class="form-row form-group m2">
+                    <label for="exampleFormControlTextarea6">{{'carrier.vehicles.form_vehicle_description' | translate }} <small>{{'carrier.vehicles.form_vehicle_description_2' | translate }}</small></label>
+                    <textarea class="form-control field-form2 z-depth-1" id="description" formControlName="description" rows="3"
+                    placeholder="{{'carrier.vehicles.form_vehicle' | translate }}"></textarea>
+                </div>
+                <!-- row-item-->
+    
+                <!-- Default form register -->
+                <div *ngIf="!submitted" class="text-right"> 
+                    <button type="submit" *ngIf="!submitted" [disabled]="submitted" class="btn next-button btn-weith"> {{'carrier.vehicles.form_vehicle_add' | translate }} </button>
+                    <button type="submit" *ngIf="submitted" [disabled]="submitted" class="btn next-button btn-weith"> {{'carrier.vehicles.form_vehicle_processing' | translate }}"}} </button>
+                </div>
+    
+                </form>
+                <!-- <app-progress-indeterminate *ngIf="submitted" ></app-progress-indeterminate> -->
+            </div>
+    
+            </div>
+        </div>
+        </div>
+    
+    </div>
+    </div>

@@ -1,0 +1,184 @@
+<div class="container-fluid px-1 py-5 mx-auto">
+    <div class="row d-flex justify-content-center">
+        <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
+            <h3>{{ 'management.m_country_details.title' | translate }}</h3>
+            <h3 class="blue-text"> {{  country?.name }} </h3>
+            <div class="card">
+                <h5 class="text-center mb-4">{{ 'management.m_country_details.rates_title' | translate }}</h5>
+                <form [formGroup]="rateForm" (ngSubmit)="submit()" class="form-card">
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-6 flex-column d-flex"> 
+                            <label class="form-control-label px-3">{{ 'management.m_country_details.karryngo_label' | translate }}</label> 
+                            <input type="number" id="fname" name="fname" placeholder="Value" formControlName="owner"> 
+                        </div>
+                        <div class="form-group col-sm-6 flex-column d-flex"> 
+                            <label class="form-control-label px-3">{{ 'management.m_country_details.administrator_label' | translate }}</label> 
+                            <input type="number" id="lname" name="lname" placeholder="Value" formControlName="manager"> 
+                        </div>
+                    </div>
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-6 flex-column d-flex"> 
+                            <label class="form-control-label px-3">{{ 'management.m_country_details.provider_label' | translate }}</label> 
+                            <input type="number" id="email" name="email" placeholder="" formControlName="provider"> 
+                        </div>
+                    </div>
+                    <div class="row justify-content-end">
+                        <div class="form-group col-sm-6" *ngIf="updating"> <button type="submit" class="btn-block btn-success">{{ 'management.m_country_details.save_button' | translate }}</button> </div>
+                    </div>
+                </form>
+                <div class="row justify-content-end">
+                    <div class="form-group col-sm-6" *ngIf="updating"> 
+                        <button type="submit" class="btn-block btn-warning" (click)="cancel_edit()">{{ 'management.m_country_details.cancel_button' | translate }}</button> 
+                    </div>
+                    <div class="form-group col-sm-6" *ngIf="!updating"> 
+                        <button type="submit" class="btn-block btn-primary" (click)="edit_rate()">{{ 'management.m_country_details.edit_button' | translate }}</button> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="main-body" *ngIf="!manager">
+        <h5><b>{{  country?.name }} {{ 'management.m_country_details.no_manager_text' | translate }}</b></h5>
+        <div class="main-body">
+            <div class="form-group mb-4 row">
+                <div class="col-md-12">
+                    <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+                        <mat-label>{{ 'management.m_country_details.search_manager_label' | translate }}</mat-label><br>
+                        <input type="text"
+                            placeholder="Pick one"
+                            aria-label="Number"
+                            matInput
+                            [formControl]="myControl"
+                            [matAutocomplete]="auto"
+                            class="form-control"
+                            (ngModelChange)="get_user($event)"
+                            >
+                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                        <mat-option *ngFor="let user of users" [value]="user.address.email" (click)="select_user(user)">
+                            {{user.firstname + " " + user.lastname + " ( " + user.address.email+" ) "}}
+                        </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-12" *ngIf="selected_user">
+                    {{ 'management.m_country_details.select_manager_text' | translate }} <b>{{ selected_user.firstname + " "+ selected_user.lastname }}</b> {{ 'management.m_country_details.as_manager_text' | translate }} <b>{{  country?.name }}</b>
+                    <button class="btn btn-success py-2 px-4" (click)="set_manager()">{{ 'management.m_country_details.yes_button' | translate }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main-body" *ngIf="manager">
+
+        <hr style="border: 1px, solid, gray;">
+
+        <div class="row gutters-sm">
+            <div class="col-md-12">
+                <h3>{{ 'management.m_country_details.manager_title' | translate }}</h3>
+            </div>
+            <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                <div class="d-flex flex-column align-items-center text-center">
+                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                    <div class="mt-3">
+                        <h4> {{ manager.firstname + " " + manager.lastname }} </h4>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="card mt-3">
+                <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                    <h6 class="mb-0">{{ 'management.m_country_details.website_label' | translate }}</h6>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                    <h6 class="mb-0">{{ 'management.m_country_details.github_label' | translate }}</h6>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                    <h6 class="mb-0">{{ 'management.m_country_details.twitter_label' | translate }}</h6>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                    <h6 class="mb-0">{{ 'management.m_country_details.instagram_label' | translate }}</h6>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                    <h6 class="mb-0">{{ 'management.m_country_details.facebook_label' | translate }}</h6>
+                </li>
+                </ul>
+            </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                            <h6 class="mb-0">{{ 'management.m_country_details.fullname_label' | translate }}</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{ manager.firstname }} {{ manager.lastname }}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                            <h6 class="mb-0">{{ 'management.m_country_details.email_label' | translate }}</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{ manager.address.email }}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                            <h6 class="mb-0">{{ 'management.m_country_details.phone_label' | translate }}</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{ manager.address.phone }}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                            <h6 class="mb-0">{{ 'management.m_country_details.mobile_label' | translate }}</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{ manager.address.phone }}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                            <h6 class="mb-0">{{ 'management.m_country_details.address_label' | translate }}</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row gutters-sm">
+                    <div class="col-sm-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">location_city</i>{{ 'management.m_country_details.location_label' | translate }}</h6>
+                            <small> {{ manager.address.city + ", " + manager.address.country }} </small>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="col-sm-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">assignment</i>{{ 'management.m_country_details.project_label' | translate }}</h6>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

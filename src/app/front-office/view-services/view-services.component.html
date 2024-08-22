@@ -1,0 +1,117 @@
+<app-nav-bar></app-nav-bar>
+
+<!-- figurative filling of content -->
+<div class="site-section bg-image overlaycustom-works">
+    <div class="container">
+        <div class="row justify-content-center bg-dark mb-5">
+            <div class="col-md-7 text-center border-primary">
+              <h2 class="font-weight-light text-warning box-title animated fadeIn delay-0.4s" *ngIf="slug=='hand-to-hand'">{{'home.service_t1' | translate}}</h2>
+              <h2 class="font-weight-light text-warning box-title animated fadeIn delay-0.4s" *ngIf="slug=='motorbikes'">{{'home.service_t2' | translate}}</h2>
+              <h2 class="font-weight-light text-warning box-title animated fadeIn delay-0.4s" *ngIf="slug=='vehicles'">{{'home.service_t3' | translate}}</h2>
+            </div>
+          </div>
+
+        <div class="col-md-12">
+            <div class="row" class="bloc-serv" *ngIf="slug=='hand-to-hand'">
+                <div class="col-md-12 mb-2">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <img src="assets/homestyle/images/testimonials/small_food.jpg" alt="Food Service" />
+                        </div>
+                        <div class="col-sm-9 " style="margin-top: auto; margin-bottom: auto;">
+                            <h5>{{'home.service_food' | translate}}</h5>
+                            <p>{{'home.service_food_content' | translate}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-2">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <img src="assets/homestyle/images/testimonials/courier.jpg" height="150px" width="150px" alt="" style="border-radius: 50%">
+                        </div>
+                        <div class="col-sm-9 " style="margin-top: auto; margin-bottom: auto;">
+                            <h5>{{'home.service_courier' | translate}}</h5>
+                            <p>{{'home.service_courier_content' | translate}}</p>
+                            <!-- <p> Do you want to move but you don't have a vehicle? We put you in touch with people who will take the same route as you at a lower cost.</p> -->
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="col-md-12 mb-2">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <img src="assets/homestyle/images/testimonials/parcel.jpg" />
+                        </div>
+                        <div class="col-sm-9 " style="margin-top: auto; margin-bottom: auto;">
+                            <h5>{{'home.service_parcel' | translate}}</h5>
+                            <p>{{'home.service_parcel_content' | translate}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" class="bloc-serv" *ngIf="slug=='motorbikes'">
+                <div class="col-md-12 px-2 pt-4 pb-5">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <img src="assets/homestyle/images/testimonials/motorbike.jpg" height="150px" width="150px" alt="" style="border-radius: 50%">
+                        </div>
+                        <div class="col-sm-9 " style="margin-top: auto; margin-bottom: auto;">
+                            <h5>{{'home.service_tranport_moto' | translate}}</h5>
+                            <p>{{'home.service_tranport_moto_content' | translate}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 px-2">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <img src="assets/homestyle/images/testimonials/motorbike_rental.jpg" height="150px" width="150px" alt="" style="border-radius: 50%">
+                        </div>
+                        <div class="col-sm-9 " style="margin-top: auto; margin-bottom: auto;">
+                            <h5>{{'home.service_rental_moto' | translate}}</h5>
+                            <p>{{'home.service_rental_moto_content' | translate}}</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="row" class="bloc-serv" *ngIf="slug=='vehicles'">
+                <div class="col-md-12 px-2 pt-4 pb-5">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <img src="assets/homestyle/images/testimonials/car.jpg" height="150px" width="150px" alt="" style="border-radius: 50%">
+                        </div>
+                        <div class="col-sm-9 " style="margin-top: auto; margin-bottom: auto;">
+                            <h5>{{'home.service_tranport_person' | translate}}</h5>
+                            <p>{{'home.service_tranport_person_content' | translate}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 px-2">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <img src="assets/homestyle/images/testimonials/car.jpg" height="150px" width="150px" alt="" style="border-radius: 50%">
+                        </div>
+                        <div class="col-sm-9 " style="margin-top: auto; margin-bottom: auto;">
+                            <h5>{{'home.service_transfert' | translate}}</h5>
+                            <p>{{'home.service_transfert_content' | translate}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 px-2">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <img src="assets/homestyle/images/testimonials/truck.jpg" height="150px" width="150px" alt="" style="border-radius: 50%">
+                        </div>
+                        <div class="col-sm-9 " style="margin-top: auto; margin-bottom: auto;">
+                            <h5>{{'home.service_trucking' | translate}}</h5>
+                            <p>{{'home.service_trucking_content' | translate}}</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-front-footer></app-front-footer>

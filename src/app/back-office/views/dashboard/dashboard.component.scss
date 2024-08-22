@@ -1,0 +1,20 @@
+.card-header{
+    background: none !important;
+}
+
+.bloc-resume{
+    .card-body{
+        h6{
+            color: #9a9a9a;
+        }
+
+        i{
+            position: absolute;
+            top: 25px;
+            right: 8px;
+            font-size: 22px;
+            color: #d6ac18;
+            opacity: 0.7;
+        }
+    }
+}

@@ -1,0 +1,265 @@
+.cont {
+  margin-top: 12%;
+  margin-bottom: 2%;
+}
+.title-mag {
+  margin-bottom: 3%;
+}
+
+.cont-vehicule {
+  padding: 2%;
+}
+
+.tab-profile {
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+.edit-btn {
+  width: 80%;
+}
+
+.pending {
+  color: rgb(40, 127, 226);
+}
+
+.statut {
+  margin-right: 0px;
+}
+
+
+// profile css
+/* Tabs*/
+.padding-bike {
+  padding-left: 3%;
+}
+
+.fa-star {
+  color: #fecd0b;
+}
+
+.user-profil {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.material-icons-profil {
+  background-color: #fecd0b;
+  color: black;
+}
+
+.account-pending {
+  background-color: rgb(171, 236, 117);
+  text-transform: none;
+  padding-top: 0%;
+  padding-bottom: 0%;
+  height: 20px;
+  font-size: 12px;
+}
+
+/* Tabs*/
+
+section {
+  border-left: 1px solid !important;
+  border-right: 1px solid !important;
+  border-bottom: 1px solid !important;
+}
+
+#tabs {
+  color: rgb(117, 113, 113);
+}
+
+#tabs .nav-tabs .nav-link {
+  border: 1px solid !important;
+  border-top-left-radius: 0rem;
+  border-top-right-radius: 0rem;
+  color: rgb(117, 113, 113);
+  font-size: 15px;
+}
+
+.tab-pane {
+  color: black;
+  margin-right: 3%;
+}
+
+.user-profil {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.material-icons-profil {
+  background-color: #fecd0b;
+  color: black;
+}
+
+.container-profil {
+  padding: 0px;
+}
+
+.title-form2 {
+  margin-top: 5%;
+  margin-bottom: 0%;
+}
+
+.card-profil {
+  border: 1px solid !important;
+  padding-top: 5%;
+  padding-left: 5%;
+  padding-right: 5%;
+  border-radius: 0px;
+  color: rgb(117, 113, 113);
+}
+
+.line-profil {
+  margin-top: 0%;
+  margin-bottom: 5%;
+  border: 1px solid !important;
+  color: black;
+}
+
+.card-content-profil {
+  background-color: rgb(211, 205, 205);
+  color: rgb(110, 107, 107);
+}
+
+.card-p {
+  margin-top: 3%;
+  margin-bottom: 3%;
+  margin-left: 2%;
+}
+
+.span1 {
+  color: rgb(110, 107, 107);
+  font-size: 12px;
+}
+
+.span2 {
+  color: red;
+}
+
+.manage-button {
+  background-color: #fecd0b;
+  height: 20px;
+  padding-top: 0%;
+  padding-bottom: 0%;
+}
+.manage-button2 {
+  width: 55%;
+}
+
+.title-card1 {
+  color: black;
+}
+
+.line-separator-profil {
+  margin-top: 2%;
+  margin-bottom: 2%;
+  background-color: rgb(204, 199, 199);
+  width: 106%;
+}
+
+.c2 {
+  padding-left: 0px;
+  padding-right: opx;
+}
+
+.card-header-acor {
+  background-color: rgb(199, 199, 199);
+}
+.chevron {
+  margin-left: 70%;
+}
+.rgba-grey-light {
+  background-color: rgb(224, 221, 221);
+}
+.form-m {
+  margin-right: 10%;
+}
+.field-date {
+  height: 60%;
+}
+mat-datepicker-toggle {
+  color: green;
+}
+
+.fa-file-pdf {
+  color: red;
+}
+.items {
+  padding-top: 1%;
+  padding-left: 1%;
+  padding-right: 1%;
+  padding-bottom: 0%;
+  background-color: rgb(233, 231, 231);
+  height: 42px;
+}
+
+.item-col {
+  height: 40px;
+}
+.fa-window-close {
+  color: red;
+}
+.doc-desc-perso {
+  font-size: 8px;
+  margin-top: -3%;
+}
+.doc-desc {
+  font-size: 8px;
+  margin-top: -3%;
+}
+.doc-name {
+  font-size: 9px;
+  margin-top: 0%;
+}
+.bnt-custom {
+  height: 15px;
+  vertical-align: middle;
+}
+.field-file {
+  height: 70%;
+  background-color: transparent;
+  padding-top: 0%;
+  padding-bottom: 0%;
+}
+.btn-text {
+  font-size: 5%;
+}
+.mat-header {
+  background-color: rgb(182, 179, 179);
+}
+.mat-body {
+  background-color: rgb(212, 209, 209);
+  padding: 2%;
+}
+.mat-body2 {
+}
+.f2 {
+  background-color: transparent;
+}
+.chip {
+  width: 100%;
+}
+.chip-mag {
+  width: 100%;
+}
+.text-btn {
+  font-size: 11px;
+}
+.mb2 {
+  width: 70%;
+}
+.btn-add {
+  width: 30%;
+}
+.text2 {
+  font-size: 12px;
+}
+
+.img-plus {
+  color: #dcdee0;
+}
+.pack-img {
+  font-size: 10px;
+  margin-top: 3%;
+}
+.doc-div {
+  padding: 2%;
+}

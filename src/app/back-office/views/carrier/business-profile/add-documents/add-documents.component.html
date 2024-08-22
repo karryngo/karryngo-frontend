@@ -1,0 +1,42 @@
+<div class="ms-2 me-auto">
+    <div class="modal fade bs-example-modal-lg" id="documentModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">{{ 'business_profile.add_documents_title' | translate }}</h4>
+                </div>
+                <div class="modal-body">
+                    <!-- <app-documents (handleVehicle)="registerVehicle($event)"></app-documents> -->
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <input type="file" id="field_files" name="file-multiple-input" multiple (change)="handleFileInput($event)" accept=".jpg, .jpeg, .png, .pdf, .doc, .docx" >
+                            <p class="title-form sub-indication text-left">{{ 'business_profile.add_vehicles_indication' | translate }}</p>
+                        </div>
+                    </div>
+                    <div class="form-row form-group m2" *ngIf="new_documents.length>0">
+                        <!-- Display selected images with remove buttons -->
+                        <div *ngFor="let file of new_documents; let i = index" class="col-md-12 my-3" style="font-weight: bold; border-bottom: 1px solid gray;">
+                            <span style="float: left;" class="mr-4"> {{i+1}} </span>
+                            <a href="javascript:void()" >{{ file.name }}</a>
+                            <span class="badge bg-primary rounded-pill p-2" (click)="remove(i)" style="cursor: pointer; float: right;"><i class="bi bi-trash"></i></span>
+                        </div>
+                        
+                    </div>
+                    <div class="row" *ngIf="new_documents.length>0">
+                        <div class="col-md-8">
+                            <p class="text-right">{{'carrier.be_provider_form.section2_subtitle_part1' | translate }} {{new_documents.length}} {{'carrier.be_provider_form.section2_subtitle_document' | translate }}</p>
+                        </div>
+                        <div class="col-md-4 text-right">
+                            <button type="button" class="btn btn-link btn-sm bg-danger" (click)="new_documents = [];">{{'carrier.be_provider_form.section2_clear_list_button' | translate }}</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button #closeButton type="button" class="btn btn-default" data-dismiss="modal">{{ 'business_profile.add_documents_cancel' | translate }}</button>
+                    <button type="button" class="btn btn-primary" (click)="save_document()" [disabled]="new_documents?.length==0">{{ 'business_profile.add_documents_save' | translate }}</button>
+                </div>  
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+<!-- <div class="list-group rounded-0">
+        
+</div> -->
+<div class="card mb-sm-3 mb-md-0 contacts_card">
+    <div class="card-header">
+      <div class="input-group">
+        <input type="text" placeholder="{{'chat.list_user_message.search' | translate }}" name="" class="form-control search">
+        <div class="input-group-prepend">
+          <span class="input-group-text search_btn"><i class="fas fa-search"></i></span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body contacts_body">
+      <ul class="contacts">
+        <app-item-user-message 
+        *ngFor="let user of listUser"
+            [date]="user.date"
+            [service]="user.service"
+            [online]="user.online"
+            [active]="shouldActive(user)"
+            img="../../../../assets/img/user_image.png"
+            [user]="user.user"
+            (selected)="selectUser($event)"
+            [idDiscuss]="user.idDiscuss"
+        ></app-item-user-message>
+      </ul>
+    </div>
+    <div class="card-footer"></div>
+  </div>

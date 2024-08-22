@@ -1,0 +1,50 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3>{{currentProvider?.title}} </h3>
+        <p>{{currentProvider?.description}} </p>
+    </div>
+</div>
+<div class="row mt-3">
+    <!-- <div class="col-md-12">
+        
+        <app-vehicles (handleVehicle)="registerVehicle($event)"></app-vehicles>
+        
+        <div class="row" *ngIf="list_vehicles.length>0">
+          <div class="col-md-8">
+            <p class="text-right">You added {{list_vehicles.length}} vehicle(s)</p>
+          </div>
+          <div class="col-md-4 text-right">
+            <button type="button" class="btn btn-link btn-sm bg-danger" (click)="list_vehicles = [];">Clear list</button>
+          </div>
+        </div>
+        <hr>
+        <div class="col-12">
+            <div class="row">
+                <p class="text-center">
+                    <i>Please add zone or towns where you served</i>
+                </p>
+                <div class="col-md-8">
+                    <app-search-location label="City covered" #compagnyZone></app-search-location>
+                </div>
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-success">Add Zone</button>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-12">
+                    <ul class="list-group">
+                        <li *ngFor="let obj of selectedLocations; let i = index" class="list-group-item d-flex justify-content-between align-items-center">
+                            {{obj.city}}, {{obj.country}}
+                            <span (click)="removeZone(i)" class="badge badge-danger badge-pill">Remove</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="col-12">
+            <button class="btn btn-success btn-large" type="button" (click)="updateService()">Update Service</button>
+        </div>
+
+    </div> -->
+</div>

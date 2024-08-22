@@ -1,0 +1,133 @@
+<app-nav-bar></app-nav-bar>
+
+<!-- Start your project here-->
+<div class="bradcam_area bradcam_bg_1">
+  <div class="container">
+      <div class="row">
+          <div class="col-xl-12">
+              <div class="bradcam_text text-center">
+                  <h3>{{'about_us.title' | translate}}</h3>
+              </div>
+          </div> 
+      </div>
+  </div>
+</div>
+
+
+<!-- chose_area  -->
+<div class="chose_area">
+  <div class="container">
+      <div class="features_main_wrap">
+          <div class="row  align-items-center">
+              <div class="col-xl-5 col-lg-5 col-md-6">
+                  <div class="about_image">
+                      <img src="assets/img/bg_side_4-1.jpg" alt="" />
+                  </div>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-6">
+                  <div class="features_info">
+                      <h3>{{'about_us.about' | translate}}</h3>
+                      <p>{{'about_us.about_content' | translate}}</p>
+                      <ul>
+                          <li> {{'about_us.about_item_1' | translate}} </li>
+                          <li> {{'about_us.about_item_2' | translate}} </li>
+                          <li> {{'about_us.about_item_3' | translate}}</li>
+                      </ul>
+
+                  </div>
+              </div>
+           </div>
+        </div>
+    </div>
+</div>
+              
+<div class="animated fadeIn">
+
+</div>
+<!--/ chose_area  -->
+
+<section class="contact-section">
+
+  <div class="container animated fadeIn" >
+    <div class="row">
+      <div class="col-12">
+          <h2 class="contact-title">{{'about_us.contact' | translate}}</h2>
+      </div>
+  
+      <div class="col-lg-8">
+          <form class="form-contact contact_form" [formGroup]="contactForm" (ngSubmit)="onSubmit()" id="contactForm" novalidate="novalidate">
+              <div class="row">
+                  <div class="col-12">
+                      <div class="form-group">
+                            <textarea class="form-control w-100" name="message" formControlName="message" id="message" cols="30" rows="9" [ngClass]="{ 'is-invalid': submitted && f.message.errors }" placeholder="{{'about_us.message' | translate}}"></textarea>
+                            <div *ngIf="submitted && f.message.errors"
+                                class="invalid-feedback text-danger">
+                                <div *ngIf="f.message.errors.required">{{'signup.registration_field_required' | translate}}</div>
+                            </div>
+                      </div>
+
+                  </div>
+                  <div class="col-sm-6">
+                      <div class="form-group">
+                            <input class="form-control valid" name="name" formControlName="name" id="name" type="text" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" placeholder="{{'about_us.name' | translate}}">
+                            <div *ngIf="submitted && f.name.errors"
+                                class="invalid-feedback text-danger"> 
+                                <div *ngIf="f.name.errors.required">{{'signup.registration_field_required' | translate}}</div>
+                            </div>
+                      </div>
+                  </div>
+                  <div class="col-sm-6" id="contact">
+                      <div class="form-group">
+                            <input class="form-control valid" name="email" id="email" formControlName="email" type="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" placeholder="{{'about_us.email' | translate}}">
+                            <div *ngIf="submitted && f.email.errors"
+                                class="invalid-feedback text-danger">
+                                <div *ngIf="f.email.errors.required">{{'signup.registration_field_required' | translate}}</div>
+                            </div>
+                      </div>
+                  </div>
+                  <div class="col-12">
+                      <div class="form-group">
+                            <input class="form-control" name="subject" id="subject" formControlName="subject" type="text" [ngClass]="{ 'is-invalid': submitted && f.subject.errors }" placeholder="{{'about_us.subject' | translate}}">
+                            <div *ngIf="submitted && f.subject.errors"
+                                class="invalid-feedback text-danger">
+                                <div *ngIf="f.subject.errors.required">{{'signup.registration_field_required' | translate}}</div>
+                            </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="form-group mt-3">
+                  <button type="submit" class="btn btn-primary">{{'about_us.contact_button' | translate}}</button>
+              </div>
+          </form>
+      </div>
+      <div class="col-lg-3 offset-lg-1">
+          <div class="media contact-info">
+              <span class="contact-info__icon"><i class="ti-home"></i></span>
+              <div class="media-body">
+                  <h3>{{'about_us.contact_country' | translate}}</h3>
+                  <p>{{'about_us.contact_address' | translate}}</p>
+              </div>
+          </div>
+          <div class="media contact-info">
+              <span class="contact-info__icon"><i class="ti-tablet"></i></span>
+              <div class="media-body">
+                  <p>{{'about_us.contact_phone' | translate}}:    <a class="text-link" href="tel:0027655271848">{{'footer.phone' | translate}}</a></p>
+                  <p>{{'about_us.contact_whatsapp' | translate}}: <a href="https://wa.me/27655271848" class="text-warning">{{'footer.whatsapp' | translate}}</a></p>
+              </div>
+          </div>
+          <div class="media contact-info">
+              <span class="contact-info__icon"><i class="ti-email"></i></span>
+              <div class="media-body">
+                  <p><a href="mailto:{{'footer.email' | translate}}">{{'footer.email' | translate}}</a></p>
+                  <p>{{'about_us.contact_message' | translate}}</p>
+              </div>
+          </div>
+      </div>
+  </div>
+  
+    <!--/.row-->
+  </div>
+</section>
+<!-- / Social -->
+
+<app-front-footer></app-front-footer>

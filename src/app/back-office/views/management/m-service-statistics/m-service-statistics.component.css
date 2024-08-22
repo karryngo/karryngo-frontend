@@ -1,0 +1,163 @@
+/* Header */
+/* header.top-0 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4rem;
+    background-color: #ccc;
+    color: #fff; 
+    display: flex;
+    align-items: center;
+    padding: 1rem; 
+} */
+
+header.top-0 h1 {
+    text-align: center;
+    width: 100%;
+    font-size: 1.25rem; /* Equivalent to text-xl */
+}
+
+/* Grid */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 1rem; /* Equivalent to gap-4 */
+    margin-left: 0.5rem; /* Equivalent to mx-2 */
+    margin-right: 0.5rem; /* Equivalent to mx-2 */
+    margin-top: 1.5rem; /* Equivalent to my-6 */
+}
+.grid-chart {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 1rem; /* Equivalent to gap-4 */
+    margin-left: 0.5rem; /* Equivalent to mx-2 */
+    margin-right: 0.5rem; /* Equivalent to mx-2 */
+    margin-top: 1.5rem; /* Equivalent to my-6 */
+}
+.grid-total {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem; /* Equivalent to gap-4 */
+    margin-left: 0.5rem; /* Equivalent to mx-2 */
+    margin-right: 0.5rem; /* Equivalent to mx-2 */
+    margin-top: 1.5rem; /* Equivalent to my-6 */
+}
+
+.col-span-1 {
+    grid-column: span 1;
+}
+
+.col-span-2 {
+    grid-column: span 2;
+}
+
+/* Cards */
+.bg-white {
+    background-color: #fff;
+}
+
+.shadow-md {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+                0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.rounded-lg {
+    border-radius: 0.5rem; /* Equivalent to rounded-lg */
+}
+
+.p-4 {
+    padding: 1rem; /* Equivalent to p-4 */
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+/* Labels and Inputs */
+label {
+    display: block;
+    margin-bottom: 0.5rem; /* Equivalent to mb-2 */
+    font-size: 0.875rem; /* Equivalent to text-sm */
+    font-weight: 500; /* Equivalent to font-medium */
+    color: #4a5568; /* Equivalent to text-gray-700 */
+}
+
+input[type="number"] {
+    display: block;
+    width: 100%;
+    padding: 0.5rem; /* Equivalent to p-2 */
+    border: 1px solid #e2e8f0; /* Equivalent to border-gray-300 */
+    border-radius: 0.375rem; /* Equivalent to rounded-md */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* Equivalent to shadow-sm */
+    outline: none; /* Equivalent to focus:outline-none */
+}
+
+input[type="number"]:focus {
+    border-color: #4299e1; /* Equivalent to focus:ring-primary-500 and focus:border-primary-500 */
+}
+
+/* Buttons */
+button {
+    display: inline-block;
+    text-align: center;
+    font-size: 0.875rem; /* Equivalent to text-sm */
+    font-weight: 500; /* Equivalent to font-medium */
+    color: #4a5568; /* Equivalent to text-gray-700 */
+    background-color: transparent;
+    padding: 0.5rem 1rem; /* Equivalent to px-4 py-2 */
+    border: 1px solid transparent;
+    border-radius: 0.375rem; /* Equivalent to rounded-lg */
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #cbd5e0; /* Equivalent to hover:bg-gray-400 */
+    color: #fff; /* Equivalent to hover:text-white */
+}
+
+/* Flexbox */
+.flex {
+    display: flex;
+}
+
+.flex-none {
+    flex: none;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+/* Miscellaneous */
+.gap-2 {
+    gap: 0.5rem; /* Equivalent to gap-2 */
+}
+
+.w-64 {
+    width: 16rem; /* Equivalent to w-64 */
+}
+
+.mt-3 {
+    margin-top: 0.75rem; /* Equivalent to mt-3 */
+}
+
+.col-span-1 {
+    grid-column: span 1;
+}
+
+.bg-red {
+    background-color: #ff0000; /* Red */
+}
+
+.bg-blue {
+    background-color: #0000ff; /* Blue */
+}
+
+.bg-green {
+    background-color: #00ff00; /* Green */
+}
+
+.bg-yellow {
+    background-color: #ffff00; /* Yellow */
+}

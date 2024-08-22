@@ -1,0 +1,492 @@
+    <app-header style="background-color: #efefef;" #appHeader [navbarBrandRouterLink]="['/welcome']" [fixed]="true"
+    [navbarBrandFull]="{src: 'assets/img/logo.png', width: 60, height: 40, alt: 'karryngo Logo'}"
+    [navbarBrandMinimized]="{src: 'assets/img/logo.png', width: 30, height: 30, alt: 'Karryngo Logo'}"
+    [sidebarToggler]="'lg'" [asideMenuToggler]="'lg'">
+    <!-- <app-notif></app-notif> -->
+    <ul class="nav navbar-nav ml-auto">
+        <li class="nav-item px-3 custom-user">
+        <a class="nav-link" [routerLink]="['/profil']">{{userName}}</a>
+        </li>
+        <li class="nav-item px-3">
+        <a class="nav-link btn-logout" (click)="logOut()"><i class="fa fa-sign-out-alt"></i></a>
+        </li>
+        <li class="nav-item px-3">
+        <div class="bloc-lang">
+            <select [(ngModel)]="selected_lang" (change)="chooseLang($event)" class="selectpicker custom-lang">
+            <option *ngFor="let item of langues" value="{{item.id}}"><span class="flag-icon flag-icon-us"></span> {{item.id | uppercase}}</option>  
+            </select>
+        </div>
+        </li>
+        <div style="display: none;">
+        
+            <div class="nav-item d-md-down-none" id="notifButton">
+                <a class="nav-link"  ><i class="icon-bell"></i><span
+                    class="badge badge-pill badge-danger">{{notifs.length}}</span></a>
+            </div>
+        </div>
+        <!-- <li class="nav-item d-md-down-none">
+        <strong><a class="nav-link" [routerLink]="['/wallet/deposit']">|| {{balence}} {{currency}}</a></strong>
+        </li> -->
+        <li class="nav-item dropdown" dropdown placement="bottom right">
+        <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
+            <!-- <div class="dropdown-header text-center"><strong>Account</strong></div>
+            <div class="dropdown-header text-center"><strong>Settings</strong></div> -->
+            <a class="dropdown-item" [routerLink]="['/profil']"><i class="fa fa-user"></i> Profile</a>
+            <a class="dropdown-item" href="#"><i class="fa fa-wrench"></i> Setting</a>
+            <div class="divider"></div>
+            <a class="dropdown-item" (onclick)="logOut()"><i class="fa fa-lock"></i> Logout</a>
+        </div>
+        </li>
+    </ul>
+    </app-header> 
+
+    <div class="app-body">
+    <app-sidebar style="background-color: #313030;" #appSidebar [fixed]="true" [display]="'lg'"
+        [minimized]="sidebarMinimized" (minimizedChange)="toggleMinimize($event)">
+        <app-sidebar-nav [navItems]="navItems" [perfectScrollbar] [disabled]="appSidebar.minimized">
+        </app-sidebar-nav>
+        <app-sidebar-minimizer style="background-color: #242121;"></app-sidebar-minimizer>
+    </app-sidebar>
+
+    <!-- Main content -->
+    <main class="main">
+        <!-- Breadcrumb -->
+        <cui-breadcrumb>
+        <!-- Breadcrumb Menu-->
+        <li class="breadcrumb-menu d-md-down-none">
+            <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+            
+            </div>
+        </li>
+
+        </cui-breadcrumb>
+
+        <!-- MAIN VIEW BLOCK -->
+        <div class="container-fluid">
+        <div>
+            <p><strong>{{today | date:'fullDate':'':selected_lang}}</strong></p>
+        </div>
+
+
+
+
+
+<!-- If the user account is not activated -->
+    <!-- <div class="container-fluid" *ngIf="!user.account_activated; else continue">
+        <div class="container">
+            <div class="row" *ngIf="activating">
+                <div class="col-md-12" style="text-align: center;">
+                    <div class="spinner-border m-5" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div *ngIf="activationStatus === 'success'">
+                <h1>Account Activated Successfully</h1>
+                <p>Congratulations! Your account has been successfully activated.</p>
+            </div>
+            
+            <div>
+                <p>
+                    Check you inbox and click on the activation link to activate your account.
+                </p>
+                <p>
+                    Didn't receive the activation email? <a href="javascript:void(0)" class="text-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">click here</a>
+                </p><br>
+                
+                <p>
+                    If you didn't receive the activation code after several attempts, please contact us <i><strong>inquiries@karryngo.com, (+27) 73-544-4401</strong></i>, or use <a href="javascript:void(0)" class="text-primary" [routerLink]="['/about-us']" fragment="contact">this</a> form.
+                </p>
+            </div>
+        </div>
+        
+        
+        
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Activation email</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                        After clicking on <strong>SEND</strong>, you will receive another activation email.
+                        <form [formGroup]="activationForm" (ngSubmit)="activation_email()">
+                            <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label" >Email address:</label>
+                                        <input type="email" class="form-control" formControlName="email" id="recipient-name" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                                        <div *ngIf="submitted && f.email.errors" class="invalid-feedback text-danger">
+                                            <div *ngIf="f.email.errors.required">enter a value</div>
+                                        </div>
+                                        
+                                    </div>
+                                    <div *ngIf="not_found!=''" class=" text-danger">
+                                        <div>{{not_found}} </div>
+                                    </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary dis" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Activate</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+        <!-- <div class="container-fluid" *ngIf="!user.account_activated; else continue">
+            <div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="passwordModalLabel">Account activation</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form [formGroup]="activationForm" (ngSubmit)="onSubmit()">
+                        <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label" >Activation Code:</label>
+                                    <input type="text" class="form-control" formControlName="code" id="recipient-name" [ngClass]="{ 'is-invalid': submitted && f.code.errors }">
+                                    <div *ngIf="submitted && f.code.errors" class="invalid-feedback text-danger">
+                                        <div *ngIf="f.code.errors.required">enter the code</div>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary dis" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Activate</button>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+            <div classs="container p-5">
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    Hello <strong> {{ user.firstname }} {{ user.lastname }} </strong> You need to activate your account.
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="True">&times;</span>
+                  </button>
+                </div>
+            </div>
+            <p>
+                <a href="javascript:void(0)" class="text-primary" data-toggle="modal" data-target="#passwordModal" data-whatever="@getbootstrap">click here</a> and enter the code you received by email to activate your Account
+            </p>
+            <p>
+                Didn't receive the activation email? <a href="javascript:void(0)" class="text-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">click here</a>
+            </p><br>
+            <p>
+                If you didn't receive the activation code after several attempts, please contact us <i><strong>inquiries@karryngo.com, (+27) 73-544-4401</strong></i>, or use <a href="javascript:void(0)" class="text-primary" [routerLink]="['/about-us']" fragment="contact">this</a> form.
+            </p>
+    
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Activation email</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                        By clicking on <strong>SEND</strong>, you will receive another activation email.
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary email" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" (click)="activation_email()">Send</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div> -->
+        
+        <!-- end new email modal -->
+<!-- End If the user account is not activated -->
+    <!-- <ng-template #continue>
+        <router-outlet ></router-outlet>
+    </ng-template> -->
+    <router-outlet ></router-outlet>
+
+
+        
+    </div>
+        <!-- END MAIN VIEW BLOCK-->
+
+    </main>
+
+    <!-- Right sideview to display notifications-->
+<app-aside [fixed]="true" [display]="false" [ngClass]="'test'">
+        <tabset>
+        <tab>
+            <ng-template tabHeading><i class="icon-list"></i></ng-template>
+            <div class="list-group list-group-accent">
+                <div class="list-group-item list-group-item-accent-secondary bg-light text-center font-weight-bold text-muted text-uppercase small">
+                    <!-- Today -->
+                    Notif
+                </div>
+            </div>
+            <div class="list-group" id="list-tab" role="tablist" style="cursor: pointer;">
+                <div *ngFor="let notif of notifs | slice:0:5;" class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">
+                    <small><b>{{ notif.title }}</b></small><br>
+                    <small>{{ notif.content }}</small>
+                </div>
+                <button type="button" class="btn btn-secondary" [routerLink]="['/notifications']">All</button>
+                <!-- <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Home</a>
+                <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Profile</a>
+                <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Messages</a>
+                <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Settings</a> -->
+            </div>
+        </tab>
+        <tab>
+            <ng-template tabHeading>
+            <i class="icon-bell"></i>
+            <span
+            class="badge badge-pill badge-danger">{{unreadProjetList.length}}</span>
+            </ng-template>
+            <div class="list-group list-group-accent">
+
+            <app-aside [fixed]="true" [display]="false" [ngClass]="'test'">
+                <tabset style="align-items: right;">
+                <tab>
+                    <ng-template tabHeading><i class="fas fa-car"></i>
+                    <span
+                    class="badge badge-pill badge-danger">{{unreadProjetList.length}}</span>
+                    </ng-template>
+                    <div class="list-group list-group-accent">
+                    <div
+                        class="list-group-item list-group-item-accent-secondary bg-light text-center font-weight-bold text-muted text-uppercase small">
+                        {{'global.unread' | translate}} ({{unreadProjetList.length}})</div>
+
+                        <div *ngFor="let projet of unreadProjetList" 
+                        
+                        (click)="showModal(projet)"
+                        class="list-group-item list-group-item-accent-warning list-group-item-divider">
+                        <div><strong> {{projet.pkg.title}} 
+                            <i class="bi-{{showStatutPackage(projet)}}" role="img" style="color: green !important;font-weight: bolder; font-size: larger;" aria-hidden="true"></i>
+                        
+                        </strong></div>
+                        <div>
+                            <div>
+                            <font style="color:#20a8d8 !important;">{{projet.pkg.from.city}} </font><strong> - </strong>
+                            <font style="color: green !important;">{{projet.pkg.to.city}}</font>
+                            </div>
+                            <small class="text-muted mr-3" style="color:#20a8d8 !important;">
+                            <i class="icon-location-pin"></i>  {{projet.pkg.date_departure.length || "Undefined" }}</small>
+                            <small class="text-muted" style="color: green !important;">
+                            <i class="icon-location-pin"></i>  {{projet.pkg.date_arrival || "Undefined" }}</small>
+                        </div>
+                        </div>
+
+                        <app-detail #modalDetail></app-detail>
+                    
+
+                    </div>
+                </tab>
+                <tab>
+                    <ng-template tabHeading><i class="fas fa-bus"></i></ng-template>
+                    <div class="list-group list-group-accent">
+                    <div
+                        class="list-group-item list-group-item-accent-secondary bg-light text-center font-weight-bold text-muted text-uppercase small">
+                        {{'global.unread' | translate}} ({{unreadMessageList.length}})</div>
+                    <div *ngFor="let msg of unreadMessageList"
+                        class="list-group-item list-group-item-accent-primary list-group-item-divider">
+                        <div (click)="open(content, msg)">
+                        <strong> {{msg.content.title}} </strong> <small>{{msg.content.text}}</small>
+                        </div>
+                        <div>
+                        <font style="color:#20a8d8 !important;">{{msg.content.from_city}} </font><strong> - </strong>
+                        <font style="color: green !important;">{{msg.content.to_city}}</font>
+                        </div>
+                    </div>
+                    </div>
+                </tab>
+                </tabset>
+            </app-aside>
+            </div>
+        </tab>
+        </tabset>
+    </app-aside>
+    <!-- END OF RIGHT SIDE VIEW-->
+</div>
+
+    <!-- Footer Block -->
+<app-footer style="background-color: white;">
+    <span>&copy; {{year | date: 'yyyy'}} <a target="_blank" href="https://karryngo.com"
+        style="color: #b48f30;"><strong>Karryngo.</strong></a></span>
+    <span class="ml-auto">{{'global.poweredby' | translate}} 
+        <a target="_blank" href="https://sdkgames.com" style="color: #b48f30;">
+        <strong>SDK Games Africa</strong>
+        </a>
+    </span>
+</app-footer>
+
+    <!-- Modal view to view service informations -->
+<ng-template #content let-modal>
+    <div class="card-header">
+        <h4 class="modal-title jaune text-left mb-2" id="modal-basic-title">Parcel details</h4>
+    </div>
+    <div class="modal-body">
+        <br>
+        <div *ngIf="!waitingPackageInformation && selectedPackage!=null">
+        <div class="form-row mb-3">
+            <strong>Start : </strong>
+            <div class="col">
+            <div class="form-row mb-3">
+                <div class="col-md-5">
+                <div id="field_countryStart" name="field_countryStart" class="field">
+                    {{selectedPackage.field_countryStart}}
+                </div>
+                </div>
+                <div class="col-md-5">
+                <div type="text" id="field_cityStart" name="field_cityStart" class="field" placeholder="City">
+                    {{selectedPackage.field_cityStart}}
+                </div>
+                </div>
+            </div>
+            </div>
+
+            <strong> to : </strong>
+            <div class="col">
+            <div class="form-row mb-3">
+                <div class="col-md-5">
+                <div id="field_countryArrived" name="field_countryArrived" class="field">
+                    {{selectedPackage.field_countryArrived}}
+                </div>
+                </div>
+                <div class="col-md-5">
+                <div type="text" id="field_cityArrived" name="field_cityArrived" class="field">
+                    {{selectedPackage.field_cityArrived}}
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        <!-- row-item-->
+        <!-- row-item-->
+        <div class="form-row mb-4">
+            <div class="col">
+            <div class="form-row mb-3">
+                <div class="col"><strong>Parcel type : </strong>
+                <div id="field_typeof" name="field_typeof" class="field">
+                    {{selectedPackage.field_typeof}}
+                </div>
+                </div>
+                <div class="col-md-5"><strong>Vehicle type : </strong>
+                <div id="field_vehicleType" name="field_vehicleType" class="field">
+                    {{selectedPackage.field_vehicleType}}
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- row-item-->
+        <div class="form-row mb-3">
+            <div class="col">
+            <div class="form-row mb-5">
+                <div class="col-md-3">
+                <strong>is fragil : </strong>
+                <span *ngIf="selectedPackage.field_isWeak"><i class="fa fa-check"
+                    style="color: green !important;"></i></span>
+                <span *ngIf="!selectedPackage.field_isWeak"><i class="fa fa-close"
+                    style="color: red !important;"></i></span>
+                </div>
+                <div class="col-md-3">
+                <strong>is urgent : </strong>
+                <span *ngIf="selectedPackage.field_isUrgent"><i class="fa fa-check"
+                    style="color: green !important;"></i></span>
+                <span *ngIf="!selectedPackage.field_isUrgent"><i class="fa fa-close"
+                    style="color: red !important;"></i></span>
+                </div>
+                <div class="col-md-5">
+                <strong>Delay : </strong>
+                <div type="date" id="field_delayDate" name="field_delayDate" class="field">
+                    {{selectedPackage.field_delayDate}}
+                </div>
+                </div>
+            </div>
+
+            <div class="form-row mb-4">
+                <div class="col">
+                <strong>Parcel Name : </strong>
+                <div type="text" id="field_name" name="field_name" class="field"> {{selectedPackage.field_name}}
+                </div>
+                </div>
+                <div class="col-md-5">
+                <strong>Transaction Amount : </strong>
+                <div type="text" id="field_price" name="field_price" class="field"> {{selectedPackage.field_price}} XOF
+                </div>
+                </div>
+            </div>
+
+            </div>
+
+        </div>
+        <!-- row-item-->
+
+        <!-- row-item-->
+        <!-- Package Details-->
+
+        <!-- package image-->
+        <p class="text-left pack-img"><strong>PARCEL IMAGES</strong></p>
+        <!--<div class="form-row mb-4">
+            <i class="fas fa-plus-square fa-6x img-plus"></i>
+            <i class="ml-2 fas fa-plus-square fa-6x img-plus"></i>
+            <i class="ml-2 fas fa-plus-square fa-6x img-plus"></i>
+            <i class="ml-2 fas fa-plus-square fa-6x img-plus"></i>
+        </div>-->
+        <!-- package image-->
+
+
+        <!-- row-item-->
+        <div class="form-row">
+            <div class="col-md-3">
+            <label id="weightPackage" name="field_weightPackage" class="field"
+                placeholder="Weight">{{selectedPackage.field_weightPackage}}</label>
+            kg (weight)
+            </div>
+            <div class="col-md-3">
+            <label id="field_heightPackages" name="field_heightPackages" class="field"
+                placeholder="Height">{{selectedPackage.field_heightPackages}}</label>
+            cm (Height)
+            </div>
+            <div class="col-md-3">
+            <label id="field_widhtPackage" name="field_widhtPackage" class="field"
+                placeholder="Widht">{{selectedPackage.field_widhtPackage}}</label>
+            cm (Widht)
+            </div>
+            <div class="col-md-3">
+            <label id="field_lengthPackage" name="field_lengthPackage" class="field"
+                placeholder="Length">{{selectedPackage.field_lengthPackage}}</label>
+            cm (Length)
+            </div>
+        </div><br><br>
+
+        <!-- row-item-->
+
+        <!-- row-item-->
+        <div class="form-row mb-4 form-group shadow-textarea">
+            <strong>Description:</strong>
+            <div class="form-control field-form2 z-depth-1" id="field_descriptionPackage" name="field_descriptionPackage"
+            rows="3" placeholder="">{{selectedPackage.field_descriptionPackage}}
+            </div>
+        </div>
+        <!-- row-item-->
+        </div>
+
+        <app-progress-indeterminate *ngIf="waitingPackageInformation"></app-progress-indeterminate>
+    </div>
+
+    <div class="modal-footer" *ngIf="!waitingPackageInformation">
+        <button type="button" class="btn btn-danger" (click)="modal.dismiss('Cross click')">Refuse</button>
+        <button type="button" class="btn btn-success" (click)="modal.close('Save click');acceptPrice()">Confirm</button>
+    </div>
+
+
+
+</ng-template>

@@ -1,0 +1,61 @@
+<form [formGroup]="emailForm" (ngSubmit)="onSubmit()" *ngIf="!codeSent">
+    <div class="form-group row mx-2">
+        <div class="mb-4 col-md-12">
+            <label for="email">{{'profil.new_email' | translate }}:</label>
+            <input type="email" id="email" formControlName="email" placeholder="{{'profil.new_email_placeholder' | translate }}" class="form-control">
+            <div *ngIf="emailForm.get('email').invalid && (emailForm.get('email').dirty || emailForm.get('email').touched)">
+                <div *ngIf="submitted && emailForm.get('email').errors.required">{{'profil.form_required_field' | translate }}</div>
+                <div *ngIf="submitted && emailForm.get('email').errors.email">{{'profil.invalid_email' | translate }}</div>
+            </div>
+        </div>
+        <div class="mb-4 col-md-12">
+            <label for="password">{{'profil.enter_password' | translate }}:</label>
+            <input type="password" id="password" formControlName="password" placeholder="{{'profil.enter_password_placeholder' | translate }}"  class="form-control">
+            <div *ngIf="submitted && emailForm.get('password').invalid && (emailForm.get('password').dirty || emailForm.get('password').touched)">
+                <div *ngIf="submitted && emailForm.get('password').errors.required">{{'profil.form_required_field' | translate }}</div>
+            </div>
+        </div>
+    </div>
+    <p *ngIf="incorrectPassword" class="text-danger">{{'profil.incorrect_password' | translate }}</p>
+    <button *ngIf="!submitting" type="submit" class="btn btn-success" [disabled]="emailForm.invalid">{{'profil.send' | translate }}</button>
+    <div *ngIf="submitting" class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</form>
+
+<div *ngIf="codeSent" class="row">
+    <div class="col-md-12">
+        <form [formGroup]="codeForm" (ngSubmit)="onSubmitCode()">
+            <div class="form-group row mx-2">
+                <div class="mb-4 col-md-12">
+                    <input type="text" [value]="emailForm.value.email" [disabled]="true">
+                </div>
+            </div>
+            <div class="form-group row mx-2">
+                <div class="mb-4 col-md-12">
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        {{'profil.confirm_code' | translate }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row mx-2">
+                <div class="mb-4 col-md-12">
+                    <label for="code">{{'profil.enter_code' | translate }}:</label>
+                    <input type="text" id="code" formControlName="code" placeholder="Code" class="form-control">
+                    <div *ngIf="submitted && codeForm.get('code').invalid && (codeForm.get('code').dirty || codeForm.get('code').touched)">
+                        <div *ngIf="codeForm.get('code').errors.required">{{'profil.form_required_field' | translate }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row mx-2">
+                <div class="mb-4 col-md-12">
+                    <button *ngIf="!submitting" type="submit" class="btn btn-info" [disabled]="codeForm.invalid">{{'profil.update' | translate }}</button>
+                    <div *ngIf="submitting" class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

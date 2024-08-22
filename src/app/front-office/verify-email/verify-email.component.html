@@ -1,0 +1,44 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="imag">
+  <div class="container" style="margin-top: 70px; margin-bottom: 0px;">
+    <div class="row">
+      <div class="col-md-5 bg-white my-5" style="margin-right: auto; margin-left: auto; border-radius: 15px;
+            background-color: rgba(10, 10, 10, 0.82) !important;"><br>
+        <div class="p-4"
+          style="margin-bottom: 20px; margin-top: 20px; text-align: center; border-bottom: 1px solid gray;">
+
+          <h3 style="color: white; font-size:20px;"><b>Verify Email</b></h3>
+        </div><br>
+        <div class="authBlock" style="color: white;">
+          <h3>Thank You for Registering</h3>
+
+          <!-- <div class="formGroup" *ngIf="authService.userData as user"> -->
+          <div class="formGroup">
+            <p class="text-left">We have sent a confirmation email to
+              <!-- <strong>{{user.email}}</strong> -->
+              .
+            </p>
+            <p class="text-left">Please check your email and click on the link to verfiy your email address.</p>
+          </div>
+
+          <!-- Calling SendVerificationMail() method using authService Api -->
+          <div class="formGroup pull-right">
+            <button type="button" class="btn btn-success" style="color: black !important;" (click)="sendVerifMail()">
+              <i class="fas fa-redo-alt"></i>
+              Resend Verification Email
+            </button>
+          </div>
+
+        </div>
+        <br><br><br>
+        <div class="redirectToLogin">
+          <!-- <span style="color: white;">Go back to?<span class="redirect" routerLink="login" style="color: rgb(240, 224, 11);"> Sign in</span></span> -->
+          <span style="color: white;">Go back to<span (click)="navigateToLogin()" style="color: rgb(240, 206, 11); size: 3px;"> Sign in</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-front-footer></app-front-footer>

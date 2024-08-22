@@ -1,0 +1,203 @@
+<div class="card-body">
+    <div class="form-group row">
+        <!-- <div class="col-md-2"></div> -->
+        <div class="col-md-6">
+            <label for="ccmonth">Country</label>
+            <input class="form-control field-form1" id="country" size="16" type="text"
+            placeholder="{{userCountry}}" disabled>
+        </div>
+        <div class="col-md-6">
+            <label for="ccnumber">Amount</label>
+            <div class="input-group">
+                <input class="form-control field-form1" id="appendedInput" size="16" type="number"
+                    placeholder="00">
+                <div class="input-group-append">
+                    <span *ngIf="cameroon" class="input-group-text">FCFA</span>
+                    <span *ngIf="gabon" class="input-group-text">FCFA</span>
+                    <span *ngIf="nigeria" class="input-group-text">NAIRA</span>
+                    <span *ngIf="southAfrica" class="input-group-text">RAND</span>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="col-md-2"></div> -->
+    </div>
+    <br>
+    <div class="form-group row">
+        <!-- <div class="col-md-2"></div> -->
+        <div class="col-md-12">
+            <div class="tab text-center p-3">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" onclick="openTab(event, 'om-select')" value="option1">
+                    <label class="form-check-label" for="inlineRadio1">Orange Money</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" onclick="openTab(event, 'momo-select')" value="option2">
+                    <label class="form-check-label" for="inlineRadio2">MTN MoMo</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" onclick="openTab(event, 'paypal')" value="option3">
+                    <label class="form-check-label" for="inlineRadio3">PayPal</label>
+                  </div>
+                <!-- <button type="button" class="btn btn-brand mr-1" style="margin-bottom: 4px"
+                    onclick="openTab(event, 'om-select')">
+                    <i style="font-size:10px; border: 3px solid;">OM</i>
+                    <span>Orange Money</span>
+                </button>
+                <button type="button" class="btn btn-brand mr-1" style="margin-bottom: 4px"
+                    onclick="openTab(event, 'momo-select')">
+                    <i style="font-size:7px; border: 3px solid;">MoMo</i>
+                    <span>MTN Money</span>
+                </button>
+                <button type="button" class="btn btn-brand mr-1" style="margin-bottom: 4px"
+                    onclick="openTab(event, 'paypal')">
+                    <i class="fa fa-paypal" style="font-size:24px"></i>
+                    <span>Paypal</span>
+                </button> -->
+            </div>
+            <div id="mastercard-select" class="tabcontent">
+                <br><br>
+                <h3>Mastercard</h3>
+                <div class="card-body text-left">
+                    <button type="radio" class="btn-pill" onclick="openTab(event, 'my-account')">
+                        <span>My card</span>
+                    </button>
+                    <button type="radio" class="btn-pill" onclick="openTab(event, 'mastercard')">
+                        <span>Other account</span>
+                    </button>
+                </div>
+            </div>
+
+            <div id="visa-select" class="tabcontent">
+                <br><br>
+                <h3>Visa</h3>
+                <div class="card-body text-left">
+                    <button type="radio" class="btn-pill" onclick="openTab(event, 'my-account')">
+                        <span>My card</span>
+                    </button>
+                    <button type="radio" class="btn-pill" onclick="openTab(event, 'visa')">
+                        <span>Other account</span>
+                    </button>
+                </div>
+            </div>
+
+            <div id="om-select" class="tabcontent">
+                <br><br>
+                <h3>Orange Money</h3>
+                <div class="card-body text-left">
+                    <button type="radio" class="btn btn-pill" (click)="myNumber()" onclick="openTab(event, 'my-number')">
+                        <span>My number</span>
+                    </button>
+                    <button type="radio" class="btn btn-pill" (click)="otherNumber()" onclick="openTab(event, 'orange-money')">
+                        <span>Other number</span>
+                    </button>
+                </div>
+            </div>
+
+            <div id="momo-select" class="tabcontent">
+                <br><br>
+                <h3>MTN MoMo</h3>
+                <div class="card-body text-left">
+                    <button type="radio" class="btn btn-pill" (click)="myNumber()" onclick="openTab(event, 'my-number')">
+                        <span>My number</span>
+                    </button>
+                    <button type="radio" class="btn btn-pill" (click)="otherNumber()" onclick="openTab(event, 'mtn-money')">
+                        <span>Other number</span>
+                    </button>
+                </div>
+            </div>
+
+            <div id="my-number" class="tabcontent card-body">
+                <div class="col-sm-6">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3>My Contact</h3>
+                            <label for="name">Use my phone number</label>
+                            <br>{{userPhone}}<br>
+                            <div>
+                                <button class="btn" (click)="onEvent(userPhone)">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="orange-money" class="tabcontent">
+                <hr>
+                <h3>Orange Money</h3>
+                <p>Please enter the phone number and submit.</p>
+                <div class="row">
+                    <div class="col-sm-8">
+                        <form [formGroup]="phoneForm">
+                            <div class="form-group" style="background-color: rgb(116, 112, 112);">
+                                <ngx-intl-tel-input [cssClass]="'custom'" [preferredCountries]="preferredCountries"
+                                    [enableAutoCountrySelect]="true" [enablePlaceholder]="true" [searchCountryFlag]="true"
+                                    [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]" [selectFirstCountry]="false"
+                                    [selectedCountryISO]="CountryISO.SouthAfrica" [maxLength]="15"
+                                    [phoneValidation]="true" [separateDialCode]="separateDialCode"
+                                    [numberFormat]="PhoneNumberFormat.National" 
+                                    name="cell_phone_number" 
+                                    formControlName="field_phone">
+                                </ngx-intl-tel-input>
+                            </div>
+                            <div *ngIf="submitted && f.field_phone.errors">
+                                <div *ngIf="f.field_phone.errors.required"  style="color: red;">{{'signup.registration_phone_required' | translate}}</div>
+                            </div>
+                        </form>
+                        <div class="form-group">
+                            <!-- <label for="om-tel">Phone number</label> -->
+                            <!-- <input type="tel" class="form-control field-form1" id="om-tel" placeholder="Recipient Phone number" [(ngModel)]="om_other"> -->
+                        </div>
+                    </div>
+                </div>
+                <!--/.row-->
+                
+                <div>
+                    <button class="btn" (click)="onEvent(om_other)">Submit</button>
+                </div>
+            </div>
+            <div id="paypal" class="tabcontent">
+                <hr>
+                <h3>Paypal</h3>
+                <form>
+                    <input valign="center" type="image" alt="Paiement par Paypal"
+                        src=" https://www.paypal.com/fr_FR/i/bnr/horizontal_solution_PP.gif" name="submit"
+                        alt="Paiement sécurisé par paypal" />
+                </form>
+            </div>
+            <div id="mtn-money" class="tabcontent">
+                <hr>
+                <h3>Mobile Money</h3>
+                <p>Please enter the phone number and submit.</p>
+                <div class="row">
+                    <div class="col-sm-8">
+                        <!-- <div class="form-group"> -->
+                            <!-- <label for="tel">Phone</label> -->
+                            <form [formGroup]="phoneForm">
+                                <div class="form-group" style="background-color: rgb(116, 112, 112);">
+                                    <ngx-intl-tel-input [cssClass]="'custom'" [preferredCountries]="preferredCountries"
+                                        [enableAutoCountrySelect]="true" [enablePlaceholder]="true" [searchCountryFlag]="true"
+                                        [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]" [selectFirstCountry]="false"
+                                        [selectedCountryISO]="CountryISO.SouthAfrica" [maxLength]="15"
+                                        [phoneValidation]="true" [separateDialCode]="separateDialCode"
+                                        [numberFormat]="PhoneNumberFormat.National" 
+                                        name="cell_phone_number" 
+                                        formControlName="field_phone">
+                                    </ngx-intl-tel-input>
+                                </div>
+                                <div *ngIf="submitted && f.field_phone.errors">
+                                    <div *ngIf="f.field_phone.errors.required"  style="color: red;">{{'signup.registration_phone_required' | translate}}</div>
+                                </div>
+                            </form>
+                            <!-- <input type="tel" class="form-control field-form1" id="tel" placeholder="Your Phone number" [(ngModel)]="momo_other" > -->
+                        <!-- </div> -->
+                    </div>
+                </div>
+                <!--/.row-->
+                <div>
+                    <button class="btn" (click)="onEvent(momo_other)">Submit</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>

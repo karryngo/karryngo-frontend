@@ -1,0 +1,24 @@
+<div class="animated fadeIn">
+    <div class="row">
+    <div class="col-sm-6 col-md-12">
+        <div class="card"> <br><br><br>
+            <h3 class="jaune text-center"> 
+                {{'management.m_services.services_list' | translate }}
+            </h3>
+            <div class="card-body">
+                <app-list-services [services]="services"></app-list-services>
+                <!-- <button type="button" class="btn btn-info" data-mdb-ripple-init (click)="getMoreProviders()">More</button> -->
+                <div class="d-flex justify-content-center" *ngIf="!obj_loader && waiting">
+                    <button type="button" class="btn btn-info" data-mdb-ripple-init (click)="getMoreProviders()">More</button>
+                </div>
+                <div class="d-flex justify-content-center" *ngIf="!waiting">
+                    <p>All listed</p>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    </div>
+</div>
+
+
